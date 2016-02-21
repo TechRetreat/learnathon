@@ -3,6 +3,9 @@
 ## What you'll make
   // Short description of what the project is
 
+## What you'll need
+  // Materials list
+
 ## Table of Contents
 
 ## Setup
