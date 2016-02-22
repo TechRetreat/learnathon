@@ -13,6 +13,8 @@ Gif of demo
 ## Setup
 - [Setting up Android Studio](#)
 - [Creating/compiling test project](#)
+- [Android studio view (strusture project preview)](#)
+- [Android studio shortcuts (Double shift etc)](#)
 
 ## Vocabulary
 - xml
@@ -20,20 +22,23 @@ Gif of demo
 - fragment
 - activity
 - service
+- synchronous
 
 ## Instructions
-1. [Creating/Showing XML views](#)
-2. [Logging and logic](#)
-3. [Touch inputs](#)
-4. [Arrays/maps/data structures](#)
-5. [Exceptions/other errors](#)
+1. [Logging and logic](#)
+2. [Creating/Showing XML views](#)
+3. [Resources](#)
+4. [Touch inputs](#)
+5. [Arrays/maps/data structures](#)
+6. [Exceptions/other errors](#)
 
 ## Next Steps
-- [API calls](#)
-- [Saving data to device](#)
+- [Gradle, importing libraries (android arsenal)](#)
+- [API calls (gson)](#)
+- [Shared Pref](#)
 - [Maps](#)
 - [Camera](#)
-- [Accelerometer](#)
 
 ## Extend it further
-- Things to make off base
+- Other cool apis
+- Device functionalities (Accelerometer etc)
