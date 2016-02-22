@@ -1,4 +1,4 @@
-# Game Dev
+# Hardware
 
 ## What you'll make
   // Short description of what the project is
@@ -18,6 +18,9 @@
 
 ## Vocabulary
   // Glossary of technical terms used in the lesson plan
+  
+- **Foo**: This is foo
+- **Bar**: This is bar
 
 ## Instructions
   // Step-by-step instructions for building the core MVP
