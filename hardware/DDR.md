@@ -46,8 +46,6 @@
 - <a href="c++_ddr.md">Computer version</a> <!-- TODO: make a more traditional-style DDR game on a computer; play music from speakers -->
 
 ## Extend it further
-  <!-- Bullet point ideas to inspire learners to extend & personalize their projects -->
-
 - Add scores & display them
 - Upload your own music & randomly generate arrows
 - Team up and build multiplayer support
