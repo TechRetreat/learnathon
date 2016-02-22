@@ -1,4 +1,4 @@
-# Game Dev
+# Dance Dance Revolution
 
 ## What you'll make
   I'm sure most of you have heard of the game Dance Dance Revolution. It involves a mat with four directional arrows,
