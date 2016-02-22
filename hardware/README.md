@@ -1,4 +1,4 @@
-# Game Dev
+# Hardware
 
 ## What you'll make
   // Short description of what the project is
