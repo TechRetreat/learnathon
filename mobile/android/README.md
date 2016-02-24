@@ -10,9 +10,10 @@ Gif of demo
 - [Next steps](#next-steps)
 - [Extend it further](#extend-it-further)
 
-## Setup
+## Setup (1/2 hour)
 - [Setting up Android Studio](#)
 - [Creating/compiling test project](#)
+- [Run on device/emulator](#)
 - [Android studio view (strusture project preview)](#)
 - [Android studio shortcuts (Double shift etc)](#)
 
