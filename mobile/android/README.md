@@ -4,25 +4,50 @@
 Gif of demo
 
 ## Table of Contents
-- [Setup](#setup)
-- [Vocabulary](#vocabulary)
-- [Instructions](#instructions)
-- [Next steps](#next-steps)
+- [Java](#java)
+- [Setup Android Studio](#setup-android-studio)
+- [Android Basics](#android-basics)
+- [Geocaching App](#geocaching-app)
 - [Extend it further](#extend-it-further)
+- [Android Studio Tips](#android-studio-tips)
+- [Vocabulary](#vocabulary)
+
+##Java
+- [Online Editor](https://www.compilejava.net/)
+- int, boolean
+- If, else
+- array, map
+- for, while
 
 (look at https://teamtreehouse.com/library/topic:android later)
-## Setup
+## Setup Android Studio
 - [Download/Install Android Studio + SDK tools](http://developer.android.com/training/basics/firstapp/index.html) Make sure you have Java installed as well
 - [Set up Android Studio project](http://developer.android.com/training/basics/firstapp/creating-project.html)
- - Open Anroid studio
- - Click 'Start a new Android Studio Project'
+ - Start a new Android Studio Project
  - Minimum SDK: API 16 (Jelly Bean)
  - Add an activity to Mobile: Blank Activity with fragment
 - [Run on device/emulator](http://developer.android.com/training/basics/firstapp/running-app.html)
- - Click run (Green triangle at top)
- - Plug in your device or start emulator
 
-## Android Studio
+## Android Basics
+- [Logging](http://developer.android.com/reference/android/util/Log.html)
+- [Creating/Showing XML views](http://developer.android.com/guide/topics/ui/declaring-layout.html)
+- [Resources](http://developer.android.com/reference/android/content/res/Resources.html)
+- [Touch inputs](#)
+- [Exceptions/other errors](#)
+
+## Geocaching App
+- [Gradle, importing libraries (android arsenal)](#)
+- [API calls (gson)](#)
+- [Shared Pref](#)
+- [Maps](#)
+
+## Extend it further
+- [Camera](#)
+- Other cool apis
+- Device functionalities (Accelerometer etc)
+
+
+## Android Studio Tips
 - Android studio view (structure project preview)
  - Project (left): Shows files in android structure
  - Structure (right): Shows functions and inner classes of files
@@ -38,22 +63,3 @@ Gif of demo
 - activity
 - service
 - synchronous
-
-## Instructions
-1. [Logging and logic](#)
-2. [Creating/Showing XML views](#)
-3. [Resources](#)
-4. [Touch inputs](#)
-5. [Arrays/maps/data structures](#)
-6. [Exceptions/other errors](#)
-
-## Next Steps
-- [Gradle, importing libraries (android arsenal)](#)
-- [API calls (gson)](#)
-- [Shared Pref](#)
-- [Maps](#)
-- [Camera](#)
-
-## Extend it further
-- Other cool apis
-- Device functionalities (Accelerometer etc)
