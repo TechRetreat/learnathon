@@ -10,11 +10,22 @@ Gif of demo
 - [Next steps](#next-steps)
 - [Extend it further](#extend-it-further)
 
-## Setup (1/2 hour)
-- [Setting up Android Studio](#)
-- [Creating/compiling test project](#)
+## Setup
+- [Download/Install Android Studio](http://developer.android.com/sdk/installing/index.html) Make sure you have Java installed as well
+- Set up Android Studio project
+ - Open Anroid studio
+ - Click 'Start a new Android Studio Project'
+ - Minimum SDK: API 16 (Jelly Bean)
+ - Add an activity to Mobile: Blank Activity with fragment
 - [Run on device/emulator](#)
-- [Android studio view (strusture project preview)](#)
+ - Click run (Green triangle at top)
+ - Plug in your device or start emulator
+- [Android studio view (structure project preview)](#)
+ - Project (left): Shows files in android structure
+ - Structure (right): Shows functions and inner classes of files
+ - Android (bottom right): Shows logs from device
+ - Run (bottom left): Options for running project
+ - Terminal (bottom left): Command line
 - [Android studio shortcuts (Double shift etc)](#)
 
 ## Vocabulary
