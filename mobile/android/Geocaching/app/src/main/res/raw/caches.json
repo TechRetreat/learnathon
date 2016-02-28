@@ -1,0 +1,32 @@
+{
+  "caches": [
+    {
+      "difficulty": 3,
+      "location": {
+        "latitude": 123.4,
+        "longitude": 234.5
+      }
+    },
+    {
+      "difficulty": 3,
+      "location": {
+        "latitude": 123.4,
+        "longitude": 234.5
+      }
+    },
+    {
+      "difficulty": 3,
+      "location": {
+        "latitude": 123.4,
+        "longitude": 234.5
+      }
+    },
+    {
+      "difficulty": 3,
+      "location": {
+        "latitude": 123.4,
+        "longitude": 234.5
+      }
+    }
+  ]
+}

@@ -1,31 +1,27 @@
 package techretreat.jgzuke.geocaching;
 
-import android.app.ActionBar;
-import android.app.FragmentTransaction;
-import android.content.Context;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 
-import java.util.ArrayList;
-
-import techretreat.jgzuke.geocaching.FoundPage.FoundFragment;
-import techretreat.jgzuke.geocaching.MapPage.MapFragment;
-import techretreat.jgzuke.geocaching.SettingsPage.SettingsFragment;
+import techretreat.jgzuke.geocaching.FoundPage.FoundController;
+import techretreat.jgzuke.geocaching.MapPage.MapController;
+import techretreat.jgzuke.geocaching.SettingsPage.SettingsControler;
 
 public class MainActivity extends AppCompatActivity {
 
-    static final int NUMBER_OF_TABS = 3;
+    private static final int NUMBER_OF_TABS = 3;
 
-    ViewPager viewPager;
-    TabLayout tabLayout;
-    GeocachingPagerAdapter pagerAdapter;
+    private ViewPager viewPager;
+    private TabLayout tabLayout;
+    private GeocachingPagerAdapter pagerAdapter;
+
+    //TODO not this
+    private String userId = "test";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
     }
 
-    public class GeocachingTabSelectedListener implements TabLayout.OnTabSelectedListener {
+    private class GeocachingTabSelectedListener implements TabLayout.OnTabSelectedListener {
 
         @Override
         public void onTabSelected(TabLayout.Tab tab) {
@@ -70,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public class GeocachingPagerAdapter extends FragmentStatePagerAdapter {
+    private class GeocachingPagerAdapter extends FragmentStatePagerAdapter {
 
         public GeocachingPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -80,11 +76,11 @@ public class MainActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return new FoundFragment();
+                    return new FoundController(userId).getFragment();
                 case 1:
-                    return new MapFragment();
+                    return new MapController(userId).createFragment();
                 case 2:
-                    return new SettingsFragment();
+                    return new SettingsControler(userId).createFragment();
                 default:
                     return null;
             }
