@@ -20,9 +20,9 @@ Then, come back to this page, and go to http://codepen.io/pen?template=ONJQya&ed
 - **vector**: same as in math or physics! An angle and a magnitude
 
 ## Instructions
-1. <a href="part1.md">Drawing on the screen</a>
-2. <a href="part2.md">Adding interaction with the arrow keys</a>
-3. <a href="part3.md">Creating gravity, jumping, and ground with vectors</a>
+1. <a href="part1.md">Drawing on the screen and Interactivity</a>
+2. <a href="part2.md">Gravity and collision detection</a>
+3. <a href="part3.md">Different kinds of blocks using Inheritance</a>
 4. <a href="part4.md">Adding points and lives</a>
 5. <a href="part5.md">Scrolling the camera</a>
 

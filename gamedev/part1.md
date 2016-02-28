@@ -37,26 +37,87 @@ In `draw`, we can call `drawSprites()` to render the sprites we made to the scre
 
 Let's start by adding some ground and a character we will play as onto the screen. Modify your code to look approximately like this:
 
-```js
-var player;
-var ground;
-function setup() {
-  createCanvas(500, 400);
-  player = createSprite(300, 200, 30, 30);
-  ground = createSprite(200, 300, 250, 30);
-}
-
-function draw() {
-  drawSprites();
-}
+```diff
++var player;
++var ground;
+ function setup() {
++  createCanvas(500, 400);
++  player = createSprite(300, 200, 30, 30);
++  ground = createSprite(200, 300, 250, 30);
+ }
+ 
+ function draw() {
++  drawSprites();
+ }
 ```
 
 When you press **Run** in the toolbar on Codepen, you should see your sprites render!
 <img src="screenshots/1-sprites.png" />
 
-You'll notice that every time you hit Run, the colours change. p5.js picks random colours for you if none are specified, so let's specify our own. The canvas can be coloured with `background(red, green, blue)` and sprite colours can be changed with `sprite.shapeColor = color(red, green, blue)`. The parameters `red`, `green`, `blue` are integers from 0 to 255 that specify how much light of each component colour should be mixed to create the overall colour. You might find <a href="http://www.colorpicker.com" target="_blank">colorpicker.com</a> useful for finding RGB values to put in these.
+You'll notice that every time you hit Run, the colours change. p5.js picks random colours for you if none are specified, so let's specify our own. The canvas can be coloured with `background(red, green, blue)` and sprite colours can be changed with `sprite.shapeColor = color(red, green, blue)`. The parameters `red`, `green`, `blue` are integers from 0 to 255 that specify how much light of each component colour should be mixed to create the overall colour. You might find <a href="http://www.colorpicker.com" target="_blank">colorpicker.com</a> useful for finding RGB values to put in these. Your code should look something like this now:
 
-Next, we'll add interactivity to our game to make the sprites move!
+```diff
+ var player;
+ var ground;
+ function setup() {
+   createCanvas(500, 400);
+   player = createSprite(300, 200, 30, 30);
++  player.shapeColor = color(255, 0, 0);
+   ground = createSprite(200, 300, 250, 30);
+   ground.shapeColor = color(80, 180, 100);
+ }
 
-<a href="part2.md">Part 2: Adding interaction with the arrow keys</a>
+ function draw() {
++  background(255, 220, 180);
+   drawSprites();
+ }
+```
+
+### Interactivity and motion
+
+Next, let's add some interactivity and movement.
+
+We initialized each sprite with a location, and this location is accessible through `sprite.position.x` and `sprite.position.y`. If we wanted to make the sprite move every frame, we could update the coordinates of the sprite each frame with something like `sprite.position.x += 5;`, but there is a better way.
+
+We have access to a velocity vector for each sprite either by setting `sprite.velocity = createVector(x, y)` or through `sprite.velocity.x` and `sprite.velocity.y`. The velocity vector is automatically added to the sprite's position vector every frame. In `setup`, try telling our game that the player has an initial velocity:
+
+```js
+player.velocity = createVector(0, 3);
+```
+
+When this code runs, you should see the player begin moving down! You can rerun your code or reload the page (after saving!) to reset the game's state. Let's make this be triggered by a keypress instead of all the time. Inside the `draw` function, you have access to two kinds of key press listeners:
+
+- `keyDown(key)`: This will return true if the key is currently down on a given frame.
+- `keyWentDown(key)`: This will only return true if the key went down on the current frame, and will be false if the key is down but has been held from a previous frame.
+
+Let's make our character move when arrow keys are pressed by setting the horizontal component of its velocity. When the up arrow goes down, we can set a negative value for the vertical velocity to simulate jumping.
+
+```diff
+ function draw() {
+   background(255, 220, 180);
++  
++  if (keyDown('RIGHT_ARROW')) {
++    player.velocity.x = 4;
++  } else if (keyDown('LEFT_ARROW')) {
++    player.velocity.x = -4;
++  } else {
++    player.velocity.x = 0;
++  }
++  
++  if (keyWentDown('UP_ARROW')) {
++    player.velocity.y = -6;
++  }
++  
+   drawSprites();
+ }
+```
+
+Now you should be able to move left and right, and fly up in the air when hitting the up key. There's no gravity yet, we're going to do that next! You can rerun the javascript or save and reload the page to reset the game.
+
+<a href="https://github.com/molleindustria/p5.play/blob/965e2fc5af0335f0abd6ca362ca70dc205c8f40c/lib/p5.play.js#L502-L593" target="_blank">Here is a list of possible values for the `key` parameter</a> in case you want to attach events to different kinds of key presses.
+
+### What you should have so far
+Here's a link to a Codepen project completed up to this step: http://codepen.io/davepvm/pen/NNWyrV?&editors=0010
+
+<a href="part2.md">Part 2: Gravity and collision detection</a>
 <a href="README.md#Instructions">Back</a>
