@@ -10,6 +10,7 @@ import java.io.InputStream;
 public class DataUtilities <T> {
 
     public T getResponse(Context context, Class<T> type) {
+        //TODO: take in api call instead, run async
         try {
             InputStream is = context.getResources().openRawResource(R.raw.caches_found);
             int size = is.available();

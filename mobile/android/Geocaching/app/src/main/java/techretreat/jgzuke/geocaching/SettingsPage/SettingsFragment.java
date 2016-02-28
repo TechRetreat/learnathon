@@ -1,14 +1,11 @@
 package techretreat.jgzuke.geocaching.SettingsPage;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.support.v7.preference.PreferenceFragmentCompat;
 
 import techretreat.jgzuke.geocaching.R;
 
-public class SettingsFragment extends Fragment {
+public class SettingsFragment extends PreferenceFragmentCompat {
 
     private static final String KEY_USER_ID = "user_id";
 
@@ -26,11 +23,15 @@ public class SettingsFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         userId = getArguments().getString(KEY_USER_ID);
-        View rootView = inflater.inflate(R.layout.fragment_settings, container, false);
 
-        return rootView;
+        addPreferencesFromResource(R.xml.preferences);
+    }
+
+    @Override
+    public void onCreatePreferences(Bundle bundle, String s) {
+
     }
 }
