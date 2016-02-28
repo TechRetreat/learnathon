@@ -8,13 +8,11 @@
 
 ## Setup
 
-### I'm just starting
-- setup on jsbin or codepen?
-- install local Processing?
-- Python + pip + pygame?
+We're going to use **Codepen** to make our game. Codepen is an online code editor and community for web development technologies, which Javascript is a part of.
 
-### I've got some experience
-- setup instructions for downloading libraries locally
+To be able to save and share your code, go to https://codepen.io/signup, scroll down to **Free Plan**, and sign up.
+
+Then, come back to this page, and go to http://codepen.io/pen?template=ONJQya&editors=0010 to set up a new project with p5.js and p5.play.js added already. Additionally, there is a small amount of CSS included for you that will simply center the game canvas on the page.
 
 ## Vocabulary
 - **sprite**: a graphic that we can move around the screen as a single entity
