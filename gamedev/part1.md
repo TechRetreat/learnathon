@@ -120,4 +120,5 @@ Now you should be able to move left and right, and fly up in the air when hittin
 Here's a link to a Codepen project completed up to this step: http://codepen.io/davepvm/pen/NNWyrV?&editors=0010
 
 <a href="part2.md">Part 2: Gravity and collision detection</a>
+
 <a href="README.md#Instructions">Back</a>
