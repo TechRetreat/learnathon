@@ -17,7 +17,7 @@
 - 
 
 ## Instructions
-I. Coding 101
+###I. Coding 101
   - [Open a playground](#)
   - [Hello world](#)
   - [Variables](#)
@@ -27,7 +27,7 @@ I. Coding 101
   - [While loops](#)
   - [Functions](#)
 
-II. iOS 101
+###II. iOS 101
   - [Xcode tutorial](#)
   - [Debugging tutorial](#)
   - [Git tutorial](#)
@@ -45,13 +45,7 @@ II. iOS 101
     - [Read in data from server](#)
     - [Send data to server](#)
 
-III. Extensions
+###III. Extensions
   - [Animations](#)
   - [Camera - QR](#)
   - ...
-
-## Next Steps
-- [Transition between screens](#)
-- [Transition between screens](#)
-- [Animation](#)
-- ...
