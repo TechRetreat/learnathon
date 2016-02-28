@@ -3,7 +3,7 @@ package techretreat.jgzuke.geocaching.FoundPage;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 
-public class FoundController implements FoundDataInteractor.DataReciever {
+public class FoundController implements FoundDataInteractor.DataReceiver {
 
     private String userId;
     private Context context;

@@ -7,14 +7,14 @@ import techretreat.jgzuke.geocaching.DataUtilities;
 
 public class MapDataInteractor {
 
-    public interface DataReciever {
+    public interface DataReceiver {
     }
 
     private String userId;
     private Context context;
-    private DataReciever reciever;
+    private DataReceiver reciever;
 
-    public MapDataInteractor(String userId, Context context, DataReciever reciever) {
+    public MapDataInteractor(String userId, Context context, DataReceiver reciever) {
         this.userId = userId;
         this.context = context;
         this.reciever = reciever;

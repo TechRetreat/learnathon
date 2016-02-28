@@ -3,7 +3,7 @@ package techretreat.jgzuke.geocaching.SettingsPage;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 
-public class SettingsController implements SettingsDataInteractor.DataReciever {
+public class SettingsController implements SettingsDataInteractor.DataReceiver {
 
     private String userId;
     private Context context;

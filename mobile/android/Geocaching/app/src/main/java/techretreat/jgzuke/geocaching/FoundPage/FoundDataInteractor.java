@@ -6,15 +6,15 @@ import techretreat.jgzuke.geocaching.DataUtilities;
 
 public class FoundDataInteractor {
 
-    public interface DataReciever {
+    public interface DataReceiver {
         void getFoundCaches(FoundCaches.Cache[] caches);
     }
 
     private String userId;
     private Context context;
-    private DataReciever reciever;
+    private DataReceiver reciever;
 
-    public FoundDataInteractor(String userId, Context context, DataReciever reciever) {
+    public FoundDataInteractor(String userId, Context context, DataReceiver reciever) {
         this.userId = userId;
         this.context = context;
         this.reciever = reciever;
