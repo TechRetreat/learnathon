@@ -10,7 +10,7 @@ import android.os.Bundle;
 
 import techretreat.jgzuke.geocaching.FoundPage.FoundController;
 import techretreat.jgzuke.geocaching.MapPage.MapController;
-import techretreat.jgzuke.geocaching.SettingsPage.SettingsControler;
+import techretreat.jgzuke.geocaching.SettingsPage.SettingsController;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -76,11 +76,11 @@ public class MainActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return new FoundController(userId).getFragment();
+                    return new FoundController(userId, MainActivity.this).getFragment();
                 case 1:
-                    return new MapController(userId).createFragment();
+                    return new MapController(userId, MainActivity.this).getFragment();
                 case 2:
-                    return new SettingsControler(userId).createFragment();
+                    return new SettingsController(userId, MainActivity.this).getFragment();
                 default:
                     return null;
             }

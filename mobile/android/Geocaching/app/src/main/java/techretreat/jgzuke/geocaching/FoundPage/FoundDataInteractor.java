@@ -7,17 +7,19 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.InputStream;
 
+import techretreat.jgzuke.geocaching.R;
+
 public class FoundDataInteractor {
 
-    public interface FoundDataReciever {
+    public interface DataReciever {
         void getFoundCaches(Caches.Cache[] caches);
     }
 
     private String userId;
     private Context context;
-    private FoundDataReciever reciever;
+    private DataReciever reciever;
 
-    public FoundDataInteractor(String userId, Context context, FoundDataReciever reciever) {
+    public FoundDataInteractor(String userId, Context context, DataReciever reciever) {
         this.userId = userId;
         this.context = context;
         this.reciever = reciever;
@@ -25,7 +27,7 @@ public class FoundDataInteractor {
 
     public void getFoundCaches() {
         try {
-            InputStream is = context.getAssets().open("cachesFound.json");
+            InputStream is = context.getResources().openRawResource(R.raw.caches_found);
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);

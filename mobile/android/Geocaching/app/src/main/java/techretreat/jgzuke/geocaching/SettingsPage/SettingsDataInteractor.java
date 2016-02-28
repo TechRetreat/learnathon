@@ -1,7 +1,19 @@
 package techretreat.jgzuke.geocaching.SettingsPage;
 
-/**
- * Created by jgzuke on 16-02-27.
- */
+import android.content.Context;
+
 public class SettingsDataInteractor {
+
+    public interface DataReciever {
+    }
+
+    private String userId;
+    private Context context;
+    private DataReciever reciever;
+
+    public SettingsDataInteractor(String userId, Context context, DataReciever reciever) {
+        this.userId = userId;
+        this.context = context;
+        this.reciever = reciever;
+    }
 }

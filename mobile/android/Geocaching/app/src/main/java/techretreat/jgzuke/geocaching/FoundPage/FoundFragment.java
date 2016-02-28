@@ -56,7 +56,9 @@ public class FoundFragment extends Fragment {
 
     public void setFoundCaches(Caches.Cache[] caches) {
         foundCaches = Arrays.asList(caches);
-        cachesRecycerViewAdapter.notifyDataSetChanged();
+        if(cachesRecycerViewAdapter != null) {
+            cachesRecycerViewAdapter.notifyDataSetChanged();
+        }
     }
 
     private class CacheHolder extends RecyclerView.ViewHolder {
@@ -88,6 +90,9 @@ public class FoundFragment extends Fragment {
 
         @Override
         public int getItemCount() {
+            if(foundCaches == null) {
+                return 0;
+            }
             return foundCaches.size();
         }
     }
