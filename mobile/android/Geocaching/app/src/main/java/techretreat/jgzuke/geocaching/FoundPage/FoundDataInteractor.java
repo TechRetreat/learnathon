@@ -2,17 +2,12 @@ package techretreat.jgzuke.geocaching.FoundPage;
 
 import android.content.Context;
 
-import com.google.gson.Gson;
-
-import java.io.IOException;
-import java.io.InputStream;
-
-import techretreat.jgzuke.geocaching.R;
+import techretreat.jgzuke.geocaching.DataUtilities;
 
 public class FoundDataInteractor {
 
     public interface DataReciever {
-        void getFoundCaches(Caches.Cache[] caches);
+        void getFoundCaches(FoundCaches.Cache[] caches);
     }
 
     private String userId;
@@ -26,19 +21,7 @@ public class FoundDataInteractor {
     }
 
     public void getFoundCaches() {
-        try {
-            InputStream is = context.getResources().openRawResource(R.raw.caches_found);
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            String json = new String(buffer, "UTF-8");
-
-            Gson gson = new Gson();
-            Caches response = gson.fromJson(json, Caches.class);
-            reciever.getFoundCaches(response.caches);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        FoundCaches response = new DataUtilities<FoundCaches>().getResponse(context, FoundCaches.class);
+        reciever.getFoundCaches(response.caches);
     }
 }
