@@ -1,11 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="12dp" >
 
     <TextView
-        android:id="@+id/found_item_difficulty"
+        android:id="@+id/cache_name"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        tools:text="Example cache name" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/cache_difficulty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cache_name"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
+        android:textSize="15sp"
+        tools:text="Difficulty: 3" />
+
+    <TextView
+        android:id="@+id/cache_find_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cache_name"
+        android:layout_toRightOf="@+id/cache_difficulty"
+        android:layout_toEndOf="@+id/cache_difficulty"
+        android:textSize="15sp"
+        tools:text="Found 3 days ago" />
+
+</RelativeLayout>

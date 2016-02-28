@@ -24,7 +24,7 @@ public class FoundController implements FoundDataInteractor.DataReciever {
     }
 
     @Override
-    public void getFoundCaches(Caches.Cache[] caches) {
+    public void getFoundCaches(FoundCaches.Cache[] caches) {
         foundFragment.setFoundCaches(caches);
     }
 }

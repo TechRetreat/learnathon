@@ -1,36 +1,22 @@
 {
   "caches": [
     {
+      "id": "yrolad",
+      "name": "Cache 1",
       "difficulty": 3,
-      "found": 123456,
-      "location": {
-        "latitude": 123.4,
-        "longitude": 234.5
-      }
+      "found": 123456
     },
     {
+      "id": "mdifpq",
+      "name": "Cache 2",
       "difficulty": 3,
-      "found": 123456,
-      "location": {
-        "latitude": 123.4,
-        "longitude": 234.5
-      }
+      "found": 123456
     },
     {
+      "id": "cbdiyd",
+      "name": "Cache 3",
       "difficulty": 3,
-      "found": 123456,
-      "location": {
-        "latitude": 123.4,
-        "longitude": 234.5
-      }
-    },
-    {
-      "difficulty": 3,
-      "found": 123456,
-      "location": {
-        "latitude": 123.4,
-        "longitude": 234.5
-      }
+      "found": 123456
     }
   ]
 }
