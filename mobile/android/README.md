@@ -64,3 +64,45 @@ Gif of demo
 - activity
 - service
 - synchronous
+
+
+
+
+
+
+
+
+Main Activity:
+XML
+resources/strings
+naming conventions
+Views
+Objects
+Built in funcitons
+ViewPager
+Listeners
+Extention/Implementation
+Adapters
+Callbacks
+Fragments
+CONSTANTS
+TabLayout
+Activity
+
+Found:
+json/gson
+classes/inner/data objects
+background threads
+resources/raw
+RecyclerView
+
+Maps:
+Getting api key
+MapFragment
+GoogleMap
+Manifest permissions and meta data
+
+Settings:
+SharedPreferences
+PreferencesFragment
+resources/arrays
