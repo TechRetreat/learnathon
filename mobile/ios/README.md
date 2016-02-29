@@ -20,12 +20,18 @@
 ###I. Coding 101
   - [Open a playground](#)
   - [Hello world](#)
+  - [Strings](#)
+  - [Ints](#)
+  - [Floats](#)
   - [Variables](#)
   - [Constants](#)
+  - [Arrays](#)
   - [If statements](#)
   - [For loops](#)
   - [While loops](#)
+  - [Comments](#)
   - [Functions](#)
+  - [iOS Specifics??](#)
 
 ###II. iOS 101
   - [Xcode tutorial](#)
@@ -43,7 +49,6 @@
     - [Saving data](#)
     - [Read in data from json file](#)
     - [Read in data from server](#)
-    - [Send data to server](#)
 
 ###III. Extensions
   - [Animations](#)
