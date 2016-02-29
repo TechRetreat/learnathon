@@ -21,6 +21,6 @@ public class MapDataInteractor {
     }
 
     public void getCaches() {
-        Caches response = new DataUtilities<Caches>().getResponse(context, Caches.class);
+        MapCaches response = new DataUtilities<MapCaches>().getResponse(context, MapCaches.class);
     }
 }

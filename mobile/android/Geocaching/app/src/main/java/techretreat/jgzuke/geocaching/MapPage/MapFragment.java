@@ -1,14 +1,15 @@
 package techretreat.jgzuke.geocaching.MapPage;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.maps.SupportMapFragment;
+
 import techretreat.jgzuke.geocaching.R;
 
-public class MapFragment extends Fragment {
+public class MapFragment extends SupportMapFragment {
 
     private static final String KEY_USER_ID = "user_id";
 

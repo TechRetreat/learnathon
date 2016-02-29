@@ -2,7 +2,7 @@ package techretreat.jgzuke.geocaching.MapPage;
 
 import java.util.Map;
 
-public class Caches {
+public class MapCaches {
     public Map<String, Cache> caches;
 
     public static class Cache {
