@@ -15,7 +15,7 @@ Gif of demo
 ##Java
 - [Online Editor](https://www.compilejava.net/)
 - int, boolean
-- If, else
+- If, else, case
 - array, map
 - for, while
 
@@ -73,8 +73,9 @@ Gif of demo
 
 
 Main Activity:
+res/layout/_.xml
 XML
-resources/strings
+res/values/strings.xml http://developer.android.com/samples/MediaRouter/res/values/strings.html
 naming conventions
 Views
 Objects
@@ -90,19 +91,40 @@ TabLayout
 Activity
 
 Found:
+res/values/colors.xml http://developer.android.com/samples/BasicMediaRouter/res/values/colors.html
+Support fragment vs fragment etc.
+Define API
 json/gson
+res/raw/_.json
 classes/inner/data objects
 background threads
 resources/raw
 RecyclerView
 
 Maps:
+http://www.truiton.com/2013/05/google-maps-android-api-v2-introduction/
 Getting api key
+- https://code.google.com/apis/console/
+- Create project
+- Use Google APIs
+- Google Maps Android API
+- Enable
+- Go to credentials
+- Calling from: Android
+- Click 'Find out what kind of credentials you need'
+- Click 'Create an API key'
+- Copy Key into Android Manifest meta-data 'com.google.android.maps.v2.API_KEY'
+
 MapFragment
 GoogleMap
 Manifest permissions and meta data
+Map UI settings https://developers.google.com/maps/documentation/android-api/controls
+
 
 Settings:
-SharedPreferences
-PreferencesFragment
-resources/arrays
+SharedPreferences http://developer.android.com/reference/android/content/SharedPreferences.html
+PreferencesFragment http://developer.android.com/reference/android/support/v7/preference/PreferenceFragmentCompat.html
+res/values/arrays.xml http://developer.android.com/samples/MediaRouter/res/values/arrays.html
+
+
+
