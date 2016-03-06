@@ -72,10 +72,84 @@ Gif of demo
 
 
 
+
+# Building the app
+
+## Add text to fragment
+- Strings, resources
+- XML
+- Tools and XML view
+
+## Add nested layout
+- Relative layout
+- Id's
+
+## Add button and set text programatically
+- Button
+- getViewById
+- OnClickLostener
+- Callbacks
+
+## Build a RecyclesView with mock arraylist
+- Simple arrayList of strings
+- RecyclerView
+- Adapter
+- XML inflation
+- Layout Manager
+- ViewHolder pattern
+
+## Get data from json file
+- Model objects
+- Json
+- IO
+- Generics
+- Static functions
+- Utility classes
+
+## Put good data into recycler view
+- Calling utility
+
+## File organization
+- Create Controller
+- Fragment
+- Utilities
+
+## Cteate viewPager
+- ViewPager
+
+## Tab layout
+- Connect to viewPager
+
+## Create Map fragment/Add to viewPager
+- Same stuff as before
+
+## Using Map
+- Getting map
+- Asynchronous
+- Map settings
+- Zoom to location
+
+## Make Markers
+- Make Model and Call for map caches
+- Click listener
+- Info window
+- Dealing with maps (found)
+
+## Marker popup dialog
+- Alert dialogs
+- View inflation
+- View dismiss
+
+## Getting data from 
+
+
+
+
 Main Activity:
 res/layout/_.xml
 XML
 res/values/strings.xml http://developer.android.com/samples/MediaRouter/res/values/strings.html
+http://developer.android.com/guide/topics/resources/string-resource.html#FormattingAndStyling
 naming conventions
 Views
 Objects
