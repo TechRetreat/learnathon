@@ -13,33 +13,41 @@ Gif of demo
 - [Vocabulary](#vocabulary)
 
 ##Java
-- [Online Editor](https://www.compilejava.net/)
+To start todays lesson were going to take a quick look at the language Android apps are written in, Java. Open up the [Java Online Editor](https://www.compilejava.net/) to get started.
+
 - int, boolean
 - If, else, case
 - array, map
 - for, while
 
-(look at https://teamtreehouse.com/library/topic:android later)
 ## Setup Android Studio
-- [Download/Install Android Studio + SDK tools](http://developer.android.com/training/basics/firstapp/index.html) Make sure you have Java installed as well
-- [Set up Android Studio project](http://developer.android.com/training/basics/firstapp/creating-project.html)
- - Start a new Android Studio Project
- - Minimum SDK: API 16 (Jelly Bean)
- - Add an activity to Mobile: Blank Activity with fragment
-- [Run on device/emulator](http://developer.android.com/training/basics/firstapp/running-app.html)
+###Download/Install Android Studio
+To build our Android app we'll be using an IDE called Android Studio. An IDE is a programming environment that allows you to edit files, compile and run your code, and has other features built into it like debugging. Lets start by [Downloading Android Studio](http://developer.android.com/training/basics/firstapp/index.html) To get it to work you'll also need to install [Java](TODO:link)
 
-# Building the app
+###Download SDK tools
+TODO: SDK stuff here or after? test fresh install studio on windows
 
-## Add text to fragment
+###Setting up a New Project
+Once Android studio is set up we'll need to start a [New Project](http://developer.android.com/training/basics/firstapp/creating-project.html). Open Android studio and select 'Start a new Android Studio Project', use a Minimum SDK of API 16 (Jelly Bean), and when prompted to choose starting Activity, choose 'Blank Activity with Fragment'
+Minimum SDK is the minimum version of the Android Operating System required to run your app. We chose 16 because most phones run that or newer, and it allows us to use new Android features.
+The starting Activity is the code that Android Studio will generate to start your project. Well explain what Activity and Fragment are in a bit.
+Android studio should now generate your starting project, and drop you into the screen pictured below (TODO: Get screenshot from windows AS).
+
+### Running project on Device/Emulator
+To make sure it worked correctly, click the green 'Run' arrow at the top of the screen. This will compile the starting code and prompt you for a device to run it on. If you are using the emulator for testing, check Launch Emulator at the bottom and click OK, this will start a virtual device and run the app on it (may take while to start). If you are using a real device, plug in your phone and accept the prompt on the device, then it should appear under 'Choose a running device'. Select it and click OK to run the app on your phone.
+
+## Building the app
+
+### Add text to fragment
 - Strings, resources (http://developer.android.com/reference/android/content/res/Resources.html)
 - XML
 - Tools and XML view
 
-## Add nested layout
+### Add nested layout
 - Relative layout
 - Id's
 
-## Add button and set text programatically
+### Add button and set text programatically
 - Button
 - View, Object
 - Extention/Implementation (breifly)
@@ -48,7 +56,7 @@ Gif of demo
 - OnClickLostener
 - Callbacks
 
-## Build a RecyclesView with mock arraylist
+### Build a RecyclesView with mock arraylist
 - Simple arrayList of strings
 - RecyclerView
 - Adapter
@@ -56,7 +64,7 @@ Gif of demo
 - Layout Manager
 - ViewHolder pattern
 
-## Get data from json file
+### Get data from json file
 - Model objects
 - Json
 - IO
@@ -65,21 +73,21 @@ Gif of demo
 - Interface/Implementation/Composition
 - Utility classes
 
-## Put good data into recycler view
+### Put good data into recycler view
 - Calling utility
 
-## File organization
+### File organization
 - Create Controller
 - Fragment
 - Utilities
 
-## Cteate viewPager
+### Create viewPager
 - ViewPager
 
-## Tab layout
+### Tab layout
 - Connect to viewPager
 
-## Create Map fragment/Add to viewPager
+### Create Map fragment/Add to viewPager
 - Extend SupportMapFragment
 - Extension further
 
@@ -101,75 +109,72 @@ Getting api key
 - Support Fragment vs Fragment
 - Same stuff as before
 
-## Using Map
+### Using Map
 - Getting map
 - Asynchronous
 - Map settings https://developers.google.com/maps/documentation/android-api/controls
 - Zoom to location
 
-## Permissions
+### Permissions
 - Manifest
 - Check has permissions
 - Request if not
 
-## Make Markers
+### Make Markers
 - Make Model and Call for map caches
 - Click listener
 - Info window
 - Dealing with maps (found)
 
-## Marker popup dialog
+### Marker popup dialog
 - Alert dialogs
 - View inflation
 - View dismiss
 
-## Cache NFC?
+### Cache NFC?
 - Read NFC of cache and check against server?
 - Client/server validation
 
-## Getting data from actual API
+### Getting data from actual API
 - Making the request
 
-## Sending back to API from found
+### Sending back to API from found
 - Make the request, handle errors
 
-## Open map from found fragment
+### Open map from found fragment
 - Callback to activity
 - Passing in Location
 - Talk about async with getting map
 
-## Cache Data
+### Cache Data
 - Store json to use off network
 - Take in onError Callbacks
 - Check connectivity
 
-## Preferences
+### Preferences
 - Add fragment to viewPager
 - Create Strings etc for preferences
 - Create R.xml.preferences
 - Extend PreferenceFragmentCompat http://developer.android.com/reference/android/support/v7/preference/PreferenceFragmentCompat.html
 - SharedPreferences http://developer.android.com/reference/android/content/SharedPreferences.html
 
-## Preference screen to do actions
+### Preference screen to do actions
 - Dump Cache
 - Clear Cache
 - Clear found caches (+server call)
 
-## Beautify app
+### Beautify app
 - Colors
 - Styles
 - Themes (put in settings?)
 
-## Geocaching App
-- [Gradle, importing libraries (android arsenal)](#)
-
-## Extend it further
+### Extend it further
 - [Camera](#)
 - Caching data
 - Other cool apis
 - Device functionalities (Accelerometer etc)
 
-## Android Studio Tips
+### Android Studio Tips
 - Android studio view (structure project preview)
  - Project (left): Shows files in android structure
  - Structure (right): Shows functions and inner classes of files
@@ -178,10 +183,41 @@ Getting api key
  - Terminal (bottom left): Command line
 - [Android studio shortcuts](https://teamtreehouse.com/library/android-tools/getting-started-with-android-studio/helpful-keyboard-shortcuts)
 
-## Vocabulary
-- xml
-- view
-- fragment
-- activity
-- service
-- synchronous
+### Vocabulary
+- Xml
+- View
+- Fragment
+- Activity
+- Controller
+- Utility
+- Data Class
+- Synchronous
+- Resources
+- Object
+- Extends
+- Implements
+- Interface
+- Callback
+- HashMap
+- Array
+- Casting
+- Type
+- Integer
+- Long
+- Float
+- Boolean
+- String
+- Null
+- Public
+- Private
+- Static
+- Final
+- Return
+- Class
+- Import
+- Gradle
+- Compile
+- Preference
+- Constant
+- Generic
+- @Override
