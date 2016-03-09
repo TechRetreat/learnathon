@@ -3,6 +3,11 @@
 ## What you'll make
 Gif of demo
 
+
+
+
+
+
 ## Table of Contents
 - [Java](#java)
 - [Setup Android Studio](#setup-android-studio)
@@ -12,6 +17,11 @@ Gif of demo
 - [Android Studio Tips](#android-studio-tips)
 - [Vocabulary](#vocabulary)
 
+
+
+
+
+
 ##Java
 To start todays lesson were going to take a quick look at the language Android apps are written in, Java. Open up the [Java Online Editor](https://www.compilejava.net/) to get started.
 
@@ -19,6 +29,11 @@ To start todays lesson were going to take a quick look at the language Android a
 - If, else, case
 - array, map
 - for, while
+
+
+
+
+
 
 ## Setup Android Studio
 ###Download/Install Android Studio
@@ -38,6 +53,11 @@ To make sure it worked correctly, click the green 'Run' arrow at the top of the 
 
 ### Problems?
 Thats what mentors are here for, feel free to ask for help with any problems you have, if you feel up to the challenge you can also try searching your problem on [StackOverflow](http://stackoverflow.com/) or just Google.
+
+
+
+
+
 
 ## Building the GeoCaching App
 
@@ -171,67 +191,94 @@ Getting api key
 - Styles
 - Themes (put in settings?)
 
+
+
+
+
+
 ## Extend it further
 - [Camera](#)
 - Caching data
 - Other cool apis
 - Device functionalities (Accelerometer etc)
 
+
+
+
+
+
 ## Android Studio Tips
-- Android studio view (structure project preview)
- - Project (left): Shows files in android structure
- - Structure (right): Shows functions and inner classes of files
- - Android (bottom right): Shows logs from device
- - Run (bottom left): Options for running project
- - Terminal (bottom left): Command line
-- [Android studio shortcuts](https://teamtreehouse.com/library/android-tools/getting-started-with-android-studio/helpful-keyboard-shortcuts)
+### Android studio view (structure project preview)
+- Project (left): Shows files in android structure
+- Structure (right): Shows functions and inner classes of files
+- Android (bottom right): Shows logs from device
+- Run (bottom left): Options for running project
+- Terminal (bottom left): Command line
+
+### [Android studio shortcuts](https://teamtreehouse.com/library/android-tools/getting-started-with-android-studio/helpful-keyboard-shortcuts)
+
+
+
+
+
 
 ## Vocabulary
-### Views
-- **View:** An element on the screen
+### User Interface (UI)
+- **View:** An element on the screen, like a text block, a button, or a collection or other elements
 - **XML:** The format android uses to store view data like text, color, and size
-- **Fragment:** A Fragment
-- **Resources:**
+- **Resources:** All our data files defining our views, strings, or a bunch of other things
+- **Layout:** Layouts define how views are organized and laid out 
 
 ### Top level classes
-- **Activity:** An Activity
-- **Controller:** The Controller is what we use 
-- **Utility:** 
+- **Activity:** Our Activity is the entry point into the app, and holds the UI not contained in fragments. Also used as a Context.
+- **Fragment:** A Fragment is what holds the Views for our UI pages
+- **Controller:** The Controller is what we will use to handle and logic and data for our fragments.
+- **Utility:** Utilities consist of useful functions to share across our fragments, like fetching data, or getting preferences
 
 ### Objects
 - **Object:** 
+- **Instance:** 
 - **Extends:** 
 - **Implements:** 
 - **Interface:** 
 - **Override:** 
 
-### Data Class
-### HashMap
-### Array
+### Data Structures
+- **Data Class:** An Object that holds data
+- **HashMap:** 
+- **Array:** 
 
-### Function
-### Return
-### Callback
-### Synchronous
+### Functions
+- **Function:** Reusable block of code, take in parameters and returns some value
+- **Parameters:** Things 
+- **Return:** 
+- **Callback:** 
+- **Asynchronous:** 
 
-### Class
-### Type
-### Casting
-### Generic
-### Primitive
-### Null
+### Data Types
+- **Class:** 
+- **Type:** 
+- **Variable:**
+- **Casting:** 
+- **Generic:** 
+- **Primitive:** 
+- **Null:** 
 
-### Integer
-### Long
-### Float
-### Boolean
-### String
+### Primitive Data Types
+- **Integer:** Whole numbers eg -1, 0, 1 up to 2147483647
+- **Long:** Whole numbers larger in magnitude than ints
+- **Double:** Decimal numbers
+- **Boolean:** True of False
+- **String:** Group of characters (Word, sentence, or longer)
 
-### Public
-### Private
-### Static
-### Final
+### Variable/Function Access
+- **Public:** Accessible by anyone
+- **Private:** Accessible only in this class
+- **Static:** Code that can be called without an object of that class
+- **Final:** Variable that cannot be modified
+- **Constant:** Variable that is hard coded to have some value (Never changes)
 
-### Gradle
-### Preference
-### Constant
+### Android
+- **Context:** 
+- **Gradle:** Android build system
+- **SharedPreferences:** One place to store data on a device
