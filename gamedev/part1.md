@@ -1,6 +1,6 @@
 # Game Dev
 ## Part 1: Drawing on the Screen
-<a href="README.md#Instructions">Back</a>
+<a href="README.md#instructions">Back</a>
 
 ### How do game visuals work?
 
@@ -121,4 +121,4 @@ Here's a link to a Codepen project completed up to this step: http://codepen.io/
 
 <a href="part2.md">Part 2: Gravity and collision detection</a>
 
-<a href="README.md#Instructions">Back</a>
+<a href="README.md#instructions">Back</a>
