@@ -22,10 +22,10 @@ To start todays lesson were going to take a quick look at the language Android a
 
 ## Setup Android Studio
 ###Download/Install Android Studio
-To build our Android app we'll be using an IDE called Android Studio. An IDE is a programming environment that allows you to edit files, compile and run your code, and has other features built into it like debugging. Lets start by [Downloading Android Studio](http://developer.android.com/training/basics/firstapp/index.html) To get it to work you'll also need to install [Java](TODO:link)
+To build our Android app we'll be using an IDE called Android Studio. An IDE is a programming environment that allows you to edit files, compile and run your code, and has other features built into it like debugging. Lets start by [Downloading Android Studio](http://developer.android.com/training/basics/firstapp/index.html) To get it to work you'll also need to install [Java](TODO:link).
 
 ###Download SDK tools
-TODO: SDK stuff here or after? test fresh install studio on windows
+TODO: SDK stuff here or after? test fresh install studio on windows.
 
 ###Setting up a New Project
 Once Android studio is set up we'll need to start a [New Project](http://developer.android.com/training/basics/firstapp/creating-project.html). Open Android studio and select 'Start a new Android Studio Project', use a Minimum SDK of API 16 (Jelly Bean), and when prompted to choose starting Activity, choose 'Blank Activity with Fragment'
@@ -34,11 +34,14 @@ The starting Activity is the code that Android Studio will generate to start you
 Android studio should now generate your starting project, and drop you into the screen pictured below (TODO: Get screenshot from windows AS).
 
 ### Running project on Device/Emulator
-To make sure it worked correctly, click the green 'Run' arrow at the top of the screen. This will compile the starting code and prompt you for a device to run it on. If you are using the emulator for testing, check Launch Emulator at the bottom and click OK, this will start a virtual device and run the app on it (may take while to start). If you are using a real device, plug in your phone and accept the prompt on the device, then it should appear under 'Choose a running device'. Select it and click OK to run the app on your phone.
+To make sure it worked correctly, click the green 'Run' arrow at the top of the screen. This will compile the starting code and prompt you for a device to run it on. If you are using the emulator for testing, check Launch Emulator at the bottom and click OK, this will start a virtual device and run the app on it (may take while to start). If you are using a real device, plug in your phone and accept the prompt on the device, then it should appear under 'Choose a running device'. Select it and click OK to run the app on your phone. Your app should open with a white screen that says 'Hello World'.
 
-## Building the app
+### Problems?
+Thats what mentors are here for, feel free to ask for help with any problems you have, if you feel up to the challenge you can also try searching your problem on [StackOverflow](http://stackoverflow.com/) or just Google.
 
-### Add text to fragment
+## Building the GeoCaching App
+
+### XML, Views and Fragments, oh my
 - Strings, resources (http://developer.android.com/reference/android/content/res/Resources.html)
 - XML
 - Tools and XML view
@@ -168,13 +171,13 @@ Getting api key
 - Styles
 - Themes (put in settings?)
 
-### Extend it further
+## Extend it further
 - [Camera](#)
 - Caching data
 - Other cool apis
 - Device functionalities (Accelerometer etc)
 
-### Android Studio Tips
+## Android Studio Tips
 - Android studio view (structure project preview)
  - Project (left): Shows files in android structure
  - Structure (right): Shows functions and inner classes of files
@@ -183,41 +186,52 @@ Getting api key
  - Terminal (bottom left): Command line
 - [Android studio shortcuts](https://teamtreehouse.com/library/android-tools/getting-started-with-android-studio/helpful-keyboard-shortcuts)
 
-### Vocabulary
-- Xml
-- View
-- Fragment
-- Activity
-- Controller
-- Utility
-- Data Class
-- Synchronous
-- Resources
-- Object
-- Extends
-- Implements
-- Interface
-- Callback
-- HashMap
-- Array
-- Casting
-- Type
-- Integer
-- Long
-- Float
-- Boolean
-- String
-- Null
-- Public
-- Private
-- Static
-- Final
-- Return
-- Class
-- Import
-- Gradle
-- Compile
-- Preference
-- Constant
-- Generic
-- @Override
+## Vocabulary
+### Views
+- **View:** An element on the screen
+- **XML:** The format android uses to store view data like text, color, and size
+- **Fragment:** A Fragment
+- **Resources:**
+
+### Top level classes
+- **Activity:** An Activity
+- **Controller:** The Controller is what we use 
+- **Utility:** 
+
+### Objects
+- **Object:** 
+- **Extends:** 
+- **Implements:** 
+- **Interface:** 
+- **Override:** 
+
+### Data Class
+### HashMap
+### Array
+
+### Function
+### Return
+### Callback
+### Synchronous
+
+### Class
+### Type
+### Casting
+### Generic
+### Primitive
+### Null
+
+### Integer
+### Long
+### Float
+### Boolean
+### String
+
+### Public
+### Private
+### Static
+### Final
+
+### Gradle
+### Preference
+### Constant
