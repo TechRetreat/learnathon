@@ -9,9 +9,11 @@ In games and movies, it looks like the things on the screen on the moving. The m
 A classic example of this is "The Horse In Motion", which was made in 1878 by taking photos of a racehorse at different points in time. Played back, the horse appears to move.
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/7/73/The_Horse_in_Motion.jpg" />
+
 *Frames of The Horse In Motion, from <a href="https://commons.wikimedia.org/wiki/File:The_Horse_in_Motion.jpg" target="_blank">Wikimedia</a>*
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/d/dd/Muybridge_race_horse_animated.gif" />
+
 *The frames, played back, from <a href="https://en.wikipedia.org/wiki/File:Muybridge_race_horse_animated.gif" target="_blank">Wikimedia</a>*
 
 In a game, the same thing applies. The movement in a game will be made by the computer drawing slightly different images together fast enough to give the illusion of motion. Unlike in real life, where objects move on its own for us to capture, in a game, the computer needs to figure out where to put everything in the next frame before it can draw it.
