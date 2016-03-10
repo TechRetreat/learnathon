@@ -39,7 +39,7 @@
   - [Xcode tutorial](#)
   - [Debugging tutorial](#)
   - [Git tutorial](#)
-  - [Scavenger](#)
+  - [Scavenger](https://github.com/TechRetreat/learnathon/blob/ios-outline/mobile/ios/Scavenger.md)
     - [iOS Hello world](#) 
     - [Add menu](#)
     - [Add model](#)
