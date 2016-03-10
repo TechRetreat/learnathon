@@ -79,6 +79,23 @@
         self.window!.rootViewController = navController
       }
       ```
+      - This function [instatiates]() our menu [view controller]()
+      - Then creates a [navigation controller](), with our menu as the base
+      - And the sets the root of the window to the [navigation controller]()
+    - Now let's call it. Under the line where we [initialize]() the window, call the start method we created using the code: `self.start()`
+2. View Controllers
+  - "[Views]()" are elements on the screen that users intereact with (e.g. Buttons, cells, labels, etc...)
+  - "[View controllers]()" as the name suggests, controls the contents of the view. It acts as the brain of the application and tells the views what to do.
+  - The "MenuViewController" will control the menu. It will manage the views and control what happens when the user interacts with them.
+  - [`ViewController`]()s have a [property]() called `view`. It can be accessed via `self.view` This is the [root view]() of the view controller.
+    - Let's set the background colour of the view controller's view by setting its `backgroundColor` property to a colour. You can create a colour by using one of the `UIColor` [constructors]().
+  - Let's start by adding a label. We will add it in the [`viewDidLoad`]() method
+    - To add a label, we'll create a label object: `let helloLabel = UILabel()`
+    - Then we want to set the `text`, `font`, and `textColor` properties.
+    - We also want to set the `frame` of the view. For now, we will just set it to the `bounds` of `MenuViewController`'s view.
+    - Finally, we want to add the label as a [`subview`]() of the `MenuViewController`'s view.
+3. Run!
+  - When you run the application, you should see some text displayed on the screen.
 
 
     
@@ -88,11 +105,11 @@ import UIKit
 
 class MenuViewController: UIViewController {
 
-      override func viewDidLoad() {
-          super.viewDidLoad()
+  override func viewDidLoad() {
+      super.viewDidLoad()
 
-          // Do any additional setup after loading the view.
-      }
+      // Do any additional setup after loading the view.
+  }
 
 }
 ```
