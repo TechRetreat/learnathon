@@ -29,7 +29,8 @@ To start todays lesson were going to take a quick look at the language Android a
 To start, replace the generated code with the following 
 ```java
 public class JavaExamples {
-  // The main function is the start of a normal Java program, you can ignore this as it works differently in Android
+  // The main function is the start of a normal Java program
+  // You can ignore this function as Android starts running in a different spot
   public static void main(String[] args) {
     // This will print out "Hello world!" to the console
     System.out.println("Hello World!");
