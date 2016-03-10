@@ -1,4 +1,5 @@
 # Mobile/iOS
+Learn the fundamentals of programming, the Swift programming language adn build a geocaching iOS app!
 
 ## What you'll make: Scavenger
 - A geocaching mobile application
