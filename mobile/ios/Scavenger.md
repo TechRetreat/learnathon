@@ -1,17 +1,16 @@
 #Scavenger
 
 ## Create the project
-1. Go to "File" -> "New" -> "Project"
-2. Select "iOS" -> "Single View Application"
-3. Name your app! The "Product Name" field will be the name of your app.
-4. For organization, you can just put your name.
-5. For the organizatoin identifier, try to make it unique. For example you can do "com.firstName.lastName"
-6. Choose "Swift" as the programming language
+1. Make a new project ("File" -> "New" -> "Project")
+2. Select "iOS" -> "Single View Application". We'll start off with the most basic starting point. Starting off from scratch.
+3. This of a name for your app! The "Product Name" field will be the name of your app. I named the sample on "Scavenger".
+4. The organization field just specifies the author of the app, you can put your name there.
+5. For the organizatoin identifier, try to make it unique. For example you can do "com.firstName.lastName".
+6. Make sure to choose "Swift" as the programming language
 7. Select "iPhone" for the devices filed
-8. Make sure the "Use Core Data" field is unchecked
-9. Click next
-10. Choose where to save your project on your computer.
-11. Make sure "Create Git repository on My Mac" is selected
+8. Make sure the "Use Core Data" field is unchecked. This will add some template code that we don't want for this app.
+10. After clicking next you can choose where to save your project on your computer.
+11. Make sure "Create Git repository on My Mac" is selected. This will let us use source control.
 12. Click "Create"!
 
 ## Let's look around!
@@ -87,19 +86,7 @@
   - "[Views]()" are elements on the screen that users intereact with (e.g. Buttons, cells, labels, etc...)
   - "[View controllers]()" as the name suggests, controls the contents of the view. It acts as the brain of the application and tells the views what to do.
   - The "MenuViewController" will control the menu. It will manage the views and control what happens when the user interacts with them.
-  - [`ViewController`]()s have a [property]() called `view`. It can be accessed via `self.view` This is the [root view]() of the view controller.
-    - Let's set the background colour of the view controller's view by setting its `backgroundColor` property to a colour. You can create a colour by using one of the `UIColor` [constructors]().
-  - Let's start by adding a label. We will add it in the [`viewDidLoad`]() method
-    - To add a label, we'll create a label object: `let helloLabel = UILabel()`
-    - Then we want to set the `text`, `font`, and `textColor` properties.
-    - We also want to set the `frame` of the view. For now, we will just set it to the `bounds` of `MenuViewController`'s view.
-    - Finally, we want to add the label as a [`subview`]() of the `MenuViewController`'s view.
-3. Run!
-  - When you run the application, you should see some text displayed on the screen.
-
-
-    
-1. In "MenuViewController.swift" you can delete the `didReceiveMemoryWarning` function and the comments after it. It should look like:
+  - By default, view controllers have a lot of code that we don't need. In "MenuViewController.swift" you can delete the `didReceiveMemoryWarning` function and the comments after it. It should look like:
 ```swift
 import UIKit
 
@@ -113,5 +100,15 @@ class MenuViewController: UIViewController {
 
 }
 ```
+  - [`ViewController`]()s have a [property]() called `view`. It can be accessed via `self.view` This is the [root view]() of the view controller.
+    - Let's set the background colour of the view controller's view by setting its `backgroundColor` property to a colour. You can create a colour by using one of the `UIColor` [constructors]().
+  - Let's start by adding a label. We will add it in the [`viewDidLoad`]() method
+    - To add a label, we want to add the label as a property of the view controller. We add properties at the top of the class declaration, so in this case, right before [`viewDidLoad`]().
+    - Since we want it to stay a label always, we can make it a constant. And also, since only this class needs to know about the label, we can also make it private. This means that we can add the property with the line: `private let helloLabel = UILabel()`
+    - Now that `helloLabel` is a [property]() of the [view controller]() we can go ahead and access it in [`viewDidLoad`]() with `self.helloLabel`.
+      - Then we want to set the `text`, `font`, and `textColor` properties of the label. For the font, you can set it like `self.helloLabel.font = UIFont.systemFontOfSize(20)`. Give the other 2 properties a shot! (hint: colours are [object]()s too! You can create the colour red [object]() using `UIColor.redColor()`.
+      - We also want to set the `frame` of the [view](). For now, we will just set it to the `bounds` of `MenuViewController`'s view.
+      - Finally, we want to add the label as a [`subview`]() of the `MenuViewController`'s view.
+3. Run!
+  - When you run the application, you should see some text displayed on the screen.
 
-2. Add a label
