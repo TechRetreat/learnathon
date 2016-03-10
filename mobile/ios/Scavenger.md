@@ -111,4 +111,53 @@ class MenuViewController: UIViewController {
       - Finally, we want to add the label as a [`subview`]() of the `MenuViewController`'s view.
 3. Run!
   - When you run the application, you should see some text displayed on the screen.
+4. Tidying up.
+  - If you havn't already, make sure to commit your code ("Source Control" -> "Commit")
+  - Now we want to make room for our scavenger app, so let's comment out all of the code that has to do our label.
 
+## Scavenger
+### Main Menu
+We're well on our way to making our geocaching app! The first thing that we're going to do is make the screen below:
+**INSERT PIC OF MENU HERE**
+
+Before we start coding, let's see what's going on here. What we have is a [view]() called a [UITableVIew](), which is just a group of cells. You see this in many iOS applications.
+1. Add a table view
+  - We're going to follow the same steps as we did to add a label. Not we want to create a `private`, *constant* item named "tableView", which is an [instance]() of `UITableView`. Give it a try!
+  - In `viewDidLoad`, we need to set a few properties of the `tableView`. Start off by setting the `rowHeight` and `frame` of the `tableView`, just like you did for the `helloLabel`. I set my row height to 100. This is measured in [points]()
+  - Now let's remember what a [view]() does. All it knows to do is display information and if someone is trying to interact with it. But it doesn't know **what** to do if someone intereacts with it. That's where the view controller comes it. The [view]() has a [`delegate`]() property. The [view]() then forwards its actions to let the delegate deal with it.
+  - The `MenuViewController` will act as the `tableView`'s [delegate](). To specify this, set the `tableView`'s `delegate` property to `self`. `self` is referencing the `MenuViewController`.
+  - The `tableView` also needs a way to know what the data to put in the table. It does this similarly to the `delegate`. It does it with a `dataSource` property. Go ahead and also set its `dataSource` property to `self`.
+  - The last thing we need to specify is what type of cells the table is going to use. For this app we're going to use the default cell, but we still need to tell the `tableView` that we want to use the default cell. So we're going to add the line `tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "menuCellIdentifier")`. This lets the `tableView` do some cool optimizations for large tables, which you can read about [here]() if you're interested.
+  - Now  if you try running the app, you'll see some errors. This is because we told the `tableView` that we can be its `delegate` and `dataSource`, but it doesn't believe us. The only way for the `tableView` to know if we can actually live up to that claim is if we declare that we implement the `UITableViewDelegate` and `UITableViewDataSource` [protocols]().
+      - A [protocol]() is simply a list of methods that we need to implement. It can have required methods, which we *must* implement, and optional ones too.
+      - To keep the code clean, we're going to implement the delegate and the data source in extensions of the class.
+      - **Delegate methods**
+         - For the delegate, make an extension that delcares it implements the `UITableViewDelegate` as such:
+           ```swift
+          extension MenuViewController: UITableViewDelegate {
+              func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+                // TODO: We will implement this function later 
+              }
+          }
+           ```
+      - **Data Source methods**
+        - Make another extension to `MenuViewController`, this time declaring that you implement `UITableViewDataSource`
+        ```swift
+        func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+          return 1 // we will only have 1 section in this table.
+        }
+
+        func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+          return 1 // TODO: return the number of menu items. Display 1 for now so we can see the table view
+        }
+
+        func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+          // Remember when we registered this identifier for the tableView. This is where it comes in.
+          // Make sure the two idenfiers are the same. In this case, "menuCellIdentifier"
+          let cell = tableView.dequeueReusableCellWithIdentifier("menuCellIdentifier", forIndexPath: indexPath)
+          
+          cell.backgroundColor = UIColor.lightGrayColor() // set the colour to light grey for now
+
+          return cell
+        }
+        ```
