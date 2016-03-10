@@ -1,14 +1,15 @@
 # Mobile/iOS
+Learn the fundamentals of programming, the Swift programming language adn build a geocaching iOS app!
 
 ## What you'll make: Scavenger
 - A geocaching mobile application
 
 ## Table of Contents
-//TODO
+//TO GENERATE AT THE end
 
 ## Setup
 - Setup Xcode
-  - [Download](#)
+  - [Download](https://itunes.apple.com/us/app/xcode/id497799835?ls=1&mt=12)
   - USBs (20 the day of, with varying DMGs of Xcode supporting back to Lion)
 
 ## Vocabulary
@@ -17,15 +18,17 @@
 - 
 
 ## Instructions
-###I. Coding 101
+###I. Coding 101 - Swift
   - [Open a playground](#)
   - [Hello world](#)
   - [Strings](#)
   - [Ints](#)
   - [Floats](#)
+  - [Booleans](#)
   - [Variables](#)
   - [Constants](#)
   - [Arrays](#)
+  - [Dictionaries](#)
   - [If statements](#)
   - [For loops](#)
   - [While loops](#)
@@ -37,7 +40,7 @@
   - [Xcode tutorial](#)
   - [Debugging tutorial](#)
   - [Git tutorial](#)
-  - [Scavenger](#)
+  - [Scavenger](https://github.com/TechRetreat/learnathon/blob/ios-outline/mobile/ios/Scavenger.md)
     - [iOS Hello world](#) 
     - [Add menu](#)
     - [Add model](#)
