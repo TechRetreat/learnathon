@@ -5,15 +5,14 @@ To start todays lesson were going to take a quick look at the language Android a
 To start, replace the generated code with the following 
 ```java
 public class JavaExamples {
-  // The main function is the start of a normal Java program
-  // You can ignore this function as Android starts running in a different spot
+  // The main method is the start of a normal Java program
   public static void main(String[] args) {
     // This will print out "Hello world!" to the console
     System.out.println("Hello World!");
   }
 }
 ```
-If we run our code now, after compiling, it will run the `main` function and execute the command `System.out.print("Hello World!");` which prints "Hello World!" to the console. Note that anything after `//` does not run as code, this is called a comment. For now all the code we write will go inside the `main` function, where `System.out.println("Hello World!");` is now.
+If we run our code now, after compiling, it will run the `main` method and execute the command `System.out.print("Hello World!");` which prints "Hello World!" to the console. Note that anything after `//` does not run as code, this is called a comment. For now all the code we write will go inside the `main` method, where `System.out.println("Hello World!");` is now.
 
 
 ### Data types
@@ -57,7 +56,7 @@ countdown -= countdownSpeed; // Lower coundowns value by ammount in a variable w
 System.out.println("Count: " + countdown);
 ```
 ### Logic
-Storing variables is nice, but you cant do very much with just variables. There are a few different ways to control what happens in our code. The first is `if` statements, which will check if a value is true, and if so run the code inside. Try running the following inside our main function in the online editor.
+Storing variables is nice, but you cant do very much with just variables. There are a few different ways to control what happens in our code. The first is `if` statements, which will check if a value is true, and if so run the code inside. Try running the following inside our main method in the online editor.
 ```java
 boolean someValue = false; // Try setting this to true after 
 if (someValue) {
@@ -154,9 +153,112 @@ for (String name : nameToAgeMap.keySet()) {
 }
 ```
 
-### Functions
+### Methods
+Sometimes we want to reuse code we write, for this we use methods. Methods are blocks of code that we pass a set of values, called parameters, and then run. In our last example we have some printing code that looks very similar, we could replace these calls with our own method, like below.
+```java
+public static void main(String[] args) {
+  HashMap<String, Integer> nameToAgeMap = new HashMap<>();
+  nameToAgeMap.put("Bob", 19);
+  nameToAgeMap.put("Betty", 17);
+  nameToAgeMap.put("Barnaby", 21);
+
+  // We now call printNameAndAge with the name and age instead of printing here
+  printNameAndAge("Bob", nameToAgeMap.get("Bob"));
+  
+  for (String name : nameToAgeMap.keySet()) {
+    printNameAndAge(name, nameToAgeMap.get(name));
+  }
+}
+ 
+// Void means the method returns no value
+// String name, int age are the parameters that we give this method when we call it
+public static void printNameAndAge(String name, int age) {
+  System.out.println(name + "s age is " + age);
+}
+```
+Variables can be made avaliable across methods by declaring them outside of a method, making them 'instance' variables.
+```java
+// Declare the map outside of any methods
+static HashMap<String, Integer> nameToAgeMap;
+  
+public static void main(String[] args) {
+  nameToAgeMap = new HashMap<>();
+  nameToAgeMap.put("Bob", 19);
+  nameToAgeMap.put("Betty", 17);
+  nameToAgeMap.put("Barnaby", 21);
+
+  // We only need to pass in the name now, the method can access the map
+  printNameAndAge("Bob");
+  
+  for (String name : nameToAgeMap.keySet()) {
+    printNameAndAge(name);
+  }
+}
+ 
+public static void printNameAndAge(String name) {
+  // Inside this method we can now use nameToAgeMap to get the age
+  System.out.println(name + "s age is " + nameToAgeMap.get(name));
+}
+```
+Methods can also return values instead of `void` meaning no return type.
+```java
+static HashMap<String, Integer> nameToAgeMap;
+  
+public static void main(String[] args) {
+  nameToAgeMap = new HashMap<>();
+  nameToAgeMap.put("Bob", 19);
+  nameToAgeMap.put("Betty", 17);
+  nameToAgeMap.put("Barnaby", 21);
+
+  // We can use our method here now as it returns an integer
+  System.out.println("Bobs age is " + getAgeFromName("Bob"));
+  
+  for (String name : nameToAgeMap.keySet()) {
+    System.out.println(name + "s age is " + getAgeFromName(name));
+  }
+}
+
+// Declare return type as int here
+public static int getAgeFromName(String name) {
+  // Instead of printing well return the age for a given name
+  return nameToAgeMap.get(name);
+}
+```
 
 ### Objects
-- Object
+In Java, we can create things called `Object`s. An `Object` is a collection of values and methods, you can think of them like most objects in the real world. Each `Object` is an instance of some `Class`. Lets try defining a `Class` Dog and instantiating (creating) an `Object` of class, or type Dog, called `firstDog`.
+```java
+public class JavaExamples {
+  public static void main(String[] args) {
+    // Create new dogs, call their constructor methods with their names
+    Dog firstDog = new Dog("Buddy");
+    Dog secondDog = new Dog("Lassie");
+    // Print the name of the dog objects we instantiated
+    System.out.println("The first dogs name is " + firstDog.getName());
+    System.out.println("The second dogs name is " + secondDog.getName());
+  }
+}
+
+// This is the definition of our class Dog
+public class Dog {
+  // Our dogs will each have some name
+  // private means it cant be accessed outside of this class
+  private String name;
+  
+  // This is the constructor method for the Dog class,
+  // note the lack of return type, and the name being the same as the class
+  // Our constructor takes in a String name, so to create a dog call `new Dog("someName");`
+  public Dog(String name) {
+    this.name = name;
+  }
+  
+  // Each dog has a method to return its name
+  public String getName() {
+    return name; 
+  }
+}
+```
+Our `Class` Dog has been defined as having one value `name`, and one method `getName` which returns the dogs name as a `String`. In our `main` function, we create two new Dogs called with the names "Buddy" and "Lassie" and print their names.
+
 - Extention
 - Implementation
