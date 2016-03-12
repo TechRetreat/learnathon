@@ -260,6 +260,7 @@ class Dog {
 ```
 Our `Class` Dog has been defined as having one value `name`, and one method `getName` which returns the dogs name as a `String`. In our `main` function, we create two new Dogs called with the names "Buddy" and "Lassie" and print their names.
 
+### Extension
 Sometimes we need to be able to treat different kinds of `Object`s as one, for example if we want an `ArrayList` (which holds only one type of thing eg. `ArrayList<String>`) of Cats and Dogs. One way we can get around this is using Extention. Extention is when a class, in this case Cat and Dog, inherits the values and methods from a 'parent' class, as well as adding new methods or values and optionally overriding the behavior of its 'parent's methods.
 ```java
 import java.util.ArrayList;
@@ -335,7 +336,119 @@ class Cat extends Animal {
   }
 }
 ```
+Note here that Cat didn't Override getFavoriteFood(), so when the method was called it used the version written in its parent class, Animal. `Object`s like Cat or Dog can also be Extended, leading to a heirarchy structure similar to the classification of animals. We could define
+```java
+class Corgi extends Dog
+```
+Or put things in between like
+```java
+class Dog extends Mammal
+class Mammal extends Animal
+```
+And define some values and methods at each level.
 
+### Implementation
+One problem with Extension is that you can only Extend one Class, which means you can't share values or methods over different parts of the heirarchy. For example if we have
+```java
+class Fish extends Animal
+class Mammal extends Animal
+class Whale extends Mammal
+```
+We can no longer Inherit the method swim() in both Fish and Whales without also having it for all Mammals. To solve this problem we use Implementation instead of Extension. Implementation is when you implement an Interface (a set of undefined methods), and you define the behavior for every method given. For example the Interface LandAnimal might have the methods `walk` and `run`. Below is a small example of inheratance .
 
-- Extention
-- Implementation
+```java
+import java.util.ArrayList;
+public class JavaExamples {
+  public static void main(String[] args) {
+    Shark shark = new Shark();
+    Dog dog = new Dog("Buddy");
+    
+    ArrayList<Animal> animals = new ArrayList<>(); 
+    animals.add(shark);
+    animals.add(dog);
+    
+    ArrayList<FourLegged> fourLeggeds = new ArrayList<>(); 
+    fourLeggeds.add(dog);
+    
+    ArrayList<Swimmer> swimmers = new ArrayList<>(); 
+    swimmers.add(shark);
+    
+    System.out.println("Animals:");
+    for (Animal animal : animals) {
+      System.out.println("The animals name is " + animal.getName());
+	  animal.makeSound();
+    }
+    System.out.println("");
+    
+    System.out.println("FourLeggeds:");
+    for (FourLegged animal : fourLeggeds) {
+      animal.run();
+    }
+    System.out.println("");
+    
+    System.out.println("Swimmers:");
+    for (Swimmer animal : swimmers) {
+      animal.swim();
+    }
+  }
+}
+
+// Anything extending Animal must define what these methods do
+interface Animal {
+  public String getName();
+  public void makeSound();
+}
+
+interface FourLegged {
+  public void run();
+}
+
+interface Swimmer {
+  public void swim();
+}
+
+// A Dog is an Animal that has four legs (can run)
+class Dog implements Animal, FourLegged {
+  private String name;
+
+  public Dog(String name) {
+   	this.name = name;
+  }
+  
+  // Override means this method replaces getName() in a parent class
+  @Override
+  public String getName() {
+    return name;
+  }
+  
+  @Override
+  public void makeSound() {
+    System.out.println(getName() + " says Woof");
+  }
+  
+  @Override
+  public void run() {
+    System.out.println(getName() + " goes running...");
+  }
+}
+
+class Shark implements Animal, Swimmer {  
+  public Shark() {
+  }
+  
+  @Override
+  public String getName() {
+    return "Shark...";
+  }
+  
+  @Override
+  public void makeSound() {
+    System.out.println("The shark makes no sound");
+  }
+  
+  @Override
+  public void swim() {
+    System.out.println("The Shark swims away");
+  }
+}
+```
