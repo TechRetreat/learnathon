@@ -129,35 +129,45 @@ Before we start coding, let's see what's going on here. What we have is a [view]
   - The `tableView` also needs a way to know what the data to put in the table. It does this similarly to the `delegate`. It does it with a `dataSource` property. Go ahead and also set its `dataSource` property to `self`.
   - The last thing we need to specify is what type of cells the table is going to use. For this app we're going to use the default cell, but we still need to tell the `tableView` that we want to use the default cell. So we're going to add the line `tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "menuCellIdentifier")`. This lets the `tableView` do some cool optimizations for large tables, which you can read about [here]() if you're interested.
   - Now  if you try running the app, you'll see some errors. This is because we told the `tableView` that we can be its `delegate` and `dataSource`, but it doesn't believe us. The only way for the `tableView` to know if we can actually live up to that claim is if we declare that we implement the `UITableViewDelegate` and `UITableViewDataSource` [protocols]().
-      - A [protocol]() is simply a list of methods that we need to implement. It can have required methods, which we *must* implement, and optional ones too.
-      - To keep the code clean, we're going to implement the delegate and the data source in extensions of the class.
-      - **Delegate methods**
-         - For the delegate, make an extension that delcares it implements the `UITableViewDelegate` as such:
-           ```swift
-          extension MenuViewController: UITableViewDelegate {
-              func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-                // TODO: We will implement this function later 
-              }
+  - A [protocol]() is simply a list of methods that we need to implement. It can have required methods, which we *must* implement, and optional ones too.
+  - To keep the code clean, we're going to implement the delegate and the data source in extensions of the class.
+  - **Delegate methods**
+     - For the delegate, make an extension that delcares it implements the `UITableViewDelegate` as such:
+       ```swift
+      // this line means that MenuViewController says it implements the UITableViewDelegate protocol
+      extension MenuViewController: UITableViewDelegate { 
+          // this function is called when a use taps on a cell
+          func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) { 
+            // TODO: We will implement this function later 
           }
-           ```
-      - **Data Source methods**
-        - Make another extension to `MenuViewController`, this time declaring that you implement `UITableViewDataSource`
-        ```swift
-        func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-          return 1 // we will only have 1 section in this table.
-        }
+      }
+       ```
+  - **Data Source methods**
+    - Make another extension to `MenuViewController`, this time declaring that you implement `UITableViewDataSource`
+    ```swift
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+      return 1 // we will only have 1 section in this table.
+    }
+    
+    // Since we only have one section, we can just return how many rows we want
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int { 
+      return 1 // TODO: return the number of menu items. Display 1 for now so we can see the table view
+    }
+    
+    // This function returns the cell we want to go at a certain row
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell { 
+      // Remember when we registered this identifier for the tableView. This is where it comes in.
+      // Make sure the two idenfiers are the same. In this case, "menuCellIdentifier"
+      let cell = tableView.dequeueReusableCellWithIdentifier("menuCellIdentifier", forIndexPath: indexPath)
+      
+      cell.backgroundColor = UIColor.lightGrayColor() // set the colour to light grey for now
 
-        func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-          return 1 // TODO: return the number of menu items. Display 1 for now so we can see the table view
-        }
-
-        func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-          // Remember when we registered this identifier for the tableView. This is where it comes in.
-          // Make sure the two idenfiers are the same. In this case, "menuCellIdentifier"
-          let cell = tableView.dequeueReusableCellWithIdentifier("menuCellIdentifier", forIndexPath: indexPath)
-          
-          cell.backgroundColor = UIColor.lightGrayColor() // set the colour to light grey for now
-
-          return cell
-        }
-        ```
+      return cell
+    }
+    ```
+2. Manage the menu items.
+  - We're going to start off with 4 menu items: Map, Found Locations, Nearest Locations, and Settings
+  - To model this, we're going to define an [array]() of menu items.
+  - Make an array with the names of the menu items as a property of the view controller, just like the `tableView`.
+  - Now let's go back to the `func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int`
+  - We want to return how many menu items we have, so we can return the length of the array we defined
