@@ -240,7 +240,7 @@ public class JavaExamples {
 }
 
 // This is the definition of our class Dog
-public class Dog {
+class Dog {
   // Our dogs will each have some name
   // private means it cant be accessed outside of this class
   private String name;
@@ -259,6 +259,83 @@ public class Dog {
 }
 ```
 Our `Class` Dog has been defined as having one value `name`, and one method `getName` which returns the dogs name as a `String`. In our `main` function, we create two new Dogs called with the names "Buddy" and "Lassie" and print their names.
+
+Sometimes we need to be able to treat different kinds of `Object`s as one, for example if we want an `ArrayList` (which holds only one type of thing eg. `ArrayList<String>`) of Cats and Dogs. One way we can get around this is using Extention. Extention is when a class, in this case Cat and Dog, inherits the values and methods from a 'parent' class, as well as adding new methods or values and optionally overriding the behavior of its 'parent's methods.
+```java
+import java.util.ArrayList;
+public class JavaExamples {
+  public static void main(String[] args) {
+    // Add a Cat and Dog to a list of Animals
+    ArrayList<Animal> animals = new ArrayList<>(); 
+    animals.add(new Dog("Doggy"));
+    animals.add(new Cat("Kitty"));
+    
+    // Print the Animals names and sounds
+    for (Animal animal : animals) {
+      System.out.println("The animals name is " + animal.getName());
+      System.out.println("Its favorite food is " + animal.getFavoriteFood());
+	  animal.makeSound();
+    }
+  }
+}
+
+// Abstract means it cannot be instantiated, you cant say new Animal("name");
+abstract class Animal {
+  // Every Animal will now have a name
+  private String name;
+  
+  // Base constructor for any Animal 
+  public Animal(String name) {
+    this.name = name;
+  }
+  
+  // Every Animal has the getName function
+  public String getName() {
+    return name; 
+  }
+  
+  // Every Animal also likes some kind of food
+  public String getFavoriteFood() {
+    return "Unknown"; 
+  }
+  
+  // Every Animal can make a sound
+  // An abstract method has no defined behavior, child classes must define what this does
+  abstract public void makeSound();
+}
+
+class Dog extends Animal {
+  // Dogs constructor calls Animals instructor with the same arguments 'super(name)'
+  public Dog(String name) {
+   	super(name); 
+  }
+  
+  // Override means this method replaces getFavoriteFood() in its parent class
+  @Override
+  public String getFavoriteFood() {
+    return "Bones";
+  }
+  
+  // Override means this method replaces abstract makeSound() in its parent class
+  @Override
+  public void makeSound() {
+    System.out.println(getName() + " says Woof");
+  }
+}
+
+// Same structure as Dog without a defined favorite food
+class Cat extends Animal {  
+  public Cat(String name) {
+   	super(name); 
+  }
+  
+  @Override
+  public void makeSound() {
+    System.out.println(getName() + " says Meow");
+  }
+}
+```
+
 
 - Extention
 - Implementation
