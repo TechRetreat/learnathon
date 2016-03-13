@@ -16,7 +16,6 @@ Learn the fundamentals of programming, the Swift programming language adn build 
 ## Vocabulary
 - **views**: a specific element that is shown on the screen (button, table, box, etc...)
 - **controllers**: a class that controls and gives life to the views
-- 
 
 ## Instructions
 ###I. [Coding 101 - Swift](playground.md)
