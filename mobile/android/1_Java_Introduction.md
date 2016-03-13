@@ -1,4 +1,5 @@
 ##Java
+
 To start todays lesson were going to take a quick look at the language Android apps are written in, Java. Open up the [Java Online Editor](https://www.compilejava.net/) to get started.
 
 ### Main
@@ -25,6 +26,7 @@ After we have stored our variable, a `String` (or text) named `myText`, we can a
 String someText = "Text to Print";
 System.out.println("Hello World!");
 ```
+<!-- (adam) "Hello World!" -> someText -->
 and rerun our program.
 
 We can also store numbers or booleans like so
@@ -38,6 +40,7 @@ System.out.println("Are we done yet: " + areWeDoneYet);
 As you can see in the above code, Strings (things in quotes) can be joined with numbers or booleans and they will display as their text values.
 
 Variables can also be modified after they have been created (initialized).
+<!-- (adam) why not show how to create variables without initializing? -->
 ```java
 int countdown = 10;
 System.out.println("Count: " + countdown);
@@ -72,6 +75,7 @@ if (someNumber < 8) {
   System.out.println(someNumber + " is not smaller than 8");
 }
 ```
+<!-- (adam) why not call them 'and' and 'or'? -->
 You can also check if multiple things are true using `&&` or if one of a list of things is true with `||`, try running the code below with different values for myNumber and shouldPrint.
 ```java
 int someNumber = 7;
@@ -86,18 +90,19 @@ if (someNumber < 8 || shouldPrint) {
 
 ### Loops
 Often we encounter situations when we want to run a command many times, one way to accomplish this is using a `while` loop. A while loop keeps running the code inside while the condition in brackets is true, in this case while countdown is greater than or equal to 0.
+<!-- (adam) maybe make a note on countdown--? also why the space (also below) -->
 ```java
 int countdown = 10;
 while (countdown >= 0) {
   System.out.println(countdown);
-  countdown --;
+  countdown--;
 }
 System.out.println("Finished");
 ```
-Another way to accomplish this result is with a for loop. A for loop has a few forms which we'll discuss later, but for now a for loop has an initialization step, which runs once before looping starts, a condition that decides whether the loop will run or not, and an incremement step which runs after the code in the loops body.
+Another way to accomplish this result is with a for loop. A for loop has a few forms which we'll discuss later, but for now a for loop has an initialization step, which runs once before looping starts, a condition that decides whether the loop will run or not, and an incremement step which runs every time after the code in the body.
 ```java
 //   initialization;     condition;      increment
-for (int countdown = 10; countdown >= 0; countdown --) {
+for (int countdown = 10; countdown >= 0; countdown--) {
   System.out.println(countdown);
 }
 System.out.println("Finished");
@@ -105,10 +110,11 @@ System.out.println("Finished");
 
 ### Data Structures
 We also have a lot of situations where we want to store values together, like a list of names. We call the things we use to store these values data structures. The first data structure well use is an `Array`, basically a list of values with a fixed size, in the code below the array has 3 elements.
+<!-- (adam) try accessing an out of bounds index? also show them how to iterate with an index before foreach -->
 ```java
 // String[] means array of Strings, new String[5] gives the length
 String[] names = new String[3];
-// names[0] is the first item in our list, were setting it to "Jason"
+// names[0] is the first item in our list, w'ere setting it to "Jason"
 names[0] = "Bob";
 names[1] = "Betty";
 names[2] = "Barnaby";
@@ -144,16 +150,17 @@ nameToAgeMap.put("Betty", 17);
 nameToAgeMap.put("Barnaby", 21);
   
 // Get a value by the key in the map, in this case "Bob" is the key
-System.out.println("Bobs age is " + nameToAgeMap.get("Bob"));
+System.out.println("Bob's age is " + nameToAgeMap.get("Bob"));
 
 // Here we'll iterate through all the entries in the map
 // '.keySet()' returns the list of keys
 for (String name : nameToAgeMap.keySet()) {
-  System.out.println(name + "s age is " + nameToAgeMap.get(name));
+  System.out.println(name + "'s age is " + nameToAgeMap.get(name));
 }
 ```
 
 ### Methods
+<!-- (adam) maybe subheadings for functions and procedures? -->
 Sometimes we want to reuse code we write, for this we use methods. Methods are blocks of code that we pass a set of values, called parameters, and then run. In our last example we have some printing code that looks very similar, we could replace these calls with our own method, like below.
 ```java
 public static void main(String[] args) {
@@ -173,7 +180,7 @@ public static void main(String[] args) {
 // Void means the method returns no value
 // String name, int age are the parameters that we give this method when we call it
 public static void printNameAndAge(String name, int age) {
-  System.out.println(name + "s age is " + age);
+  System.out.println(name + "'s age is " + age);
 }
 ```
 Variables can be made avaliable across methods by declaring them outside of a method, making them 'instance' variables.
@@ -226,7 +233,7 @@ public static int getAgeFromName(String name) {
 ```
 
 ### Objects
-In Java, we can create things called `Object`s. An `Object` is a collection of values and methods, you can think of them like most objects in the real world. Each `Object` is an instance of some `Class`. Lets try defining a `Class` Dog and instantiating (creating) an `Object` of class, or type Dog, called `firstDog`.
+In Java, we can create things called `Object`s. An `Object` is a collection of values and methods, you can think of them like most objects in the real world. Each `Object` is an instance of some `Class` <!-- (adam) , which is like a template for an object -->. Lets try defining a `Class` Dog and instantiating (creating) an `Object` of class, or type Dog, called `firstDog`.
 ```java
 public class JavaExamples {
   public static void main(String[] args) {
@@ -261,15 +268,16 @@ class Dog {
 Our `Class` Dog has been defined as having one value `name`, and one method `getName` which returns the dogs name as a `String`. In our `main` function, we create two new Dogs called with the names "Buddy" and "Lassie" and print their names.
 
 ### Extension
-Sometimes we need to be able to treat different kinds of `Object`s as one, for example if we want an `ArrayList` (which holds only one type of thing eg. `ArrayList<String>`) of Cats and Dogs. One way we can get around this is using Extention. Extention is when a class, in this case Cat and Dog, inherits the values and methods from a 'parent' class, as well as adding new methods or values and optionally overriding the behavior of its 'parent's methods.
+Sometimes we need to be able to treat different kinds of `Object`s as one, for example if we want an `ArrayList` (which holds only one type of thing eg. `ArrayList<String>`) of Cats and Dogs. One way we can get around this is using <!-- inheritance? --> Extension. Extension is when a class, in this case Cat and Dog, inherits the values and methods from a 'parent' class, as well as adding new methods or values and optionally overriding the behavior of its 'parent's methods.
+<!-- (adam) maybe no abstract? just throw in some generic makesound "grunt" or blank or something -->
 ```java
 import java.util.ArrayList;
 public class JavaExamples {
   public static void main(String[] args) {
     // Add a Cat and Dog to a list of Animals
     ArrayList<Animal> animals = new ArrayList<>(); 
-    animals.add(new Dog("Doggy"));
-    animals.add(new Cat("Kitty"));
+    animals.add(new Dog("Rover"));
+    animals.add(new Cat("Garfield"));
     
     // Print the Animals names and sounds
     for (Animal animal : animals) {
@@ -341,20 +349,21 @@ Note here that Cat didn't Override getFavoriteFood(), so when the method was cal
 class Corgi extends Dog
 ```
 Or put things in between like
+<!-- not having { } breaks syntax highlighting -->
 ```java
-class Dog extends Mammal
-class Mammal extends Animal
+class Mammal extends Animal { ... }
+class Dog extends Mammal { ... }
 ```
 And define some values and methods at each level.
 
 ### Implementation
-One problem with Extension is that you can only Extend one Class, which means you can't share values or methods over different parts of the heirarchy. For example if we have
+One problem with Extension is that you can only `extend` one Class, which means you can't share values or methods over different parts of the heirarchy. For example if we have
 ```java
-class Fish extends Animal
-class Mammal extends Animal
-class Whale extends Mammal
+class Fish extends Animal { ... }
+class Mammal extends Animal { ... }
+class Whale extends Mammal { ... }
 ```
-We can no longer Inherit the method swim() in both Fish and Whales without also having it for all Mammals. To solve this problem we use Implementation instead of Extension. Implementation is when you implement an Interface (a set of undefined methods), and you define the behavior for every method given. For example the Interface LandAnimal might have the methods `walk` and `run`. Below is a small example of inheratance .
+We can no longer inherit the method swim() in both Fish and Whales without also having it for all Mammals. To solve this problem we use Implementation instead of Extension. Implementation is when you implement an Interface (a set of undefined methods), and you define the behavior for every method given. For example the Interface LandAnimal might have the methods `walk` and `run`. Below is a small example of inheratance.
 
 ```java
 import java.util.ArrayList;
