@@ -13,24 +13,23 @@
 
 ### Data Structures
 - **Data Class:** An class of Objects that holds data
-- **HashMap:** 
-- **Array:** 
+- **HashMap:** A HashMap stores values by 'keys' or unique id's used to access them later
+- **Array:** An Array stores an ordered list of values
 
-### Functions
-- **Function:** Reusable block of code, take in parameters and returns some value
-- **Parameters:** Things 
-- **Return:** 
-- **Callback:** 
-- **Asynchronous:** 
+### Methods
+- **Method:** Reusable block of code, take in parameters and returns some value
+- **Parameters:** Values passed to methods
+- **Return:** Values passed back from methods
 
 ### Types
-- **Class:** 
-- **Type:** 
-- **Variable:**
+- **Class:** Set of values and methods
+- **Interface:** Set of methods to implement behaviors for in an Object
+- **Type:** What kind of value a given variale is eg. some Object, or an int
+- **Variable:** Some value of a given type
 - **Casting:** 
-- **Generic:** 
-- **Primitive:** 
-- **Null:** 
+- **Generic:** Allowing a method or class to use different types of Objects
+- **Primitive:** Value that is not an object eg. int
+- **Null:** Variable that isn't set to an Object
 
 ### Objects
 - **Object:** A collection of values and things you can do with them
@@ -47,7 +46,7 @@
 - **Boolean:** True of False
 - **String:** Group of characters (Word, sentence, or longer)
 
-### Variable/Function Access
+### Variable/Method Access
 - **Public:** Accessible by anyone
 - **Private:** Accessible only in this class
 - **Static:** Code that can be called without an object of that class
@@ -55,6 +54,10 @@
 - **Constant:** Variable that is hard coded to have some value (Never changes)
 
 ### Android
-- **Context:** 
+- **Context:** Used to get resources and interact with a lot of Andriod internal stuff
 - **Gradle:** Android build system
 - **SharedPreferences:** One place to store data on a device
+
+### Misc
+- **Callback:** An Object that implements a method to call on some event
+- **Asynchronous:** Code that runs in the background
