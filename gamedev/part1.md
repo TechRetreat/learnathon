@@ -179,11 +179,14 @@ In your Javascript editor, we will set up our game in the following structure:
 
 function setup() {
   // Assign to variables
+
   // Set up initial state
 }
 
 function draw() {
   // Calculate new positions of objects
+
+  // Accept user input (keypresses, etc)
 
   // Redraw screen
 }
@@ -271,6 +274,8 @@ You can rerun your code or reload the page (after saving!) to reset the game's s
 - `keyWentDown(key)`: This will only return true if the key went down on the current frame, and will be false if the key is down but has been held from a previous frame.
 
 Let's make our character move when arrow keys are pressed. When a direction key such as `'RIGHT_ARROW'` is down, set the character's velocity, else if another direction is pressed, set a different velocity, else reset the horizontal velocity to zero. When the up arrow first goes down, we can set a negative value for the vertical velocity to simulate jumping.
+
+In the code describing the order in which we will do our calculations, I put the section for accepting user input after calculating the other positions of objects. It doesn't make a difference yet, but we want to do this anyway because later on when we are doing collision detection, we will want to have logic that depends on positions already being calculated. For example, when the up arrow is pressed, we will only want to let the player jump if they are currently on the ground, which we need to have calculated beforehand.
 
 <!---
 ```diff
