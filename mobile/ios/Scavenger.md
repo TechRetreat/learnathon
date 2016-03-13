@@ -55,12 +55,6 @@
   2. Hit the run button (play button in the top left), or you can hit "Command + R"
 - If the app doesn't run, try and get a mentor to help you
 
-
-## Git moving
-- Q: What is git?
-- A: Good question! Git is a peice of software that does [version control](#). Which is just a way of easily maintaining backups of your work!
-
-
 ## Hello, world!
 - Now that we're all set up. Let's get started.
 1. App startup
