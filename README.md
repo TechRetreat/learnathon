@@ -1,8 +1,8 @@
 # Learnathon
 Learnathon lesson plans
-- <a href="gamedev/README.md">Game Dev</a>
-- <a href="hardware/README.md">Hardware</a>
-- <a href="web/README.md">Web</a>
+- <a href="gamedev">Game Dev</a>
+- <a href="hardware">Hardware</a>
+- <a href="web">Web</a>
 - Mobile
- - <a href="mobile/android/README.md">Android</a>
- - <a href="mobile/ios/README.md">iOS</a>
+ - <a href="mobile/android">Android</a>
+ - <a href="mobile/ios">iOS</a>
