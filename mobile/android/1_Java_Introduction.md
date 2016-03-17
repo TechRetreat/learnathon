@@ -24,9 +24,8 @@ String someText = "Text to Print";
 After we have stored our variable, a `String` (or text) named `myText`, we can access its value with just the variable name. Replace our old `System.out.println("Hello World!");` with
 ```java
 String someText = "Text to Print";
-System.out.println("Hello World!");
+System.out.println(someText);
 ```
-<!-- (adam) "Hello World!" -> someText -->
 and rerun our program.
 
 We can also store numbers or booleans like so
@@ -40,9 +39,9 @@ System.out.println("Are we done yet: " + areWeDoneYet);
 As you can see in the above code, Strings (things in quotes) can be joined with numbers or booleans and they will display as their text values.
 
 Variables can also be modified after they have been created (initialized).
-<!-- (adam) why not show how to create variables without initializing? -->
 ```java
-int countdown = 10;
+int countdown;
+countdown = 10;
 System.out.println("Count: " + countdown);
 
 countdown = 9; // Reassign countdown to 9
@@ -75,8 +74,7 @@ if (someNumber < 8) {
   System.out.println(someNumber + " is not smaller than 8");
 }
 ```
-<!-- (adam) why not call them 'and' and 'or'? -->
-You can also check if multiple things are true using `&&` or if one of a list of things is true with `||`, try running the code below with different values for myNumber and shouldPrint.
+You can also check if multiple things are true using 'and' (written `&&`) or if one of a list of things is true with 'or' (written `||`), try running the code below with different values for myNumber and shouldPrint.
 ```java
 int someNumber = 7;
 boolean shouldPrint = false;
@@ -90,11 +88,11 @@ if (someNumber < 8 || shouldPrint) {
 
 ### Loops
 Often we encounter situations when we want to run a command many times, one way to accomplish this is using a `while` loop. A while loop keeps running the code inside while the condition in brackets is true, in this case while countdown is greater than or equal to 0.
-<!-- (adam) maybe make a note on countdown--? also why the space (also below) -->
 ```java
 int countdown = 10;
 while (countdown >= 0) {
   System.out.println(countdown);
+  // `--` after a variable decreses its value by 1, `++` increases by 1
   countdown--;
 }
 System.out.println("Finished");
@@ -110,7 +108,6 @@ System.out.println("Finished");
 
 ### Data Structures
 We also have a lot of situations where we want to store values together, like a list of names. We call the things we use to store these values data structures. The first data structure well use is an `Array`, basically a list of values with a fixed size, in the code below the array has 3 elements.
-<!-- (adam) try accessing an out of bounds index? also show them how to iterate with an index before foreach -->
 ```java
 // String[] means array of Strings, new String[5] gives the length
 String[] names = new String[3];
@@ -121,11 +118,19 @@ names[2] = "Barnaby";
 ```
 One cool thing we can do with our data structures is iterate through them with loops.
 ```java
-// For every String in names, execute the code in the block
+// For every index in the array print name at that index
+for (int i = 0; i < names.length; i--) {
+  System.out.println(names[i]);
+}
+```
+Since iterating over arrays happens a lot, Java has a shorter way to write it
+```java
+// For every String in names, print
 for (String name : names) {
   System.out.println(name);
 }
 ```
+
 Another common data structure is the `ArrayList` which is very similar to an array, but has a size you can change (mutable size) which means you can keep adding elements to it.
 ```java
 // ArrayList of Strings called names
@@ -135,6 +140,7 @@ names.add("Betty");
 names.add("Barnaby");
 System.out.println("The first name in the list is " + names.get(0));
   
+// Same as going through an array
 for (String name : names) {
   System.out.println(name);
 }
@@ -160,7 +166,6 @@ for (String name : nameToAgeMap.keySet()) {
 ```
 
 ### Methods
-<!-- (adam) maybe subheadings for functions and procedures? -->
 Sometimes we want to reuse code we write, for this we use methods. Methods are blocks of code that we pass a set of values, called parameters, and then run. In our last example we have some printing code that looks very similar, we could replace these calls with our own method, like below.
 ```java
 public static void main(String[] args) {
@@ -233,7 +238,7 @@ public static int getAgeFromName(String name) {
 ```
 
 ### Objects
-In Java, we can create things called `Object`s. An `Object` is a collection of values and methods, you can think of them like most objects in the real world. Each `Object` is an instance of some `Class` <!-- (adam) , which is like a template for an object -->. Lets try defining a `Class` Dog and instantiating (creating) an `Object` of class, or type Dog, called `firstDog`.
+In Java, we can create things called `Object`s. An `Object` is a collection of values and methods, you can think of them like most objects in the real world. Each `Object` is an instance of some `Class`, a template that describes what values as object has, and what it can do. Lets try defining a `Class` Dog and instantiating (creating) an `Object` of class, or type Dog, called `firstDog`.
 ```java
 public class JavaExamples {
   public static void main(String[] args) {
@@ -268,8 +273,7 @@ class Dog {
 Our `Class` Dog has been defined as having one value `name`, and one method `getName` which returns the dogs name as a `String`. In our `main` function, we create two new Dogs called with the names "Buddy" and "Lassie" and print their names.
 
 ### Extension
-Sometimes we need to be able to treat different kinds of `Object`s as one, for example if we want an `ArrayList` (which holds only one type of thing eg. `ArrayList<String>`) of Cats and Dogs. One way we can get around this is using <!-- inheritance? --> Extension. Extension is when a class, in this case Cat and Dog, inherits the values and methods from a 'parent' class, as well as adding new methods or values and optionally overriding the behavior of its 'parent's methods.
-<!-- (adam) maybe no abstract? just throw in some generic makesound "grunt" or blank or something -->
+Sometimes we need to be able to treat different kinds of `Object`s as one, for example if we want an `ArrayList` (which holds only one type of thing eg. `ArrayList<String>`) of Cats and Dogs. One way we can get around this is using inheritance. Inheritance is when a class, in this case Cat and Dog, inherits the values and methods from a 'parent' class using `extends`, as well as adding new methods or values and optionally overriding the behavior of its 'parent's methods.
 ```java
 import java.util.ArrayList;
 public class JavaExamples {
@@ -283,7 +287,6 @@ public class JavaExamples {
     for (Animal animal : animals) {
       System.out.println("The animals name is " + animal.getName());
       System.out.println("Its favorite food is " + animal.getFavoriteFood());
-	  animal.makeSound();
     }
   }
 }
@@ -305,12 +308,8 @@ abstract class Animal {
   
   // Every Animal also likes some kind of food
   public String getFavoriteFood() {
-    return "Unknown"; 
+    return "unknown"; 
   }
-  
-  // Every Animal can make a sound
-  // An abstract method has no defined behavior, child classes must define what this does
-  abstract public void makeSound();
 }
 
 class Dog extends Animal {
@@ -324,12 +323,6 @@ class Dog extends Animal {
   public String getFavoriteFood() {
     return "Bones";
   }
-  
-  // Override means this method replaces abstract makeSound() in its parent class
-  @Override
-  public void makeSound() {
-    System.out.println(getName() + " says Woof");
-  }
 }
 
 // Same structure as Dog without a defined favorite food
@@ -337,19 +330,13 @@ class Cat extends Animal {
   public Cat(String name) {
    	super(name); 
   }
-  
-  @Override
-  public void makeSound() {
-    System.out.println(getName() + " says Meow");
-  }
 }
 ```
-Note here that Cat didn't Override getFavoriteFood(), so when the method was called it used the version written in its parent class, Animal. `Object`s like Cat or Dog can also be Extended, leading to a heirarchy structure similar to the classification of animals. We could define
+Note here that Cat didn't Override getFavoriteFood(), so when the method was called it used the version written in its parent class, Animal. `Object`s like Cat or Dog can also be extended, leading to a heirarchy structure similar to the classification of animals. We could define
 ```java
 class Corgi extends Dog
 ```
 Or put things in between like
-<!-- not having { } breaks syntax highlighting -->
 ```java
 class Mammal extends Animal { ... }
 class Dog extends Mammal { ... }
