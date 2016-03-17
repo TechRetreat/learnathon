@@ -1,5 +1,5 @@
 # Building the GeoCaching App
-## Getting started
+## What are we making
 Now that we have an app compiling and running, lets start customizing it to make our Geocaching app. In our app we will have three screens shown below, a list of caches the user has found, a map showing caches at their locations, and a settings page.
 TODO: add pics
 
@@ -7,76 +7,133 @@ TODO: add pics
 If you open up the project tab on the left you will be able to view all the files in the project, for the most part we will be worried about files in java folder which will be your code, and files in the res (resources) folder which will define how your views are laid out and a few other things like colors, images, and text. To start we will look at the Fragment and Activity that we start with, and the xml layouts that go with them.
 
 ### MainActivity.java
-Activities in Android are entry points into the app that let you show something on the screen, and interact with the system. If you open up MainActivity under the java/yourApplicationName folder you will see three methods, `onCreate`, `onCreateOptionsMenu` and `onOptionsItemSelected`, you can ignore the last two as we wont be using an option menu in our app.
+Activities in Android are entry points into the app that let you show something on the screen, and interact with the system. If you open up MainActivity under the java/yourApplicationName folder you will see the following.
 ``` java
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
+package com.example.jzukewich.geocaching;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    }
 }
 ```
-In `onCreate`, which you might notice Overrides the method from it parent class `AppCompatActivity`, we call `AppCompatActivity`s onCreate and the method `setContentView` that sets the screen to show `R.layout.activity_main`, our activity's view. `R` means resources, so we can find this file in `res/layout/activity_main`, lets go take a look.
+The first line, `package com...` is where our file is located in the project, we wont worry about this. Our imports are Android built in classes that we need, like when we used `import java.util.Arraylist;` before. In `onCreate`, which you might notice Overrides the method from `MainActivity`'s parent class `AppCompatActivity`, we call `AppCompatActivity`s onCreate and the method `setContentView` that sets the screen to show `R.layout.activity_main`, our activity's view. `R` means resources, so we can find this file in `res/layout/activity_main`, lets go take a look.
 
 ### activity_main.xml
-Welcome to XML, this is how we usually define our Views in Android. XML allows us to set values like width, height, text, and a bunch more depending what kind of View we are describing. In this case, our Activity's View is very simple, all it is displaying is one Fragment (screen), which is defined in XML as follows
-``` xml
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fragment"
-    android:name="com.example.jgzuke.myapplication.MainActivityFragment"
-    tools:layout="@layout/fragment_main"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" />
-```
-`<fragment` just says what type of element this is, in this case a fragment.
-`xmlns:android="http://schemas.android.com/apk/res/android"` and `xmlns:tools="http://schemas.android.com/tools"` define namespaces, you won't need to know what these mean, just have them at the beginning of each file.
-`android:id="@+id/fragment"` gives this view a unique identifier 'fragment', which will be used later to find it (like in a Map).
-`android:name="com.example.jgzuke.myapplication.MainActivityFragment"` is telling this view where the code for our Fragment is. 
-`tools:layout="@layout/fragment_main"` is telling Android Studio how to render this fragment in our design view (Click 'Design' at the bottom to see what the Activity looks like). This isn't important when we run our app, but is useful when we want to see what something will look like faster. Anything that starts with `tools:` instead of `android:` will be used to render stuff in Android Studio.
-`android:layout_width="match_parent"` and `android:layout_height="match_parent"` set the width and height of the fragment to match the container or parents width and height, which will be the full screen.
-Lets look at what this Fragment actually is by going to the class given on the 4th line `android:name="com.example.jgzuke.myapplication.MainActivityFragment"`, open up MainActivityFragment in the java/yourApplicationName folder.
-
-### MainActivityFragment.java
-MainActivityFragment is also very simple for now, notice that it extends `Fragment` and Overrides the method `onCreateView` from there.
-``` java
-@Override
-public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    return inflater.inflate(R.layout.fragment_main, container, false);
-}
-```
-What this is doing is creating and returning a View from the XML resource `R.layout.fragment_main`, go open that file under res/layout/fragment_main.
-
-### fragment_main.xml
+Welcome to XML, this is how we usually define our Views in Android. XML allows us to set values like width, height, text, and a bunch more depending what kind of View we are describing. In this case, our Activity's View is very simple, all it is displaying is one line of text, which says "Hello World!".
 ``` xml
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context=".MainActivityFragment">
-  
-    <TextView android:text="@string/hello_world"
+    tools:context="com.example.jzukewich.geocaching.MainActivity">
+
+    <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="Hello World!" />
 </RelativeLayout>
 ```
-
-The first element is our `RelativeLayout` which again defines our namespaces and its width and height, as well as paddings on the sides (empty space), and the context, which again allows this fragment to render properly in Android Studio.
+`<RelativeLayout` is defining what kind of element we are describing, in this case a `RelativeLayout`. Layouts in Android are Views that hold one or more views as 'children', and position them on the screen. This `RelativeLayout` will have one child, our "Hello World!" text.
+`xmlns:android="http://schemas.android.com/apk/res/android"` and `xmlns:tools="http://schemas.android.com/tools"` define namespaces, you won't need to know what these mean, just have them at the beginning of each file.
+`android:layout_width="match_parent"` and `android:layout_height="match_parent"` set the width and height of the fragment to match the container or parents width and height, which will be the full screen.
+`android:paddingBottom="@dimen/activity_vertical_margin"` and the following three lines set the 'padding' of the view, which is extra empty space around the sides. `"@dimen/activity_vertical_margin"` references a value defined in a file called dimens.xml, we wont be using dimens.xml anywhere else so dont worry about this.
+`tools:context="com.example.jzukewich.geocaching.MainActivity"` gives this layout an associated java file, don't worry about this either.
 
 The second element is our `TextView` inside the `RelativeLayout`, we call the `TextView` a child of the `RelativeLayout`. All this means is that our `RelativeLayout` contains the `TextView` and can define its position and size (somewhat). The `TextView`, besides defining its width and height also gives a value for its text to display, `@string/hello_world`. Any time we see `@something` in XML it means the value is defined in another file, open up res/values/strings.xml.
 
-### strings.xml
-```xml
+## Adding Views
+### Add a Button
+Now that we know what we have in our starting project, lets try adding something. Underneath your `TextView` lets add a `Button`.
+``` xml
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Hello World!" />
+
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Button Text" />
+```
+If we click 'Design' at the bottom of the file we can preview what this will look like, notice that the button appeared on top of the text, thats because in a `RelativeLayout` every child needs to define its position relative to something else. Lets have our `Button` appear below the text, to do this we first need to give our `TextView` an Id, add `android:id="@+id/text_view"` at the start of the `TextView`.
+``` xml
+<TextView
+    android:id="@+id/my_text_view"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Hello World!" />
+```
+Adding this Id allows our `Button` to use the `TextView`, we can now add `android:layout_below="@+id/text_view"` to our `Button`. Lets also give our `Button` an Id the same way we did the `TextView`
+``` xml
+<Button
+    android:id="@+id/my_button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/my_text_view"
+    android:text="Button Text" />
+```
+Lets make sure this works by going back to the 'Design' tab (if it doesn't ask a mentor for help)
+
+## Strings
+You might have noticed that Android Studio has highlighted `android:text="Test Button"`, if you hover over the text, it says you should use an @string reference instead of a hardcoded string. What this means is that we should write "Test Button" elsewhere, in a file called `strings.xml` and reference it here. If you look at the 'Project' tab on the left, underneath the `layout` folder there will be one called `values`, open up the file called `strings.xml` inside. You should see
+``` xml
 <resources>
-    <string name="app_name">My Application</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="app_name">Geocaching</string>
 </resources>
 ```
-This is where we will define our strings, each one has a name which us used to access it, and a value. For example `<string name="hello_world">Hello world!</string>` has the name `hello_world` and value "Hello World!", so in fragment_main.xml when we say `android:text="@string/hello_world"`, "Hello World!" is what will be displayed.
+This file is where we will put all the text that our app uses, which will make it easier to make changes later on, as well as having a few other benifits we wont talk about today. Each String one has a name which us used to access it, and a value. For example `<string name="hello_world">Hello world!</string>` has the name `hello_world` and value "Hello World!". Lets define another String called `button_title` to put on our `Button`. Add `<string name="button_title">Click Me</string>` on a new line under `<string name="app_name">Geocaching</string>`.
+
+If we go back to `activity_main.xml` we can now replace `"Button Text"` with `"@string/button_title"` which will fill in the text from our strings file, "Click Me". Check again to make sure this worked.
+
+## Fragments
+### Creating a Fragment
+Right now our `Activity` which will run our whole app holds our view. This is a problem because as you saw before we want to show a few different screens in our app. We solve this problem by using `Fragments`, which are screens that our `Activity` can show, and switch between.
+
+Lets start by creating a new Java file called `FoundCachesFragment.java` (this `Fragment` will become our found caches list). Right click on com.yourpackagename under java and select new -> Java Class, enter `FoundCachesFragment` for the name. The first thing were going to do is make our class extend Fragment so add `extends Fragment` after the class name. We also need to import the `Fragment` class so add `import android.support.v4.app.Fragment;` below the package name. You might notice were using `android.support.v4.app.Fragment` instead of `android.app.Fragment`, `support.v4` is a Library that lets you run things on older devices, dont worry much about this as were doing it to avoid some complex stuff later on.
+
+Now that we have our `Fragment`, lets build a layout for it to use, create a new Layout resource File under `layout` called `fragment_found_caches` (the same way you did the class) and replace the generated LinearLayout with the contents of activity_main. Then remove the line `tools:context="com.example.jzukewich.geocaching.MainActivity"` from the new file.
+
+Going back to our `FoundCachesFragment`, lets make it display the file we just made. `Fragment`s have a built in function called `onCreateView` where you can set what it should show, lets start by Overriding it. Add the method below to `FoundCachesFragment`
+``` java
+@Override
+public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    return null;
+}
+```
+Now whenever our `Fragment` gets shown, this method will be called and some `View` will be returned to display. Right now we return `null` which basically means nothing. Two of the parameters pased to the `onCreateView` function are a `LayoutInflater` and a `ViewGroup`. The first we will use to create a `View` out of our layout file (or 'inflate' the layout), the other is what we will attach our newly created view to.
+``` java
+View rootView = inflater.inflate(R.layout.fragment_found_caches, container, false);
+return rootView;
+```
+What this does is get our `fragment_found_caches` layout, and use the `LayoutInflater` called `inflater` to create a `View` called `rootView` from the layout. We then return `rootView` to be displayed on the screen.
+
+### Showing our Fragment
+Now that we have a `Fragment` that will display our layout, lets get our `Activity` to use it. We'll start by opening up `activity_main.xml` and replacing everything in that file with
+``` xml
+<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment"
+    android:name="com.yourpackagename.FoundCachesFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
+```
+Our `Activity`'s layout now contains a `<fragment` element, which we will use to display our `FoundCachesFragment`. Lets build and run our app and make sure it works (Problems? Most times Android Studio fails to build something a 'Messages' tab pops up at the bottom and tells you whats wrong, feel free to ask for help if it doesnt make sense)
+
+
+
+
+
 
 ## XML, Views and Fragments
 Lets start with building the found caches page, if you open 
