@@ -240,11 +240,8 @@ Getting api key
 ### Sending back to API from found
 - Make the request, handle errors
 
-### Open map from found fragment
-- Callback to activity
-- Passing in Location
-- Talk about async with getting map
 
+# Possibly Extensions
 ### Cache Data
 - Store json to use off network
 - Take in onError Callbacks
