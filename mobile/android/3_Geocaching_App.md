@@ -96,6 +96,20 @@ This file is where we will put all the text that our app uses, which will make i
 
 If we go back to `activity_main.xml` we can now replace `"Button Text"` with `"@string/button_title"` which will fill in the text from our strings file, "Click Me". Check again to make sure this worked.
 
+## Button Clicks
+### OnClickListener
+Add clickListener to Activity
+- Button
+- View, Object
+- Extention/Implementation (breifly)
+- [Logging click] http://developer.android.com/reference/android/util/Log.html
+- getViewById
+- OnClickLostener
+- Callbacks
+
+### Setting Text
+Set textView text on Click (incremement click count? then use string with placeholder)
+
 ## Fragments
 ### Creating a Fragment
 Right now our `Activity` which will run our whole app holds our view. This is a problem because as you saw before we want to show a few different screens in our app. We solve this problem by using `Fragments`, which are screens that our `Activity` can show, and switch between.
@@ -140,19 +154,6 @@ Lets start with building the found caches page, if you open
 - Strings, resources (http://developer.android.com/reference/android/content/res/Resources.html)
 - XML
 - Tools and XML view
-
-## Add nested layout
-- Relative layout
-- Id's
-
-## Add button and set text programatically
-- Button
-- View, Object
-- Extention/Implementation (breifly)
-- [Logging click] http://developer.android.com/reference/android/util/Log.html
-- getViewById
-- OnClickLostener
-- Callbacks
 
 ## Build a RecyclesView with mock arraylist
 - Simple arrayList of strings
