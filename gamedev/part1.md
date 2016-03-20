@@ -303,10 +303,8 @@ Now you should be able to move left and right, and fly up in the air when hittin
 
 <a href="https://github.com/molleindustria/p5.play/blob/965e2fc5af0335f0abd6ca362ca70dc205c8f40c/lib/p5.play.js#L502-L593" target="_blank">Here is a list of possible values for the `key` parameter</a> in case you want to attach events to different kinds of key presses.
 
-<!---
 ### What you should have so far
-Here's a link to a Codepen project completed up to this step: http://codepen.io/davepvm/pen/NNWyrV?&editors=0010
---->
+Here's a link to a Codepen project completed up to this step, in case you fall behind: http://codepen.io/davepvm/pen/NNWyrV?&editors=0010
 
 <a href="part2.md">Part 2: Gravity and collision detection</a>
 
