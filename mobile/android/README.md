@@ -4,9 +4,21 @@
 Gif of demo
 
 ## Table of Contents
-- <a href="1_Java_Introduction.md">Java Introduction</a>
-- <a href="2_Android_Studio_Setup.md">Android Studio Setup</a>
+### Getting ready
+- [Java Introduction](1_Java_Introduction.md)
+- [Android Studio Setup](2_Android_Studio_Setup.md)
+
+### Building the Geocaching app
 - <a href="3_Geocaching_App.md">Geocaching App</a>
-- <a href="4_Geocaching_App_Extentions.md">Geocaching App Extensions</a>
-- <a href="5_Android_Studio_Tips.md">Android Studio Tips</a>
-- <a href="6_Vocabulary.md">Vocabulary</a>
+- [Starting the App](3_Geocaching_App.md)
+- [Found Caches Page](4_Found_Caches_Page.md)
+- [Map Page](5_Map_Page.md)
+
+### Extending the app
+- [Preferences Page](6_Preferences_Page.md)
+- [Caching Data](7_Caching_Data.md)
+- [Beautify the App](8_Beautify_App.md)
+
+### Reference Material
+- [Android Studio Tips](10_Android_Studio_Tips.md)
+- [Vocabulary](11_Vocabulary.md)
