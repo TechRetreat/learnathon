@@ -105,16 +105,137 @@ yourRecyclerView.setAdapter(yourRecyclerViewAdapter);
 ```
 You should now have a working recycler view, make sure it compiles and runs correctly, you should see your names that you put in `itemNames` underneath your `Button`
 
-## Get data from json file
-- Model objects
-- Json
-- IO
-- Generics
-- Static functions
-- Interface/Implementation/Composition
-- Utility classes
+## Getting Data
+### JSON
+Now that we have our `RecyclerView` its time to get some real data to put in it, eventually were going to be getting this data from our server online, but for now were going to read the data from a file locally in resources. The format were going to store our data in is called JSON, basically it's a way to write our data that is easy for us to read, as well as for a computer to use.
+``` json
+{
+  "caches": {
+    "yrolad": {
+      "name": "Cache 1",
+      "difficulty": 3,
+      "found": 1456883400000
+    },
+    "mdifpq": {
+      "name": "Cache 2",
+      "difficulty": 3,
+      "found": 1456531200000
+    },
+    "cbdiyd": {
+      "name": "Cache 3",
+      "difficulty": 3,
+      "found": 1456531200000
+    }
+  }
+}
+```
+This is what the JSON file looks like for our found caches, lets go through whats happening here. In JSON, everything is stored by some 'key' like in a `Map`. Our main element has the key `caches` and the value
+``` json
+"yrolad": {
+  "name": "Cache 1",
+  "difficulty": 3,
+  "found": 1456883400000
+},
+"mdifpq": {
+  "name": "Cache 2",
+  "difficulty": 3,
+  "found": 1456531200000
+},
+"cbdiyd": {
+  "name": "Cache 3",
+  "difficulty": 3,
+  "found": 1456531200000
+}
+```
+Each of these 'child' elements is again a key and value, the first has the key `yrolad` and the value 
+``` json
+"name": "Cache 1",
+"difficulty": 3,
+"found": 1456883400000
+```
+The key `yrolad`, as well as `mdifpq` and `cbdiyd` are our geocache Ids. Every cache has a unique random identifier we will use to refer to it, kind of like a name. Each of these geocache Ids maps to the definition for a cache, its name, difficulty, and the date it was found. Each of these values still maps a key, for example `name` to a value `Cache 1`.
 
-## Put good data into recycler view
+## Create JSON Resource
+Now that we know a bit about JSON lets start using it, create a new 'Android Resource Directory' in `res` called `raw` with resource type `raw`, then inside `raw` (you might have to refresh the menu to see it) create a file called `caches_found.json`. Copy the response from before into this file.
+``` json
+{
+  "caches": {
+    "yrolad": {
+      "name": "Cache 1",
+      "difficulty": 3,
+      "found": 1456883400000
+    },
+    "mdifpq": {
+      "name": "Cache 2",
+      "difficulty": 3,
+      "found": 1456531200000
+    },
+    "cbdiyd": {
+      "name": "Cache 3",
+      "difficulty": 3,
+      "found": 1456531200000
+    }
+  }
+}
+```
+
+## Reading from Resources
+Since we dont want to make our `FoundCachesFragment` too large we'll write our code to load this JSON file ielsewhere create a new Java Class in your java folder with `MainActivity` and `FoundCachesFragment` called `DataUtilities`. This is where we will write all our code related to reading, and later fetching and sending data. Lets write a method called `getResponseTest` inside this class that takes in a `Context` like so `public static void getResponseTest(Context context) {`. This method is `static` meaning that it can be called without an instance of the class like so `DataUtilities.getResponseText(context)`. When reading from raw resources we use something called an `InputStream` to read the file, The next block of code seems scary and I wont go into how it works, but it reads the json file `caches_found` we wrote earlier into a `String` called `json`.
+``` java
+try {
+    InputStream is = context.getResources().openRawResource(R.raw.caches_found);
+    int size = is.available();
+    byte[] buffer = new byte[size];
+    is.read(buffer);
+    is.close();
+    String json = new String(buffer, "UTF-8");
+} catch (IOException ex) {
+    ex.printStackTrace();
+}
+```
+The `try` and `catch` are keyword we use if something might go wrong. We try to run the code in the first block and if something goes wrong trying to read the file the system will 'throw' and `IOException` object that would normally crash the app. If this happens within the first block we instead 'catch' the exception, give up on what we were trying to do and run some other code instead. In this example we print out the exceptions 'stack trace' which is a log of what went wrong to cause the exception to get thrown.
+
+## Serializing JSON Objects
+Now we have a String of our JSON file, which is really hard to use as is. What were going to do now is convert this String to a more useable object, a Map of cache Ids to `Cache` objects, which will have `name`, `difficulty` and `found` as variables. What were going to use to do this is a tools called Gson, which will take our String and automatically convert it to an object we define. Lets start by creating our 'model' object that mirrors how our JSON data is set up. Create a new Java class called `FoundCaches` that looks like we just described.
+``` java
+public class FoundCaches {
+    public Map<String, Cache> caches;
+
+    public static class Cache {
+        public String name;
+        public int difficulty;
+        public long found;
+    }
+}
+```
+When using Gson the variable names we use here have to match the keys in the JSON file. Notice that Gson will create a Map using our Ids as the keys and our Cache objects as the values.
+
+To use Gson we have to include it with `gradle`, add `compile 'com.google.code.gson:gson:2.3'` to the gradle file the same place we did before. Now if we go back to `DataUtilities` we can add
+``` java
+Gson gson = new Gson();
+FoundCaches caches =  gson.fromJson(json, FoundCaches.class);
+```
+underneath `String json = new String(buffer, "UTF-8");`, notice the method `fromJson` takes the class `FoundCaches` as a parameter. We now have a method that reads our JSON file and gets an object with the information we need to fill our `RecyclerView`.
+
+## Callbacks
+Now that we have a way to get this data let's send it to our `FoundCachesFragment`. The easiest way to do this would be to return the object from the function, but this causes problems later on when we get the information from online. When we call a method our phone waits till it finishes before moving on to do anything else, this causes issues if it takes a while for the method to finish as it would freeze your phone until it was done. We can get around this by running our code on a seperate 'thread' which we'll explain later, but that means we cant return from this method.
+
+What we do instead is define a 'callback', an object that defines a function to run when something happens like our OnClickListener running code when our `Button` got clicked. To create a callback we define an `interface` with one method `onResults(FoundCaches results)` which we will call when we finish serializing the JSON file.
+``` java
+public interface Receiver {
+    void onResults(FoundCaches results);
+}
+```
+Add this to DataUtilities above the method `getResponseTest`. When we call `getResponseTest` we want to get a callback to send back the data with so add `Receiver receiver` as a parameter to the `getResponseTest` method and add `receiver.onResults(caches);` after serializing our JSON file. Now our method takes in a callback, and fires its function when it has the data ready.
+
+
+
+
+
+## Controller Class
+Because we don't want our `FoundCachesFragment` file to get too large, were going to 
+
+## Put Response into RecyclerView
 - Calling utility
 
 ## File organization
