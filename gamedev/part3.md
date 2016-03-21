@@ -164,6 +164,8 @@ function draw() {
   // but you can now call `a.collideWith(b)` and `b.collideWith(a)`
   // when there has been a collision to perform the follow-up logic
 
+  // Loop through all sprites again to run their `interact` method
+
   drawSprites();
 }
 ```
@@ -185,7 +187,7 @@ function setup() {
 ```
 
 ### What you should have so far
-Here's the game up to this point, in case you fall behind: http://codepen.io/davepvm/pen/NNWyrV?&editors=0010
+Here's the game up to this point, in case you fall behind: http://codepen.io/davepvm/pen/aNJyXO?editors=0010
 
 <a href="part4.md">Part 4: Adding points and lives</a>
 
