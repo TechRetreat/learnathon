@@ -9,7 +9,6 @@ Gif of demo
 - [Android Studio Setup](2_Android_Studio_Setup.md)
 
 ### Building the Geocaching app
-- <a href="3_Geocaching_App.md">Geocaching App</a>
 - [Starting the App](3_Geocaching_App.md)
 - [Found Caches Page](4_Found_Caches_Page.md)
 - [Map Page](5_Map_Page.md)
