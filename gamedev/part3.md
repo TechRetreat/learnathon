@@ -16,10 +16,8 @@ var Polygon = function(width, height) {
   this.width = width;
   this.height = height;
 };
-Polygon.prototype = {};
-  getArea: function() {
-    return 0; // As an arbitrary Polygon, we don't actually have enough info to know the area
-  }
+Polygon.prototype.getArea = function() {
+  return 0; // As an arbitrary Polygon, we don't actually have enough info to know the area
 };
 
 // Make a Rectangle, which is a child of Polygon
