@@ -100,8 +100,7 @@ itemNames.add("Cache 1");
 ```
 Then all have have to do to put everything together is create and set your `Adapter`.
 ``` java
-yourRecyclerViewAdapter = new CacheAdapter(itemNames);
-yourRecyclerView.setAdapter(yourRecyclerViewAdapter);
+yourRecyclerView.setAdapter(new CacheAdapter(itemNames));
 ```
 You should now have a working recycler view, make sure it compiles and runs correctly, you should see your names that you put in `itemNames` underneath your `Button`
 
@@ -227,6 +226,18 @@ public interface Receiver {
 }
 ```
 Add this to DataUtilities above the method `getResponseTest`. When we call `getResponseTest` we want to get a callback to send back the data with so add `Receiver receiver` as a parameter to the `getResponseTest` method and add `receiver.onResults(caches);` after serializing our JSON file. Now our method takes in a callback, and fires its function when it has the data ready.
+
+## Using DataUtilities
+In our `FoundCachesFragment` we can now get the list of found caches easily by calling
+``` java
+DataUtilities.getResponseTest(getContext(), new DataUtilities.Receiver() {
+    @Override
+    public void onResults(FoundCaches results) {
+        // Do something with the results
+    }
+});
+```
+Since we want this list to get displayed
 
 
 
