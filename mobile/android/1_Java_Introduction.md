@@ -265,6 +265,8 @@ class Dog {
   }
   
   // Each dog has a method to return its name
+  // Notice that unlike the methods earlier, this has no 'static' before the return type
+  // Static means a method or variable can be used by referring to the class itself instead of an instance or Object of that class
   public String getName() {
     return name; 
   }
