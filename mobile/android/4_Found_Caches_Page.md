@@ -239,7 +239,7 @@ DataUtilities.getResponseTest(getContext(), new DataUtilities.Receiver() {
 ```
 
 ## Display Cache names in RecyclerView
-Since we want this list to get displayed in the `RecyclerView` let's modify it a bit to take in FoundCache.Cache values instead of `String`s. First change the `CacheAdapter` constructor to take in a `List` of `FoundCache.Cache`s where `.Cache` refers to the nested class in `FoundCaches`, also change the type of the `items` variable. The last thing we have to do to in the `Adapter` is change `String item = items.get(pos);` to `FoundCaches.Cache item = items.get(pos).name;` in `onBindViewHolder`. Next in `CacheHolder` modify `bindCache` to take in a `FoundCaches.Cache cache` and display `cache.name`. The last thing we have to do is supply the right data. Let's replace
+Since we want this list to get displayed in the `RecyclerView` let's modify it a bit to take in `FoundCaches.Cache` values instead of `String`s. First change the `CacheAdapter` constructor to take in a `List` of `FoundCaches.Cache`s where `.Cache` refers to the nested class in `FoundCaches`, also change the type of the `items` variable. The last thing we have to do to in the `Adapter` is change `String item = items.get(pos);` to `FoundCaches.Cache item = items.get(pos).name;` in `onBindViewHolder`. Next in `CacheHolder` modify `bindCache` to take in a `FoundCaches.Cache cache` and display `cache.name`. The last thing we have to do is supply the right data. Let's replace
 ``` java
 ArrayList<String> itemNames = new ArrayList<>();
 itemNames.add("Cache 1");
@@ -250,7 +250,9 @@ cachesRecycerView.setAdapter(cachesRecycerViewAdapter);
 ```
 with the DataUtilities call from before, and where we have `// Do something with the results` we can create an adapter from our fetched data
 ``` java
-cachesRecycerViewAdapter = new CacheAdapter(results.caches);
+// This takes our Map and makes a List of the values
+List<FoundCaches.Cache> caches = new ArrayList(results.caches.values());
+cachesRecycerViewAdapter = new CacheAdapter(caches);
 cachesRecycerView.setAdapter(cachesRecycerViewAdapter);
 ```
 Try running the app and make sure it works, for now it should display the names of the caches (`Cache 1`, `Cache 2`, `Cache 3`)
@@ -305,18 +307,20 @@ Theres a few things here you haven't seen before, lets list them quick.
 - `layout_margin`: similar to padding, but pushes other elements away from it rather than making itself bigger to fit its contents with space inside. Defined in `dp` or Density-independent Pixels which are a size unit that scales with pixel density on the screen (`dp` stays the same physical size).
 - `textSize`: fairly self explanatory, this sets the text size in `sp` which is similar to `dp` but takes users font size into consideration.
 - `layout_marginEnd` and `layout_toEndOf`: not all phones are layed out right to left, if it isn't then `End` refers to the end of the layout which would be right for us. `layout_marginStart` or `layout_toStartOf` would be the opposite.
+- 
+To use `CardView` we need to add `compile 'com.android.support:cardview-v7:23.2.0'` to our gradle file to fetch the code we need the same way we did `gson` and the design library.
 
 ## Using the Cache info Layout
 Now that we have our layout let's put it to use, go back to our `CacheAdapter` and where we have `TextView view = new TextView(getContext());` we will inflate our new layout instead `View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_found_cache, parent, false);`. 
 
-We should also modify our `CacheHolder` to give it two extra variables `difficultyTextView;` and `findTimeTextView;` both of which are `TextView`s, these will come from the layout we just defined. In the constructor, set `nameTextView = (TextView) itemView.findViewById(R.id.cache_name);` and the same for the other two variables, using `R.id.cache_difficulty` and `R.id.cache_find_time` as the element Ids. Now we have all the data we need to display, in `bindCache` add 
+We should also modify our `CacheHolder` to give it two extra variables `difficultyTextView;` and `findTimeTextView;` both of which are `TextView`s, these will come from the layout we just defined. In the constructor change `TextView itemView` to `View itemView` and set `nameTextView = (TextView) itemView.findViewById(R.id.cache_name);`, doing the same for the other two variables using `R.id.cache_difficulty` and `R.id.cache_find_time` as the element Ids. Now we have all the data we need to display, in `bindCache` add 
 ``` java
 difficultyTextView.setText(Integer.toString(cache.difficulty));
 findTimeTextView.setText(Long.toString(cache.found));
 ```
 
 ## Formatting and FormattingUtilities
-If we run our app now it shows a list of all our data but not in a format that we can read, Lets creat another class called FormattingUtilities where we'll put any methods we use to format data to be readable. First lets add two methods to format difficulties and find times, each will take in the data we have and output a `String` that we can display.
+If we run our app now it shows a list of all our data but not in a format that we can read, Lets creat another class called `FormattingUtilities` where we'll put any methods we use to format data to be readable. First lets add two methods to format difficulties and find times, each will take in the data we have and output a `String` that we can display.
 ``` java
 public static String getDifficultyString(int difficulty, Context context) {
     return "";
@@ -330,9 +334,11 @@ Notice that these methods are both `static` meaning that this class doesn't need
 
 Let's add two new entries in `strings.xml` that will be used in our cards with values `Found %s` and `Difficulty %d of 5`, you can pick names for them that make sense. Remember from before that `%d` is a number placeholder, `%s` is a placeholder but for a `String`.
 
-Back in UiUtilities `getDifficultString` will work the same way as our button click counter did before, simply return `context.getString(R.string.difficulty_out_of_five, difficulty)` and it will fill in the placeholder with our difficulty. For `getTimeAgoString` we're going to use something bulid into Android called called DateUtils to format our time nicely. `DateUtils.getRelativeTimeSpanString(context, timestamp).toString();` returns a `String` which formats our time nicely eg. "42 minutes ago". Inject this value into our other `String` the same way we did the number placeholder by using `getString` and passing the result of `getRelativeTimeSpanString`.
+Back in FormattingUtilities `getDifficultString` will work the same way as our button click counter did before, simply return `context.getString(R.string.difficulty_out_of_five, difficulty)` and it will fill in the placeholder with our difficulty. For `getTimeAgoString` we're going to use something bulid into Android called called DateUtils to format our time nicely. `DateUtils.getRelativeTimeSpanString(context, timestamp).toString();` returns a `String` which formats our time nicely eg. "42 minutes ago". Inject this value into our other `String` the same way we did the number placeholder by using `getString` and passing the result of `getRelativeTimeSpanString`.
 
-If we go back to our `CacheHolder` we can replace our `Integer.toString` and `Long.toString` with `UiUtilities.getDifficultyString(cache.difficulty, getContext())` and `getTimeAgoString(cache.found, getContext())`.
+If we go back to our `CacheHolder` we can replace our `Integer.toString` and `Long.toString` with `FormattingUtilities.getDifficultyString(cache.difficulty, getContext())` and `getTimeAgoString(cache.found, getContext())`.
+
+Try running the app, you should see our list of caches display with all the data from our `caches_found.json`.
 
 ## Cleaning up
 We're finished work on the 'Found' page for now, if you feel like it go through and take out the stuff we added at the start, `helloWorldTextView` + `clickMeButton` in our `FoundCachesFragment` fragment and `my_text_view` + `my_button` in the `fragment_found_caches` layout.
