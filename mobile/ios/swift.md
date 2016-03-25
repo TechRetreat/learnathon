@@ -222,19 +222,54 @@ print dictionary
 
 ## Function
 We can group blocks of code into a function. This allows us to reuse the group of code without typing it all out again.
-Functions can take arguments, but we need to specify the types of the arguments and what type it returns. Let's make a function called `add` which takes two integers, `a` and `b` and returns their sum as an integer.
+Functions can take arguments, but we need to specify the types of the arguments and what type it returns.
 
+Let's make a function called `add` which takes two integers, `a` and `b` and returns their sum as an integer.
 ```swift
-func introduce(name) {
-  print("Hello! My name is " + name)
-}
-
 func add(a: Int, b: Int) -> Int {
   return a + b
 }
-
-var five = add(2, 3)
 ```
 
+We can also make functions that don't return anything, it looks like this:
+```swift
+func introduce(name: String) {
+  print("Hello my name is " + name)
+}
+```
+
+In Swift, it's common to have very descriptive function names. This will make more sense as we start making apps:
+```swift
+func methodWithFirstArgument(a: Int, andSecondArgument b: Int) {
+      print("This is a common way to pass \(a) and \(b) into a function in Swift")
+}
+```
+
+We can call these functions like this:
+```swift
+var five = add(2, 3)
+introduce("Jonathan")
+methodWithFirstArgument(42, andSecondArgument: 13)
+```
+
+## Objects
+We can create a collection of related properties and functions into what is called an `Object`. This grouping of properties and functions act a lot like real world objects. You can set their attributed (properties), and ask them to do things (call their functions). To create an `object` we need to create a template for it, which properties and functions should be grouped together. This template is called a `class` and each object is an [instance]() of a particular `class`. This would look something like:
+
+```swift
+class Astronaut {
+  private var name: String
+  private var yearsOfExperience = 0 // You can set initial values like this
+  
+  // The initializer is the function that creates the object
+  // You need at least one initializer for every class
+  init(name: String) {
+    // We can access the properties of an object using dot notation as below
+    // "self" is how we refer to the current instance of the class
+    self.name = name
+  }
+}
+
+var astro1 = Astronaut(name: "Chris Hadfeild")
+```
 
 # Fun Notes
