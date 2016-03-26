@@ -59,10 +59,15 @@ After we get our `GoogleMap` let's try to zoom to our current location, create a
 ``` java
 LocationManager locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
 ```
-Next we will get a `Location` from `locationManager.getLastKnownLocation` and animate our `googleMap` to that `Location`'s lattitude and longitude with a zoom factor of `13`.
+Next we will get a `Location` from `locationManager.getLastKnownLocation` and animate our `googleMap` to that `Location`'s lattitude and longitude with a zoom factor of `13`, if we can't get a location (location == null) then use a default location in Waterloo.
 ``` java
 Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(new Criteria(), false));
-googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 13));
+if (location != null) {
+    googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 13));
+} else {
+    // Default to a location in Waterloo
+    googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(43.38224, -80.32682), 13));
+}
 ```
 `getBestProvider` gets us a system service that can provide us the location and `newLatLngZoom` returns a `CameraUpdate` that will move our map. Don't worry much about this code as it's a bit complicated.
 
@@ -81,19 +86,109 @@ Notice that Android Studio is complaining about `getLastKnownLocation`, this is 
 ```
 These give us access to a bunch of the systems properties (If the user allows).
 
-In Android M the complexity of permissions was increased quite a bit, since we want to avoid this for today open up your gradle file and change `targetSdkVersion` (in `defaultConfig`) to 22.
+In Android M the complexity of permissions was increased quite a bit, since we want to avoid this for today open up your gradle file and change `targetSdkVersion` (in `defaultConfig`) to 22 which will build our app for a slightly older version of Android.
 
-## Using Map
-- Map settings https://developers.google.com/maps/documentation/android-api/controls
-- Zoom to location
+## Caches Data
+We now have our map and access to the users location, lets get some cache data and display it on the map. Add another file called `caches_map.json` in res/raw with our `caches_found.json` file, copy the following inside.
+``` json
+{
+  "caches": {
+    "yrolad": {
+      "name": "Cache 1",
+      "description": "Hey a cache description 1",
+      "difficulty": 3,
+      "location": {
+        "latitude": 43.38224,
+        "longitude": -80.32682
+      }
+    },
+    "mdifpq": {
+      "name": "Cache 2",
+      "description": "Another one",
+      "difficulty": 3,
+      "location": {
+        "latitude": 43.38224,
+        "longitude": -80.32582
+      }
+    },
+    "cbdiyd": {
+      "name": "Cache 3",
+      "description": "Buy your momma a house",
+      "difficulty": 3,
+      "location": {
+        "latitude": 43.38454,
+        "longitude": -80.32382
+      }
+    },
+    "qudotn": {
+      "name": "Cache 4",
+      "description": "Buy your whole family houses",
+      "difficulty": 3,
+      "location": {
+        "latitude": 43.38024,
+        "longitude": -80.32382
+      }
+    }
+  }
+}
+```
+This is our cache data, it tells us where the caches are located as well as giving the name, description, and difficulty. The structure is the same as in `caches_found.json`. Next up lets creates a java class called `MapCaches` that we will read our json file into (same use as `FoundCaches`). It has the same structure as `FoundCaches` but has some extra information.
+``` java
+public class MapCaches {
+    public Map<String, Cache> caches;
 
-## Permissions
-- Manifest
-- Check has permissions
-- Request if not
+    public static class Cache {
+        public String name;
+        public String description;
+        public int difficulty;
+        public Location location;
+    }
 
-## Make Markers
-- Make Model and Call for map caches
+    public static class Location {
+        public double latitude;
+        public double longitude;
+    }
+}
+```
+In `DataUtils` duplicate `FoundCachesReceiver` and `getFoundCaches` and replace the `FoundCache` stuff with `MapCache`, make sure to read `R.raw.caches_map` instead of `caches_found` and serialize our json into a `MapCaches` object `gson.fromJson(json, MapCaches.class)`. We are now ready to use this data in our `MapFragment`.
+
+## Displaying Caches on the Map
+Back in `MapFragment`, after calling `zoomToUserLocation` add a call to `DataUtilities.getMapCaches` that look similar to the one in `FoundCachesFragment`. At the top of `MapFragment` define a new variable `private Map<String, MapCaches.Cache> mapCaches;`, inside the callback set `mapCaches` to `results.caches` and call a method `makeMarkers()` that we'll write next.
+
+Now create the `makeMarkers` method that will return `void` and take in no parameters. In this method we will draw the caches on our map. The body of this method should iterate over each `Map.Entry` in `mapCaches.entrySet()` and create a marker for each cache, an `Entry` is one Key/Value pair (`<String, MapCaches.Cache>` is the type of the Key and Value).
+``` java
+for (Map.Entry<String, MapCaches.Cache> entry : mapCaches.entrySet()) {
+    MapCaches.Cache cache = entry.getValue();
+    // Draw cache marker on map
+}
+```
+To create a marker we first need a location. Create a `new LatLng(paramaters)` called `position` passing `cache.location.latitude` and `longitude` as parameters to the constructor. Next we'll define `float iconColor = BitmapDescriptorFactory.HUE_RED;` which will be the color of our markers. We can now call
+``` java
+googleMap.addMarker(new MarkerOptions()
+        .position(position)
+        .icon(BitmapDescriptorFactory.defaultMarker(iconColor))
+        .title(cache.name));
+```
+This will add out marker to the map, try it out and make sure the markers got added around waterloo.
+
+## Marking Found Caches
+Some of these caches have already been found, let's mark these ones by changing the icon color to blue. In order to do this we first have to get the `FoundCaches` data. Create a variable `foundCaches` at the top that's a `Map` of `FoundCaches.Cache`s, before your call to `DataUtilities.getMapCaches` add one to `DataUtilities.getFoundCaches`. In the callback set `foundCaches = results.caches;`, this will let us use `foundCache`s in our `makeMarkers` method.
+
+Replace `float iconColor = BitmapDescriptorFactory.HUE_RED;` with
+``` java
+// Check if this cache id is in the Map of found caches. If so it has already been found
+boolean hasBeenFound = foundCaches.containsKey(entry.getKey());
+
+// This pattern someBoolean? value1 : value2 is called a ternary
+// It is equivalent to if (someBoolean) { value1 } else { value2 }
+// If hasBeenFound is true we use the first value 'BitmapDescriptorFactory.HUE_AZURE', else we use 'BitmapDescriptorFactory.HUE_RED'
+float iconColor = hasBeenFound? BitmapDescriptorFactory.HUE_AZURE : BitmapDescriptorFactory.HUE_RED;
+```
+The ternary is choosing between two values `BitmapDescriptorFactory.HUE_AZURE` and `BitmapDescriptorFactory.HUE_RED` based on whether hasBeenFound is true, then we set the color to red if unfound or azure if found.
+
+## Cache Click Popup
+To make things a bit more interesting and useful we're going to change the popup that appears when we click a marker on the map to display some cache information.
+
 - Click listener
 - Info window
 - Dealing with maps (found)
@@ -102,7 +197,9 @@ In Android M the complexity of permissions was increased quite a bit, since we w
 - Alert dialogs
 - View inflation
 - View dismiss
-- 
+
+## Using Map
+- Map settings https://developers.google.com/maps/documentation/android-api/controls
 
 ## Create viewPager
 - ViewPager
