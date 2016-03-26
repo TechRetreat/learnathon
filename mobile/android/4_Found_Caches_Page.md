@@ -109,71 +109,49 @@ You should now have a working recycler view, make sure it compiles and runs corr
 Now that we have our `RecyclerView` its time to get some real data to put in it, eventually were going to be getting this data from our server online, but for now were going to read the data from a file locally in resources. The format were going to store our data in is called JSON, basically it's a way to write our data that is easy for us to read, as well as for a computer to use.
 ``` json
 {
-  "caches": {
-    "yrolad": {
-      "name": "Cache 1",
-      "difficulty": 3,
-      "found": 1456883400000
-    },
-    "mdifpq": {
-      "name": "Cache 2",
-      "difficulty": 3,
-      "found": 1456531200000
-    },
-    "cbdiyd": {
-      "name": "Cache 3",
-      "difficulty": 3,
-      "found": 1456531200000
-    }
+  "Cache 1": {
+    "name": "Cache 1",
+    "difficulty": 3,
+    "found": 1456883400000
+  },
+  "Cache 2": {
+    "name": "Cache 2",
+    "difficulty": 3,
+    "found": 1456531200000
+  },
+  "Cache 3": {
+    "name": "Cache 3",
+    "difficulty": 3,
+    "found": 1456531200000
   }
 }
 ```
-This is what the JSON file looks like for our found caches, lets go through whats happening here. In JSON, everything is stored by some 'key' like in a `Map`. Our main element has the key `caches` and the value
-``` json
-"yrolad": {
-  "name": "Cache 1",
-  "difficulty": 3,
-  "found": 1456883400000
-},
-"mdifpq": {
-  "name": "Cache 2",
-  "difficulty": 3,
-  "found": 1456531200000
-},
-"cbdiyd": {
-  "name": "Cache 3",
-  "difficulty": 3,
-  "found": 1456531200000
-}
-```
-Each of these 'child' elements is again a key and value, the first has the key `yrolad` and the value 
+This is what the JSON file looks like for our found caches, lets go through whats happening here. In JSON, everything is stored by some 'key' like in a `Map`. Our first element has the key `Cache 1` and the value
 ``` json
 "name": "Cache 1",
 "difficulty": 3,
 "found": 1456883400000
 ```
-The key `yrolad`, as well as `mdifpq` and `cbdiyd` are our geocache Ids. Every cache has a unique random identifier we will use to refer to it, kind of like a name. Each of these geocache Ids maps to the definition for a cache, its name, difficulty, and the date it was found. Each of these values still maps a key, for example `name` to a value `Cache 1`.
+Each of these values still maps a key, for example `difficulty` to a value `3`. We will be using the cache names as their keys.
 
 ## Create JSON Resource
 Now that we know a bit about JSON lets start using it, create a new 'Android Resource Directory' in `res` called `raw` with resource type `raw`, then inside `raw` (you might have to refresh the menu to see it) create a file called `caches_found.json`. Copy the response from before into this file.
 ``` json
 {
-  "caches": {
-    "yrolad": {
-      "name": "Cache 1",
-      "difficulty": 3,
-      "found": 1456883400000
-    },
-    "mdifpq": {
-      "name": "Cache 2",
-      "difficulty": 3,
-      "found": 1456531200000
-    },
-    "cbdiyd": {
-      "name": "Cache 3",
-      "difficulty": 3,
-      "found": 1456531200000
-    }
+  "Cache 1": {
+    "name": "Cache 1",
+    "difficulty": 3,
+    "found": 1456883400000
+  },
+  "Cache 2": {
+    "name": "Cache 2",
+    "difficulty": 3,
+    "found": 1456531200000
+  },
+  "Cache 3": {
+    "name": "Cache 3",
+    "difficulty": 3,
+    "found": 1456531200000
   }
 }
 ```
@@ -195,24 +173,22 @@ try {
 The `try` and `catch` are keyword we use if something might go wrong. We try to run the code in the first block and if something goes wrong trying to read the file the system will 'throw' and `IOException` object that would normally crash the app. If this happens within the first block we instead 'catch' the exception, give up on what we were trying to do and run some other code instead. In this example we print out the exceptions 'stack trace' which is a log of what went wrong to cause the exception to get thrown.
 
 ## Serializing JSON Objects
-Now we have a String of our JSON file, which is really hard to use as is. What were going to do now is convert this String to a more useable object, a Map of cache Ids to `Cache` objects, which will have `name`, `difficulty` and `found` as variables. What were going to use to do this is a tools called Gson, which will take our String and automatically convert it to an object we define. Lets start by creating our 'model' object that mirrors how our JSON data is set up. Create a new Java class called `FoundCaches` that looks like we just described.
+Now we have a String of our JSON file, which is really hard to use as is. What were going to do now is convert this String to a more useable object, a `Map` of cache names to `FoundCache` objects, which will have `name`, `difficulty` and `found` as variables. What were going to use to do this is a tools called Gson, which will take our String and automatically convert it to an object we define. Lets start by creating our 'model' object that mirrors how our JSON data is set up. Create a new Java class called `FoundCache` that looks like we just described.
 ``` java
-public class FoundCaches {
-    public Map<String, Cache> caches;
-
-    public static class Cache {
-        public String name;
-        public int difficulty;
-        public long found;
-    }
+public class FoundCache {
+    public String name;
+    public int difficulty;
+    public long found;
 }
 ```
-When using Gson the variable names we use here have to match the keys in the JSON file. Notice that Gson will create a Map using our Ids as the keys and our Cache objects as the values.
+When using Gson the variable names we use here have to match the keys in the JSON file.
 
 To use Gson we have to include it with `gradle`, add `compile 'com.google.code.gson:gson:2.3'` to the gradle file the same place we did before. Now if we go back to `DataUtilities` we can add
 ``` java
 Gson gson = new Gson();
-FoundCaches caches =  gson.fromJson(json, FoundCaches.class);
+// This responseType is what we will convert our json into, a 'Map<String, FoundCache>'
+Type responseType  = new TypeToken<Map<String, FoundCache>>() {}.getType();
+Map<String, FoundCache> foundCacheMap = gson.fromJson(json, responseType);
 ```
 underneath `String json = new String(buffer, "UTF-8");`, notice the method `fromJson` takes the class `FoundCaches` as a parameter. We now have a method that reads our JSON file and gets an object with the information we need to fill our `RecyclerView`.
 
@@ -222,24 +198,24 @@ Now that we have a way to get this data let's send it to our `FoundCachesFragmen
 What we do instead is define a 'callback', an object that defines a function to run when something happens like our OnClickListener running code when our `Button` got clicked. To create a callback we define an `interface` with one method `onResults(FoundCaches results)` which we will call when we finish serializing the JSON file.
 ``` java
 public interface FoundCachesReceiver {
-    void onResults(FoundCaches results);
+    void onResults(Map<String, FoundCache> results);
 }
 ```
-Add this to DataUtilities above the method `getFoundCaches`. When we call `getFoundCaches` we want to get a callback to send back the data with so add `FoundCachesReceiver receiver` as a parameter to the `getFoundCaches` method and add `receiver.onResults(caches);` after serializing our JSON file. Now our method takes in a callback, and fires its function when it has the data ready.
+Add this to DataUtilities above the method `getFoundCaches`. When we call `getFoundCaches` we want to get a callback to send back the data with so add `FoundCachesReceiver receiver` as a parameter to the `getFoundCaches` method and add `receiver.onResults(foundCacheMap);` after serializing our JSON file. Now our method takes in a callback, and fires its function when it has the data ready.
 
 ## Using DataUtilities
 In our `FoundCachesFragment` we can now get the list of found caches easily by calling
 ``` java
 DataUtilities.getFoundCaches(getContext(), new DataUtilities.FoundCachesReceiver() {
     @Override
-    public void onResults(FoundCaches results) {
+    public void onResults(Map<String, FoundCache> results) {
         // Do something with the results
     }
 });
 ```
 
 ## Display Cache names in RecyclerView
-Since we want this list to get displayed in the `RecyclerView` let's modify it a bit to take in `FoundCaches.Cache` values instead of `String`s. First change the `CacheAdapter` constructor to take in a `List` of `FoundCaches.Cache`s where `.Cache` refers to the nested class in `FoundCaches`, also change the type of the `items` variable. The last thing we have to do to in the `Adapter` is change `String item = items.get(pos);` to `FoundCaches.Cache item = items.get(pos).name;` in `onBindViewHolder`. Next in `CacheHolder` modify `bindCache` to take in a `FoundCaches.Cache cache` and display `cache.name`. The last thing we have to do is supply the right data. Let's replace
+Since we want this list to get displayed in the `RecyclerView` let's modify it a bit to take in `FoundCache` values instead of `String`s. First change the `CacheAdapter` constructor to take in a `List` of `FoundCache`s, also change the type of the `items` variable. The last thing we have to do to in the `Adapter` is change `String item = items.get(pos);` to `FoundCache item = items.get(pos).name;` in `onBindViewHolder`. Next in `CacheHolder` modify `bindCache` to take in a `FoundCache cache` and display `cache.name`. The last thing we have to do is supply the right data. Let's replace
 ``` java
 ArrayList<String> itemNames = new ArrayList<>();
 itemNames.add("Cache 1");
@@ -251,7 +227,7 @@ cachesRecycerView.setAdapter(cachesRecycerViewAdapter);
 with the DataUtilities call from before, and where we have `// Do something with the results` we can create an adapter from our fetched data
 ``` java
 // This takes our Map and makes a List of the values
-List<FoundCaches.Cache> caches = new ArrayList(results.caches.values());
+List<FoundCache> caches = new ArrayList(results.values());
 cachesRecycerViewAdapter = new CacheAdapter(caches);
 cachesRecycerView.setAdapter(cachesRecycerViewAdapter);
 ```
