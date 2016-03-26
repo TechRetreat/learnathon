@@ -7,6 +7,9 @@
 - Extend PreferenceFragmentCompat http://developer.android.com/reference/android/support/v7/preference/PreferenceFragmentCompat.html
 - SharedPreferences http://developer.android.com/reference/android/content/SharedPreferences.html
 
+## Using Map
+- Map settings https://developers.google.com/maps/documentation/android-api/controls
+
 ## Preference screen to do actions
 - Dump Cache
 - Clear Cache

@@ -330,21 +330,3 @@ We can now call
 new AlertDialog.Builder(getContext()).setView(dialogView).create().show();
 ```
 to create and show our `Dialog`, setting it's view to the one we just made.
-
-
-
-
-## Using Map
-- Map settings https://developers.google.com/maps/documentation/android-api/controls
-
-## Create viewPager
-- ViewPager
-
-## Tab layout
-- Connect to viewPager
-
-## Getting data from actual API
-- Making the request
-
-## Sending back to API from found
-- Make the request, handle errors

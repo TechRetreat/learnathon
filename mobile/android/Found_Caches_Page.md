@@ -234,7 +234,7 @@ cachesRecycerView.setAdapter(cachesRecycerViewAdapter);
 Try running the app and make sure it works, for now it should display the names of the caches (`Cache 1`, `Cache 2`, `Cache 3`)
 
 ## Cache info Layout
-Let's continue by showing the rest of the data in our list. To do this we'll first need something to display the data in, create a layout called `list_item_found_cache` or something similar under res/layouts (Note that you can't use capital letters or spaces in resource names). Because creating layouts can be time consuming I've created this one for you to copy into your new file.
+Let's continue by showing the rest of the data in our list. To do this we'll first need something to display the data in, create a layout called `found_cache_list_item` or something similar under res/layouts (Note that you can't use capital letters or spaces in resource names). Because creating layouts can be time consuming I've created this one for you to copy into your new file.
 ``` xml
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -287,7 +287,7 @@ Theres a few things here you haven't seen before, lets list them quick.
 To use `CardView` we need to add `compile 'com.android.support:cardview-v7:23.2.0'` to our gradle file to fetch the code we need the same way we did `gson` and the design library.
 
 ## Using the Cache info Layout
-Now that we have our layout let's put it to use, go back to our `CacheAdapter` and where we have `TextView view = new TextView(getContext());` we will inflate our new layout instead `View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_found_cache, parent, false);`. 
+Now that we have our layout let's put it to use, go back to our `CacheAdapter` and where we have `TextView view = new TextView(getContext());` we will inflate our new layout instead `View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.found_cache_list_item, parent, false);`. 
 
 We should also modify our `CacheHolder` to give it two extra variables `difficultyTextView;` and `findTimeTextView;` both of which are `TextView`s, these will come from the layout we just defined. In the constructor change `TextView itemView` to `View itemView` and set `nameTextView = (TextView) itemView.findViewById(R.id.cache_name);`, doing the same for the other two variables using `R.id.cache_difficulty` and `R.id.cache_find_time` as the element Ids. Now we have all the data we need to display, in `bindCache` add 
 ``` java
