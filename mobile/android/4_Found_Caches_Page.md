@@ -307,7 +307,7 @@ Theres a few things here you haven't seen before, lets list them quick.
 - `layout_margin`: similar to padding, but pushes other elements away from it rather than making itself bigger to fit its contents with space inside. Defined in `dp` or Density-independent Pixels which are a size unit that scales with pixel density on the screen (`dp` stays the same physical size).
 - `textSize`: fairly self explanatory, this sets the text size in `sp` which is similar to `dp` but takes users font size into consideration.
 - `layout_marginEnd` and `layout_toEndOf`: not all phones are layed out right to left, if it isn't then `End` refers to the end of the layout which would be right for us. `layout_marginStart` or `layout_toStartOf` would be the opposite.
-- 
+
 To use `CardView` we need to add `compile 'com.android.support:cardview-v7:23.2.0'` to our gradle file to fetch the code we need the same way we did `gson` and the design library.
 
 ## Using the Cache info Layout
