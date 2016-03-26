@@ -190,12 +190,12 @@ Gson gson = new Gson();
 Type responseType  = new TypeToken<Map<String, FoundCache>>() {}.getType();
 Map<String, FoundCache> foundCacheMap = gson.fromJson(json, responseType);
 ```
-underneath `String json = new String(buffer, "UTF-8");`, notice the method `fromJson` takes the class `FoundCaches` as a parameter. We now have a method that reads our JSON file and gets an object with the information we need to fill our `RecyclerView`.
+underneath `String json = new String(buffer, "UTF-8");`, notice the method `fromJson` takes `responseType` as a parameter which tells gson what type of object it is creating. We now have a method that reads our JSON file and gets an object with the information we need to fill our `RecyclerView`.
 
 ## Callbacks
 Now that we have a way to get this data let's send it to our `FoundCachesFragment`. The easiest way to do this would be to return the object from the function, but this causes problems later on when we get the information from online. When we call a method our phone waits till it finishes before moving on to do anything else, this causes issues if it takes a while for the method to finish as it would freeze your phone until it was done. We can get around this by running our code on a seperate 'thread' which we'll explain later, but that means we cant return from this method.
 
-What we do instead is define a 'callback', an object that defines a function to run when something happens like our OnClickListener running code when our `Button` got clicked. To create a callback we define an `interface` with one method `onResults(FoundCaches results)` which we will call when we finish serializing the JSON file.
+What we do instead is define a 'callback', an object that defines a function to run when something happens like our OnClickListener running code when our `Button` got clicked. To create a callback we define an `interface` with one method `onResults(Map<String, FoundCache> results)` which we will call when we finish serializing the JSON file.
 ``` java
 public interface FoundCachesReceiver {
     void onResults(Map<String, FoundCache> results);
