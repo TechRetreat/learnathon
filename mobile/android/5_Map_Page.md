@@ -92,57 +92,51 @@ In Android M the complexity of permissions was increased quite a bit, since we w
 We now have our map and access to the users location, lets get some cache data and display it on the map. Add another file called `caches_map.json` in res/raw with our `caches_found.json` file, copy the following inside.
 ``` json
 {
-  "caches": {
-    "yrolad": {
-      "name": "Cache 1",
-      "description": "Hey a cache description 1",
-      "difficulty": 3,
-      "location": {
-        "latitude": 43.38224,
-        "longitude": -80.32682
-      }
-    },
-    "mdifpq": {
-      "name": "Cache 2",
-      "description": "Another one",
-      "difficulty": 3,
-      "location": {
-        "latitude": 43.38224,
-        "longitude": -80.32582
-      }
-    },
-    "cbdiyd": {
-      "name": "Cache 3",
-      "description": "Buy your momma a house",
-      "difficulty": 3,
-      "location": {
-        "latitude": 43.38454,
-        "longitude": -80.32382
-      }
-    },
-    "qudotn": {
-      "name": "Cache 4",
-      "description": "Buy your whole family houses",
-      "difficulty": 3,
-      "location": {
-        "latitude": 43.38024,
-        "longitude": -80.32382
-      }
+  "Cache 1": {
+    "name": "Cache 1",
+    "description": "Hey a cache description 1",
+    "difficulty": 3,
+    "location": {
+      "latitude": 43.38224,
+      "longitude": -80.32682
+    }
+  },
+  "Cache 2": {
+    "name": "Cache 2",
+    "description": "Another one",
+    "difficulty": 3,
+    "location": {
+      "latitude": 43.38224,
+      "longitude": -80.32582
+    }
+  },
+  "Cache 3": {
+    "name": "Cache 3",
+    "description": "Buy your momma a house",
+    "difficulty": 3,
+    "location": {
+      "latitude": 43.38454,
+      "longitude": -80.32382
+    }
+  },
+  "Cache 4": {
+    "name": "Cache 4",
+    "description": "Buy your whole family houses",
+    "difficulty": 3,
+    "location": {
+      "latitude": 43.38024,
+      "longitude": -80.32382
     }
   }
 }
 ```
-This is our cache data, it tells us where the caches are located as well as giving the name, description, and difficulty. The structure is the same as in `caches_found.json`. Next up lets creates a java class called `MapCaches` that we will read our json file into (same use as `FoundCaches`). It has the same structure as `FoundCaches` but has some extra information.
+This is our cache data, it tells us where the caches are located as well as giving the name, description, and difficulty. The structure is the same as in `caches_found.json`. Next up lets creates a java class called `MapCache` that we will read our json file into (same use as `FoundCache`). It has the same structure as `FoundCache` but has some extra information.
 ``` java
-public class MapCaches {
-    public Map<String, Cache> caches;
-
-    public static class Cache {
-        public String name;
-        public String description;
-        public int difficulty;
-        public Location location;
-    }
+public class MapCache {
+    public String name;
+    public String description;
+    public int difficulty;
+    public Location location;
 
     public static class Location {
         public double latitude;
@@ -150,15 +144,14 @@ public class MapCaches {
     }
 }
 ```
-In `DataUtils` duplicate `FoundCachesReceiver` and `getFoundCaches` and replace the `FoundCache` stuff with `MapCache`, make sure to read `R.raw.caches_map` instead of `caches_found` and serialize our json into a `MapCaches` object `gson.fromJson(json, MapCaches.class)`. We are now ready to use this data in our `MapFragment`.
+In `DataUtils` duplicate `FoundCachesReceiver` and `getFoundCaches` and replace the `FoundCache` stuff with `MapCache`, make sure to read `R.raw.caches_map` instead of `caches_found` and serialize our json into a `Map` of `MapCache` objects `new TypeToken<Map<String, MapCache>>() {}.getType()`. We are now ready to use this data in our `MapFragment`.
 
 ## Displaying Caches on the Map
-Back in `MapFragment`, after calling `zoomToUserLocation` add a call to `DataUtilities.getMapCaches` that look similar to the one in `FoundCachesFragment`. At the top of `MapFragment` define a new variable `private Map<String, MapCaches.Cache> mapCaches;`, inside the callback set `mapCaches` to `results.caches` and call a method `makeMarkers()` that we'll write next.
+Back in `MapFragment`, after calling `zoomToUserLocation` add a call to `DataUtilities.getMapCaches` that look similar to the one in `FoundCachesFragment`. At the top of `MapFragment` define a new variable `private Map<String, MapCaches.Cache> mapCaches;`, inside the callback set `mapCaches` to `results` and call a method `makeMarkers()` that we'll write next.
 
-Now create the `makeMarkers` method that will return `void` and take in no parameters. In this method we will draw the caches on our map. The body of this method should iterate over each `Map.Entry` in `mapCaches.entrySet()` and create a marker for each cache, an `Entry` is one Key/Value pair (`<String, MapCaches.Cache>` is the type of the Key and Value).
+Now create the `makeMarkers` method that will return `void` and take in no parameters. In this method we will draw the caches on our map. The body of this method should iterate over each `Map.Entry` in `mapCaches.entrySet()` and create a marker for each cache, an `Entry` is one Key/Value pair (`<String, MapCache>` is the type of the Key and Value).
 ``` java
-for (Map.Entry<String, MapCaches.Cache> entry : mapCaches.entrySet()) {
-    MapCaches.Cache cache = entry.getValue();
+for (MapCache cache : mapCaches.values()) {
     // Draw cache marker on map
 }
 ```
@@ -172,12 +165,12 @@ googleMap.addMarker(new MarkerOptions()
 This will add out marker to the map, try it out and make sure the markers got added around waterloo.
 
 ## Marking Found Caches
-Some of these caches have already been found, let's mark these ones by changing the icon color to blue. In order to do this we first have to get the `FoundCaches` data. Create a variable `foundCaches` at the top that's a `Map` of `FoundCaches.Cache`s, before your call to `DataUtilities.getMapCaches` add one to `DataUtilities.getFoundCaches`. In the callback set `foundCaches = results.caches;`, this will let us use `foundCache`s in our `makeMarkers` method.
+Some of these caches have already been found, let's mark these ones by changing the icon color to blue. In order to do this we first have to get the `FoundCaches` data. Create a variable `foundCaches` at the top that's a `Map` of `FoundCache`s, before your call to `DataUtilities.getMapCaches` add one to `DataUtilities.getFoundCaches`. In the callback set `foundCaches = results;`, this will let us use `foundCaches' in our `makeMarkers` method.
 
 Replace `float iconColor = BitmapDescriptorFactory.HUE_RED;` with
 ``` java
 // Check if this cache id is in the Map of found caches. If so it has already been found
-boolean hasBeenFound = foundCaches.containsKey(entry.getKey());
+boolean hasBeenFound = foundCaches.containsKey(cache.name);
 
 // This pattern someBoolean? value1 : value2 is called a ternary
 // It is equivalent to if (someBoolean) { value1 } else { value2 }
@@ -187,16 +180,159 @@ float iconColor = hasBeenFound? BitmapDescriptorFactory.HUE_AZURE : BitmapDescri
 The ternary is choosing between two values `BitmapDescriptorFactory.HUE_AZURE` and `BitmapDescriptorFactory.HUE_RED` based on whether hasBeenFound is true, then we set the color to red if unfound or azure if found.
 
 ## Cache Click Popup
-To make things a bit more interesting and useful we're going to change the popup that appears when we click a marker on the map to display some cache information.
+To make things a bit more interesting and useful we're going to change the popup that appears when we click a marker on the map to display some cache information, we'll start by making a layout that we want to display when we tap on a marker. Create a new layout called `marker_click_popup` that we will inflate when a marker gets clicked. Feel free to try creating your own layout to display whatever cache information you want, the one I wrote displays the name and difficulty. You don't need to show everything as when we click this popup it will open something with the rest of the cache details.
+``` xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp" >
 
-- Click listener
-- Info window
-- Dealing with maps (found)
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        tools:text="Cache Name" />
 
-## Marker popup dialog
-- Alert dialogs
-- View inflation
-- View dismiss
+    <TextView
+        android:id="@+id/difficulty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/name"
+        android:layout_marginRight="20dp"
+        android:layout_marginEnd="20dp"
+        android:textSize="12sp"
+        tools:text="Difficulty 3 of 5" />
+
+    <TextView
+        android:id="@+id/see_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/name"
+        android:layout_toRightOf="@id/difficulty"
+        android:layout_toEndOf="@id/difficulty"
+        android:textSize="12sp"
+        android:text="@string/marker_info_window_see_more" />
+</RelativeLayout>
+```
+I also defined a string in values/strings with name `marker_info_window_see_more` and value `See Details…`
+
+Now that we have our layout create a new methodin `MapFragment` called `private void setMarkerPopupAdapter()` and call it after `makeMarkers` in your `DataUtilities.getMapCaches` callback. Inside this method call `googleMap.setInfoWindowAdapter` and pass it a `GoogleMap.InfoWindowAdapter`.
+``` java
+googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+    @Override
+    public View getInfoWindow(Marker marker) {
+        return null;
+    }
+
+    // This method is called when a marker is clicked, return the popup to display
+    @Override
+    public View getInfoContents(Marker marker) {
+        return null;
+    }
+});
+```
+Inside getInfoContents we will inflate our layout and get references to the `TextView`s inside that we want to modify.
+``` java
+View infoView = getLayoutInflater(null).inflate(R.layout.marker_click_popup, null);
+TextView name = (TextView) infoView.findViewById(R.id.name);
+TextView difficulty = (TextView) infoView.findViewById(R.id.difficulty);
+```
+Now we can get the cache name from our marker and use it to get the cache info, and then set our layout's text properly.
+``` java
+final String cacheName = marker.getTitle();
+MapCache cache = mapCaches.get(cacheName);
+name.setText(cache.name);
+difficulty.setText(FormattingUtilities.getDifficultyString(cache.difficulty, getContext()));
+```
+Lastly we need to `return infoView;` so that it is displayed. If we run our app now and click a marker it should show the layout we just created.
+
+## See More Dialog
+Next we're going to show a `Dialog` when the user clicks on our marker popup. In order to get when a user clicks the popup we need to call `setOnInfoWindowClickListener` on our `googleMap`, do this after our call to `googleMap.setInfoWindowAdapter`.
+```java
+googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+        String cacheName = marker.getTitle();
+        // We will write this function next to open the Dialog
+        openSeeMoreDialog(cacheName);
+    }
+});
+```
+Now create the method `openSeeMoreDialog` that takes in a `String cacheName` and returns `void`. In this method we will open a `Dialog` which is a large popup in the middle of the screen. Again let's start by creating a layout for the dialog called `see_more_dialog`, feel free to make your own layout or customize this one.
+``` xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:padding="12dp" >
+
+    <TextView
+        android:id="@+id/cache_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:padding="16dp"
+        tools:text="Example Cache Name" />
+
+    <TextView
+        android:id="@+id/cache_difficulty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:layout_marginBottom="4dp"
+        tools:text="Difficulty 3 of 5" />
+
+    <TextView
+        android:id="@+id/cache_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        tools:text="Example Cache Description is really long and stuff. You smart. You loyal." />
+
+    <Button
+        android:id="@+id/cache_found"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:paddingTop="16dp"
+        android:text="@string/found_it_button_text"
+        tools:text="Cache Found" />
+</LinearLayout>
+```
+You'll also need to add a string with name `found_it_button_text` and value `found_it_button_text`.
+
+Back in `openViewDetailsDialog` inflate this new layout `R.layout.see_more_dialog` and save in `View dialogView`. Get references to `R.id.cache_name`, `R.id.cache_difficulty`, `R.id.cache_description`, and `R.id.cache_found` and save them in `TextView`s. Now get the `MapCache` by `cacheName` and set `dialogView`s name and difficulty text the same as before, also set the description `TextView` to `cache.description`.
+
+Next let's check if we have already found this cache by checking `if (foundCaches.containsKey(cacheName))`. If we have we can set this `Button` to say when it was found, otherwise we will set this cache to found when the `Button` is clicked (this part we'll write later).
+``` java
+if (foundCaches.containsKey(cacheName)) {
+    FoundCache foundCache = foundCaches.get(cacheName);
+    found.setClickable(false);
+    found.setText(FormattingUtilities.getTimeAgoString(foundCache.found, getContext()));
+} else {
+    found.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            // Set this cache to found
+        }
+    });
+}
+```
+We can now call
+``` java
+new AlertDialog.Builder(getContext()).setView(dialogView).create().show();
+```
+to create and show our `Dialog`, setting it's view to the one we just made.
+
+
+
 
 ## Using Map
 - Map settings https://developers.google.com/maps/documentation/android-api/controls
@@ -206,10 +342,6 @@ To make things a bit more interesting and useful we're going to change the popup
 
 ## Tab layout
 - Connect to viewPager
-
-## Cache NFC?
-- Read NFC of cache and check against server?
-- Client/server validation
 
 ## Getting data from actual API
 - Making the request
