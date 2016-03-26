@@ -18,7 +18,7 @@ To use `RecyclerView` you need to grab some code that doesnt come packaged with 
 
 **Adapter:** When a `RecyclerView` is displayed it asks its `Adapter` to create `View`s from the data it has until it fills the screen completely. As the user scrolls the `Adapter` 'recycles' the `View`s that go off screen to make new ones by changing the data in the `View`'s `ViewHolder`, and gives the `View` back to the `RecyclerView` to show.
 
-**ViewHolder:** The `ViewHolder`s are attached to each `View` and when given an entry from the data list 'bind' the data to their `View`, meaning it sets the information in the `View` based on the data it recieved.
+**ViewHolder:** The `ViewHolder`s are attached to each `View` and when given an entry from the data list 'bind' the data to their `View`, meaning it sets the information in the `View` based on the data it received.
 
 **Data List:** The `RecyclerView` needs a data entry for every element is displays in its list, this data will be used to show the proper `Views` through the `ViewHolder`s.
 
@@ -179,7 +179,7 @@ Now that we know a bit about JSON lets start using it, create a new 'Android Res
 ```
 
 ## Reading from Resources
-Since we dont want to make our `FoundCachesFragment` too large we'll write our code to load this JSON file ielsewhere create a new Java Class in your java folder with `MainActivity` and `FoundCachesFragment` called `DataUtilities`. This is where we will write all our code related to reading, and later fetching and sending data. Lets write a method called `getResponseTest` inside this class that takes in a `Context` like so `public static void getResponseTest(Context context) {`. This method is `static` meaning that it can be called without an instance of the class like so `DataUtilities.getResponseText(context)`. When reading from raw resources we use something called an `InputStream` to read the file, The next block of code seems scary and I wont go into how it works, but it reads the json file `caches_found` we wrote earlier into a `String` called `json`.
+Since we dont want to make our `FoundCachesFragment` too large we'll write our code to load this JSON file ielsewhere create a new Java Class in your java folder with `MainActivity` and `FoundCachesFragment` called `DataUtilities`. This is where we will write all our code related to reading, and later fetching and sending data. Lets write a method called `getFoundCaches` inside this class that takes in a `Context` like so `public static void getFoundCaches(Context context) {`. This method is `static` meaning that it can be called without an instance of the class like so `DataUtilities.getResponseText(context)`. When reading from raw resources we use something called an `InputStream` to read the file, The next block of code seems scary and I wont go into how it works, but it reads the json file `caches_found` we wrote earlier into a `String` called `json`.
 ``` java
 try {
     InputStream is = context.getResources().openRawResource(R.raw.caches_found);
@@ -221,16 +221,16 @@ Now that we have a way to get this data let's send it to our `FoundCachesFragmen
 
 What we do instead is define a 'callback', an object that defines a function to run when something happens like our OnClickListener running code when our `Button` got clicked. To create a callback we define an `interface` with one method `onResults(FoundCaches results)` which we will call when we finish serializing the JSON file.
 ``` java
-public interface Receiver {
+public interface FoundCachesReceiver {
     void onResults(FoundCaches results);
 }
 ```
-Add this to DataUtilities above the method `getResponseTest`. When we call `getResponseTest` we want to get a callback to send back the data with so add `Receiver receiver` as a parameter to the `getResponseTest` method and add `receiver.onResults(caches);` after serializing our JSON file. Now our method takes in a callback, and fires its function when it has the data ready.
+Add this to DataUtilities above the method `getFoundCaches`. When we call `getFoundCaches` we want to get a callback to send back the data with so add `FoundCachesReceiver receiver` as a parameter to the `getFoundCaches` method and add `receiver.onResults(caches);` after serializing our JSON file. Now our method takes in a callback, and fires its function when it has the data ready.
 
 ## Using DataUtilities
 In our `FoundCachesFragment` we can now get the list of found caches easily by calling
 ``` java
-DataUtilities.getResponseTest(getContext(), new DataUtilities.Receiver() {
+DataUtilities.getFoundCaches(getContext(), new DataUtilities.FoundCachesReceiver() {
     @Override
     public void onResults(FoundCaches results) {
         // Do something with the results
