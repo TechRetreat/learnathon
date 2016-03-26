@@ -81,44 +81,7 @@ Notice that Android Studio is complaining about `getLastKnownLocation`, this is 
 ```
 These give us access to a bunch of the systems properties (If the user allows).
 
-Now that we've requested the permissions we also have to check if they were accepted by the user before using their location, the code for this is a bit ugly. First we need to define two constants that we will use at the top of `MapFragment`
-``` java
-// This code will be used so we can tell when the permissions have been accepted
-public static final int LOCATION_PERMISSIONS_REQUEST_CODE = 1;
-// The list of permissions we want to request to use the map
-private static final String[] PERMISSIONS = new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
-```
-And then our `zoomToUserLocation` method will look like this
-``` java
-LocationManager locationManager = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
-
-// These check whether or not our app has either of these permissions.
-// Being able to run an app without allowing all the permissions is specific to the newest version of Android called M.
-boolean fineLocationRestricted = Build.VERSION.SDK_INT == Build.VERSION_CODES.M && getContext().checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED;
-boolean coarseLocationRestricted = Build.VERSION.SDK_INT == Build.VERSION_CODES.M && getContext().checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED;
-
-// If we have neither of these permissions we need to ask the user for them again by calling requestPermissions.
-if (fineLocationRestricted && coarseLocationRestricted) {
-    getActivity().requestPermissions(PERMISSIONS, LOCATION_PERMISSIONS_REQUEST_CODE);
-} else {
-    // If we have at least one of the required permissions we can get our location and animate to it
-    Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(new Criteria(), false));
-    googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 13));
-}
-```
-What this is doing is checking if we have the correct permissions to get the users location and zooming to it if we do, else requesting the permission from the user. If we test our code now it ask us for location permission when we open up the app but it doesnt zoom to it right away if we accept, to fix this we need to have our `MainActivity` listen for when a permission is granted. In `MainActivity` add the method
-``` java
-@Override
-public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
-    if (requestCode == MapFragment.LOCATION_PERMISSIONS_REQUEST_CODE && grantResults.length != 0) {
-        if (grantResults[0] == PackageManager.PERMISSION_GRANTED || grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-            ((MapFragment) fragment).updateLocationPermissions();
-        }
-    }
-}
-```
-When permissions are updated with the code `LOCATION_PERMISSIONS_REQUEST_CODE`, if any of the permissions were granted we notify our `MapFragment` to try zooming to the users location again.
-
+In Android M the complexity of permissions was increased quite a bit, since we want to avoid this for today open up your gradle file and change `targetSdkVersion` (in `defaultConfig`) to 22.
 
 ## Using Map
 - Map settings https://developers.google.com/maps/documentation/android-api/controls
