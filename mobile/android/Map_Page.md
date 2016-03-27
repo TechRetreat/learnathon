@@ -40,7 +40,7 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
     // onCreate is called when the Fragment is created
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+        super.onCreate(savedInstanceState);
         // This requests access to the GoogleMap, we will talk about what Async means later
         getMapAsync(this);
     }
