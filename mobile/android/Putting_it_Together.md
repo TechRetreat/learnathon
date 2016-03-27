@@ -68,6 +68,12 @@ if (position == FOUND_TAB) {
     return new MapFragment();
 }
 ```
+And define
+``` java
+public static final int FOUND_TAB = 0;
+public static final int MAP_TAB = 1;
+```
+at the top of our `GeocachingPagerAdapter` class
 In `getPageTitle` we want to return "Found" for the first and "Map" for the second. Define two new entries in `strings.xml` and return the correct one from this method using `getString(R.string.your_string);`.
 
 Up in `onCreate` after `viewPager = (ViewPager) findViewById(R.id.view_pager);` add the following
