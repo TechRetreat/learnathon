@@ -53,10 +53,10 @@ class GeocachingPagerAdapter extends FragmentStatePagerAdapter {
         return null;
     }
 
-    // The number of Fragments in the ViewPager
+    // The number of Fragments in the ViewPager (Found and Map)
     @Override
     public int getCount() {
-        return 0;
+        return 2;
     }
 }
 ```
@@ -64,8 +64,10 @@ In `getItem` we want to return a `FoundCachesFragment` if we're viewing the firs
 ``` java
 if (position == FOUND_TAB) {
     return new FoundCachesFragment();
-} else {
+} else if (position == MAP_TAB) {
     return new MapFragment();
+} else {
+    return null;
 }
 ```
 And define
