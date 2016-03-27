@@ -12,7 +12,7 @@ Gif of demo
 - [Starting the App](Geocaching_App.md)
 - [Found Caches Page](Found_Caches_Page.md)
 - [Map Page](Map_Page.md)
-- [Putting it Together](Putting_it_Together.md)
+- [Putting it Together](Putting_It_Together.md)
 
 ### Extending the app
 - [Preferences Page](Preferences_Page.md)
