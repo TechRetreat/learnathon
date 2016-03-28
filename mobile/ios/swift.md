@@ -272,4 +272,11 @@ class Astronaut {
 var astro1 = Astronaut(name: "Chris Hadfeild")
 ```
 
+## Inheritance
+We can also [inherit]() all of the properties of another class. For example, we will create a "vehicle" class, and we can make a "Mars Rover" class which will inherit from the "Vehicle" class because a Mars Rover has all of the attributes of a vehicle.
+
+
+## Protocols
+We can list a set of properties and functions that we want a method to implement, this is called a protocol. Then an object can declare that it implements a protocol. This is usually done in an extension. For example, we can have the flying protocol.
+
 # Fun Notes
