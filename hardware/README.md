@@ -2,6 +2,8 @@
 
 ## What you'll make
   // Short description of what the project is
+  
+  <a href="https://www.tinkercad.com/things/eo8vaX2QzCy-tech-retreat-autonomous-car">Check out this model<a/> of the finished project!
 
 ## What you'll need
   // Materials list
