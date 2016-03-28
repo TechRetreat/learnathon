@@ -1,6 +1,8 @@
 # Models
 [Home](Scavenger.md)
+
 [Previous](menu.md)
+
 - Since we're building a geocaching app, we need to be able to represent a cache, to do this make a new file called "Cache.swift"
   - We want our `Cache` object to have the following properties:
     - `name` (a `String`)

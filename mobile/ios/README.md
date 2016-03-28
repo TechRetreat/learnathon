@@ -16,7 +16,7 @@ Learn the fundamentals of programming, the Swift programming language adn build 
 ###I. [Swift](swift.md)
 
 ###II. App Building
-  - [Xcode tutorial](Xcde_Tips.md)
+  - [Xcode tutorial](Xcode_Tips.md)
   - [Git tutorial](git_tutorial.md)
   - [Scavenger](Scavenger.md)
 
