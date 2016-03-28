@@ -1,5 +1,5 @@
 ### Main Menu
-[Home](scavenger.md)
+[Home](Scavenger.md)
 We're well on our way to making our geocaching app! The first thing that we're going to do is make the screen below:
 **INSERT PIC OF MENU HERE**
 
