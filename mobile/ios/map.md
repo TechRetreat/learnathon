@@ -1,5 +1,5 @@
 # Map
-[Home](scavenger.md)
+[Home](Scavenger.md)
 [Previous](models.md)
 - Next we want to work on the map view
   - Let's create another "CocoaTouchClass" file, subclassing "UIViewController", and let's call it MapViewController
