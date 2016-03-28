@@ -139,10 +139,6 @@ Before we start coding, let's see what's going on here. What we have is a [view]
   - **Data Source methods**
     - Make another extension to `MenuViewController`, this time declaring that you implement `UITableViewDataSource`
     ```swift
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-      return 1 // we will only have 1 section in this table.
-    }
-    
     // Since we only have one section, we can just return how many rows we want
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int { 
       return 1 // TODO: return the number of menu items. Display 1 for now so we can see the table view
@@ -165,3 +161,274 @@ Before we start coding, let's see what's going on here. What we have is a [view]
   - Make an array with the names of the menu items as a property of the view controller, just like the `tableView`.
   - Now let's go back to the `func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int`
   - We want to return how many menu items we have, so we can return the length of the array we defined
+  
+  - Next we want to set the content of each cell to display the name of the menu item.
+  - Let's take a look at `func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath)`:
+    - This method gets called for every cell that is visible, with a different `indexPath`
+    - We can know which row it is being called for using the `indexPath.row` property. That will be set to 0 for the first row, 1 for the second and so on
+    - The cell has a textLabel property. You can set the text of this textLabel with `cell.textLabel?.text = "Your text here"`
+    - Use the `menus` array, and what you know about arrays to set the title of the cell to the name in `menus`
+    - Also, the cell has a property called the `accessoryType`. Try setting it to `UITableViewCellAccessoryType.DisclosureIndicator` and see what happens.
+  
+  - Next, let's make the cells do something when we tap them
+  - Let's go back to `func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)`.
+      - This returns the `indexPath` the same way as in the `cellForRowAtIndexPath` method.
+      - Right now, if you select a row it gets grayed out and stays grayed out. We can change that by animating a deselection when it's selected using: `tableView.deselectRowAtIndexPath(indexPath, animated: true)`
+      - What we want is to show a new [view controller]() whenver a cell is pressed. So, let's create those first. Create 4 new files called:
+        - `MapViewController`
+        - `FoundCachesListViewController`
+        - `ClosestCachesViewController`
+        - `SettingsViewController`
+      - We can create an array with an instance of all of them like this: `[MapViewController(), FoundCachesListViewController(), ... ]` (fill in the `...` with the other two controllers). This goes right under where we created the array with the menu strings.
+      - Then using the `indexPath` select the right view controller and put it into a constant. Let's call it `VC`.
+      - To display that view controller, we can display it like this: `self.navigationController?.pushViewController(VC, animated: true)`
+
+3. Creating the Models
+  - Since we're building a geocaching app, we need to be able to represent a cache, to do this make a new file called "Cache.swift"
+  - We want our `Cache` object to have the following properties:
+    - `name` (a `String`)
+    - `description` (a `String`)
+    - `difficulty` (an `Int`)
+    - `found` (a `Double?`, the question mark means that the property can be set to `nil`, or nothing. Which means we have not found it yet.)
+    - `location` (a `CLLocationCoordinate2D`)
+    - To get access to the `CLLocationCoordinate2D`, we need to add `import MapKit` at the top of our file
+  - Next, we need to define an initilizer. We can do so like this:
+  ```swift
+  init(name: String, description: String, difficulty: Int, location: CLLocationCoordinate2D) {
+    self.name = name
+    self.description = description
+    self.difficulty = difficulty
+    self.location = location
+  }
+  ```
+  - This allows us to create a `Cache` object
+  - We can also create methods which allow us to find a `Cache` object:
+    ```swift
+    func foundItem(atTime time: Double) {
+      self.found = time
+    }
+
+    func foundItem(atTime time: NSDate) {
+      self.found = time.timeIntervalSince1970
+    }
+
+    func loseItem() {
+      self.found = nil
+    }
+    ```
+    
+  - How we want to be able to find the distance between two caches.
+  - Create a function called `getDistanceFrom(origin: CLLocationCoordinate2D)` that returns an integer, the distance between `self` and `origin`
+  - It may look something like this:
+    ```swift
+    func getDistanceFrom(origin: CLLocationCoordinate2D) -> Int {
+      let originLocaiton = CLLocation(latitude: origin.latitude, longitude: origin.longitude)
+      let distance = originLocaiton.distanceFromLocation(CLLocation(latitude: self.location.latitude, longitude: self.location.longitude))
+      return Int(distance)
+    }
+    ```
+
+ ## The JSON
+  - We are going to read in the values of the caches from a JSON file. JSON is a popular format to store information, especially when asking for information from web servers. We are going to start off with our JSON locally.
+  - Download the two starter JSON files for the [Initial Cache List]() and the [Initial Caches Found]()
+  After downloading these files, we're going to drag them into our project. Once they're in your project, we need to create a class to turn our JSON files into classes that our program can understand. We're going to call this class a `DataModelManager`.
+  Looking at the JSON a bit first, we can see that the entire structure is shaped as a dictionary. The "caches.json" file has the generic format:
+  ```
+  {
+    String: {
+      String: String,
+        String: String,
+        String: Int,
+        String: {
+          String: Double,
+          String: Double
+        }
+    }
+  }
+  ```
+
+  - We can go through and parse it like this:
+    // TODO: explain this code
+    ```swift
+    func loadCaches() { // Returns a dictionary of String ids to the cache object
+      do {
+        if let path = NSBundle.mainBundle().pathForResource("caches", ofType: "json") {
+          if let jsonData = NSData(contentsOfFile: path) {
+            guard let jsonResult = try NSJSONSerialization.JSONObjectWithData(jsonData, options: .MutableContainers) as? CacheListJSONFormat else {
+              print("We gucci")
+                throw DataModelError.InvalidFormat
+            }
+            caches = [String:Cache]() // clear out old caches
+              for (id, cacheObject) in jsonResult {
+                let cache = Cache(json: cacheObject)
+                  caches[id] = cache
+              }
+          }
+        }
+      } catch {
+        print("Something went wrong...")
+      }
+    }
+
+  func updateFoundStates() {
+    do {
+      if let path = NSBundle.mainBundle().pathForResource("found", ofType: "json") {
+        if let jsonData = NSData(contentsOfFile: path) {
+          guard let jsonResult = try NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions.MutableContainers) as? [String:[String:Double]] else {
+            print("We gucci")
+              throw DataModelError.InvalidFormat
+          }
+
+          if let cacheEntry = jsonResult["found_times"] {
+            for (id, time) in cacheEntry {
+              if let cache = self.caches[id] {
+                cache.found = time
+              }
+            }
+          }
+        }
+      }
+    } catch {
+      print("Something went wrong...")
+    }
+  }
+
+    ```
+  
+## The annotation
+  - Create another "CocoaTouchClass" file, we're going to create a class to represent an Annotation object on the map
+  - For this annotation object, we want it to conform to the "MKAnnotation" protocol. So right beside `NSObject` add `, MKAnnotation` to show this
+  - Since we say we're implementing the `MKAnnotation` protocol, if you command-click on the protocol you can see that we need to have three properties:
+    ```swift
+    var coordinate: CLLocationCoordinate2D
+    var title: String?
+    var subtitle: String?
+    ```
+  - We're also going to add our own custom property, a `Cache` object that the Annotation object is presenting.
+  - When we set the cache object of this class, we also want to set the `coordinate`, `title` and `subtitle` to match the cache. Swift let's us do this with the following code:
+    ```swift
+    var cache: Cache {
+      didSet {
+        self.title = cache.name
+        self.subtitle = cache.description
+        self.coordinate = cache.location
+      }
+    }
+    ```
+  - Let's create the initializer. The initializer should take in a `Cache` object and set it to the local `cache` property. Since an `MKAnnotation` object always needs to have a location, we also need to set that up up-front. We can do this like this:
+    ```swift
+    init(cache: Cache) {
+      self.coordinate = cache.location
+      self.cache = cache
+    }
+    ```
+  - The last peice of this class is to return an actual view that we can display on our map. This will be a class function, very similar to the function where we returned a cell:
+   // TODO: Explain
+    ```swift
+    static func createViewAnnotationForMapView(mapView: MKMapView, annotation: MKAnnotation) -> MKAnnotationView {
+      var returnedAnnotationView: MKAnnotationView
+      if let annotView = mapView.dequeueReusableAnnotationViewWithIdentifier(Annotation.annotationReuseIdentifier) { 
+        returnedAnnotationView = annotView
+        returnedAnnotationView.annotation = annotation
+      } else {
+        returnedAnnotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: Annotation.annotationReuseIdentifier)
+        returnedAnnotationView.canShowCallout = true
+      }
+      return returnedAnnotationView
+    }
+
+    ```
+    
+4. The Map View
+  - Next we want to work on the map view
+  - Let's create another "CocoaTouchClass" file, subclassing "UIViewController", and let's call it MapViewController
+  - It will have 2 properties:
+    ```swift
+      private let mapView = MKMapView() // A map view, which comes built in
+      private var annotations: [Annotation] = [] // The array of annotiation we're going to display
+    ```
+  - Now let's make our `viewDidLoad` function:
+    - The first thing we always do in `viewDidLoad` is call `super.viewDidLoad()`
+    - Then we want to set the background colour to address the previous issue we mentioned
+    - Next we want to set up the map's size on the screen, we can do this by setting it equal to the view controller's `view`'s bounds. (Don't forget to also add it as a subview)
+    - The mapView, just like the table view, needs a [delegeate]() to manage it's annotations. The `MapViewController` will be the delegate for now.
+    - Next, we need a list of all of the caches. We can get this using our nifty `DataModelManager` that we created earlier. To access the shared insance just use `DataModelManager.sharedInstance`, then we can simply access the `caches` property of the shared instance to get all of the caches.
+    - Now we want to get a list of annotations based on this list of caches. In Swift we can do this using the `map` function, which is like a short cut for a for loop:
+      ```swift
+      annotations = caches.map { (id, cache) in
+        Annotation(cache: cache)
+      }
+      ```
+    - Next, we want to add all of our annotations to the map, which looks something like this. Easy peasy.
+      ```swift
+      self.mapView.addAnnotations(self.annotations)
+      ```
+    - Finally, let's make it go to the default location. Let's pretend we have a method called `goToDefaultLocation()` and call it here like this: `self.goToDefaultLocation()`
+  - Now let's implement this method.
+    - First, using the `self.annotations` list, find the average latitude and longitude of all our annotations, then create a new variable and make it an instance of `MKCoordinateRegion`. Now set the `center` of this object to the average location and set the `span` property to `0.02` in the `latitude` and `longitude` directions. (This is just the zoom of the region.)
+    - Give this a try. If you get stuck, remember, Google is your friend. This is how I did it:
+      ```swift
+      func goToDefaultLocation() {
+        let defaultScale = 0.02
+
+          var newRegion = MKCoordinateRegion()
+
+          // TODO, to consider
+          // Get all of the latitudes and longitudes
+          // This is the functional way... should the for-loop method be shown?
+          let latitudes = self.annotations.map { $0.coordinate.latitude }
+        let longitudes = self.annotations.map { $0.coordinate.longitude }
+
+        newRegion.center.latitude = average(latitudes)
+          newRegion.center.longitude = average(longitudes)
+
+          newRegion.span.latitudeDelta = defaultScale
+          newRegion.span.longitudeDelta = defaultScale
+
+          self.mapView.setRegion(newRegion, animated: true)
+      }
+      ```
+    - And to get the averages, I used an extension:
+      ```swift
+      // Break this off into an extension of [Double]
+      extension MapViewController {
+        func average(array: [Double]) -> Double { // TODO: Make as an extension of array
+          var sum = 0.0
+            for element in array {
+              sum += element
+            }
+          return sum / Double(array.count)
+        }
+
+        func fancyAverage(array: [Double]) -> Double {
+          return array.reduce(0, combine: +) / Double(array.count)
+        }
+      }
+      ``` 
+  - Sidenote: Since we are using a navigation view controller, the view will actually start underneath the navigation view which we can't access. To fix this, we can set it to opaque like this:
+    ```swift
+    override func viewWillAppear(animated: Bool) {
+      super.viewWillAppear(animated)
+
+        self.navigationController?.navigationBar.barStyle = .Black
+        self.navigationController?.navigationBar.translucent = true
+    }
+    ```
+  - The MapViewDelegate
+    - Now we need a method to return the view for a specific annotation. I did this like this:
+      ```swift
+      extension MapViewController: MKMapViewDelegate {
+        func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+          var returnedAnnotationView: MKAnnotationView? = nil
+
+            if (!annotation.isKindOfClass(MKUserLocation.self)) {
+              returnedAnnotationView = Annotation.createViewAnnotationForMapView(self.mapView, annotation: annotation)
+
+                returnedAnnotationView?.image = UIImage(named: "flag")
+                let sfIconView = UIImageView(image: UIImage(named: "SFIcon"))
+                returnedAnnotationView?.leftCalloutAccessoryView = sfIconView
+            }
+          return returnedAnnotationView
+        }
+      }
+      ```
