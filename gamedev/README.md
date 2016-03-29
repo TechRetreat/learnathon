@@ -8,13 +8,11 @@
 
 ## Setup
 
-### I'm just starting
-- setup on jsbin or codepen?
-- install local Processing?
-- Python + pip + pygame?
+We're going to use **Codepen** to make our game. Codepen is an online code editor and community for web development technologies, which Javascript is a part of.
 
-### I've got some experience
-- setup instructions for downloading libraries locally
+To be able to save and share your code, go to https://codepen.io/signup, scroll down to **Free Plan**, and sign up.
+
+Then, come back to this page, and go to http://codepen.io/pen?template=ONJQya&editors=0010 to set up a new project with p5.js and p5.play.js added already. Additionally, there is a small amount of CSS included for you that will simply center the game canvas on the page.
 
 ## Vocabulary
 - **sprite**: a graphic that we can move around the screen as a single entity
@@ -22,9 +20,9 @@
 - **vector**: same as in math or physics! An angle and a magnitude
 
 ## Instructions
-1. <a href="part1.md">Drawing on the screen</a>
-2. <a href="part2.md">Adding interaction with the arrow keys</a>
-3. <a href="part3.md">Creating gravity, jumping, and ground with vectors</a>
+1. <a href="part1.md">Drawing on the screen and Interactivity</a>
+2. <a href="part2.md">Gravity and collision detection</a>
+3. <a href="part3.md">Different kinds of blocks using Inheritance</a>
 4. <a href="part4.md">Adding points and lives</a>
 5. <a href="part5.md">Scrolling the camera</a>
 

@@ -2,6 +2,8 @@
 
 ## What you'll make
   // Short description of what the project is
+  
+  <a href="https://www.tinkercad.com/things/eo8vaX2QzCy-tech-retreat-autonomous-car">Check out this model<a/> of the finished project!
 
 ## What you'll need
   // Materials list
@@ -18,6 +20,9 @@
 
 ## Vocabulary
   // Glossary of technical terms used in the lesson plan
+  
+- **Foo**: This is foo
+- **Bar**: This is bar
 
 ## Instructions
   // Step-by-step instructions for building the core MVP
