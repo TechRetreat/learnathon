@@ -15,7 +15,7 @@ Gif of demo
 - [Putting it Together](Putting_it_Together.md)
 
 ### Extending the app
-- [Preferences Page](Preferences_Page.md)
+- [≈](Settings_Page.md)
 - [Caching Data](Caching_Data.md)
 - [Beautify the App](Beautify_App.md)
 
