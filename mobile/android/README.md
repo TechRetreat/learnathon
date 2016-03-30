@@ -18,6 +18,7 @@ Gif of demo
 - [Settings Page](Settings_Page.md)
 - [Caching Data](Caching_Data.md)
 - [Beautify the App](Beautify_App.md)
+- [Using Libraries](Using_Libraries.md)
 
 ### Reference Material
 - [Android Studio Tips](Android_Studio_Tips.md)
