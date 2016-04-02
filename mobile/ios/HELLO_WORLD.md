@@ -3,7 +3,7 @@
 1. App startup
   - Remember how our application will start in "AppDelegate.swift"? Let's take a look where exactly that happens.
   - Open the "AppDelegate.swift" file and find the `func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool` function.
-    - Although it has a long name it's job is very simple. When the program starts it gets called, then it does what it needs to get the app started and finally returns `true` if everything went alright.
+    - Although it has a long name it's job is very simple. When the program starts, it gets called, then it does what it needs to get the app setup and finally returns `true` if everything went alright.
     - The first thing we want to do is create a window, so let's add the line: `self.window = UIWindow(frame: UIScreen.mainScreen().bounds)`
       - Let's break this down. The app delegate has a [property](#) called window, which is the window for the application. So we need to set it to a new `UIWindow` object. When we create the `UIWindow` we specify the size of the window as the size of the main screen.
     - Next let's make a function that looks like this:
