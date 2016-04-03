@@ -117,7 +117,7 @@ PhysicsObject.prototype.recalculate = function() {
   this.velocity.add(this.gravity);
 };
 PhysicsObject.prototype.collideWith = function(target) {
-  if (this.touching.bottom) {
+  if (this.collisions.bottom) {
     this.velocity.y = this.gravity.y;
   }
   // ...and the rest of the post-collision code goes here,

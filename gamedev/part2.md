@@ -12,7 +12,7 @@ Adding to the velocity vector of a sprite can be done with `sprite.velocity.add(
 
 ### Checking for collisions
 
-In the game's current state, there is nothing actually stopping the player from simply falling through the ground. Every frame, after calculating new positions and before accepting user input, we will run a **collision detection check**. Seeing if two sprites are touching is simple. In our game setup, we will make two **sprite groups**, one for objects that have physics and can move around, and one for solid objects that can be collided with. Then in the draw loop, we can use a group's `overlap` function:
+In the game's current state, there is nothing actually stopping the player from simply falling through the ground. Every frame, after calculating new positions and before accepting user input, we will run a **collision detection check**. Seeing if two sprites are touching is simple. In our game setup, we will make two **sprite groups**, one for objects that have physics and can move around, and one for solid objects that can be collided with. Then in the draw loop, we can use the `overlap` function:
 
 ```js
 // In setup:
@@ -20,12 +20,14 @@ group1 = new Group();
 group1.add(someSprite);
 
 // In draw loop:
-group1.overlap(group2, function(a, b) {
-  // In this function, "a" is the first sprite, and "b" is the second
-  // that are overlapping as opposed to the entire group. The function
-  // will get run for every set of overlapping sprites and won't be
-  // called for sets that don't overlap.
-})
+group1.forEach(function(a) {
+  group2.forEach(function(b) {
+    if (a == b) return; // Don't check collisions with self
+    if (a.overlap(b)) {
+      // a is touching b
+    }
+  });
+});
 ```
 
 The hard part is that simply knowing that there is an overlap isn't enough. We want to know specifically what parts are overlapping. Here's why:
@@ -45,20 +47,25 @@ This isn't perfect, but it's reasonably efficient and works well. I haven't plac
 So, to keep track of who's touching whom, before we check collisions, we'll make an object on each sprite to store what sides the player is being touched on, and we will update it inside the collision detection function.
 
 ```js
-// Set initial touching state
+// Set initial collision state
 group1.forEach(function(sprite) {
-  sprite.touching = {left: false, right: false, top: false, bottom: false};
-})
-
-// Check collisions and update touching state
-group1.overlap(group2, function(a, b) {
-  // if b is touching a on a's left:
-  //   b.touching.left = true;
-  //   a.touching.right = true;
-  //   Also move a out of b so they are no longer overlapping
+  sprite.collisions = {left: false, right: false, top: false, bottom: false};
 });
 
-// Check user interaction, and now we can check if sprite.touching.bottom
+// Check collisions and update touching state
+group1.forEach(function(a) {
+  group2.forEach(function(b) {
+    if (a == b) return; // Don't check collisions with self
+    if (a.overlap(b)) {
+      // if b is touching a on a's left:
+      //   b.collisions.left = true;
+      //   a.collisions.right = true;
+      //   Also move a out of b so they are no longer overlapping
+    }
+  });
+});
+
+// Check user interaction, and now we can check if sprite.collisions.bottom
 // is true or something like that
 
 ```
@@ -68,8 +75,8 @@ Now for the hard part, actually checking if there is a collision. To check if th
 if (if b is touching a's bottom left OR b is touching a's bottom center OR b is touching a's bottom right) {
   move a up so that a's bottom is the same as b's top
 
-  a.touching.bottom = true;
-  b.touching.top = true;
+  a.collisions.bottom = true;
+  b.collisions.top = true;
 }
 if ( ... ) {
   ...
@@ -86,8 +93,8 @@ if (
      || b.overlapPoint(a.position.x+a.width*0.3, a.position.y+a.height/2)
     ) {
   a.position.y = b.position.y - b.height/2 - a.height/2;
-  a.touching.bottom = true;
-  b.touching.top = true;
+  a.collisions.bottom = true;
+  b.collisions.top = true;
 }
 ```
 

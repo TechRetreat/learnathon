@@ -109,3 +109,25 @@ function draw() {
 
 ### Creating points
 
+Similar to creating lives, we can declare a `score` variable and initialize it to 0 in `setup`. We also will want to declare a variable `coins`, which we'll initialize to a `new Group()` to hold all of the coins on the screen. We'll then make a new subclass of `Block` called `Coin`, and in its constructor, we'll add the new instance to the `score` group.
+
+```js
+Coin = function(x, y) {
+  Block.call(this, x+5, y+5, 20, 20);
+  this.shapeColor = color(255, 130, 0);
+  coins.add(this);
+}
+```
+
+Then, in `Player`'s `recalculate` function, we can loop through the coins and check if any are being touched. If they are, we want to:
+- remove it from the screen with `coin.remove()`
+- increment the score
+
+Then in the `reset` function, we can clear out the `coins` group, and reset the score to zero.
+
+### What you should have so far
+Here's the game up to this point, in case you fall behind: http://codepen.io/davepvm/pen/MyoXox?editors=0010
+
+<a href="part5.md">Part 5: Scrolling the camera</a>
+
+<a href="README.md#instructions">Back</a>
