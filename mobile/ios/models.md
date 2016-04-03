@@ -50,10 +50,10 @@
     }
     ```
 
-## The annotation
+## The Annotation
   - Create another "CocoaTouchClass" file, we're going to create a class to represent an Annotation object on the map
   - For this annotation object, we want it to conform to the "MKAnnotation" protocol. So right beside `NSObject` add `, MKAnnotation` to show this
-  - Since we say we're implementing the `MKAnnotation` protocol, if you command-click on the protocol you can see that we need to have three properties:
+  - Since we say we're implementing the `MKAnnotation` protocol, if you command-click on the protocol you can see that we need to have three properties we need to have:
   
     ```swift
     var coordinate: CLLocationCoordinate2D
