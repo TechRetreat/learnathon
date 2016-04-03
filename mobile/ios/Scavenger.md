@@ -6,6 +6,7 @@
 - [Main menu](menu.md)
 - [Models](models.md)
 - [Map](map.md)
+- [Data Model Manager](data_model_manager.md)
 - [Found List](foundList.md)
 - [Neaby List](nearbyList.md)
 - [Networking](networking.md)
