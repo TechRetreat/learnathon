@@ -123,6 +123,23 @@ Then, in `Player`'s `recalculate` function, we can loop through the coins and ch
 - remove it from the screen with `coin.remove()`
 - increment the score
 
+An important note about using a `forEach` loop in a class function: `this` gets reassigned to `window` inside the callback unless you pass in a value for `this` as another function argument. Here's what I mean:
+```
+SomeClass = function() {
+  this.thing = "something";
+
+  [1, 2, 3].forEach(function(i) {
+    console.log(this.thing); // undefined
+  });
+
+  [1, 2, 3].forEach(function(i) {
+    console.log(this.thing); // "something"
+  }, this); // <--- because we passed in a value for `this`
+}
+```
+
+(As an aside: this isn't a common pattern in Javascript, so not every function needs `this` passed in in this way. The fact that `this` can be reassigned and that there isn't as much consistency as there could be is one of the biggest problems people tend to have with Javascript.)
+
 Then in the `reset` function, we can clear out the `coins` group, and reset the score to zero.
 
 ### What you should have so far
