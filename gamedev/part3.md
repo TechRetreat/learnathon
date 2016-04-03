@@ -173,7 +173,7 @@ function draw() {
 ### Defining the level
 After the class definitions in `setup`, we need to define the starting locations for objects differently now that we have classes. Since classes automatically add themselves to the necessary sprite groups, all we need to do is this:
 
-```
+```js
 function setup() {
   // define classes
 
