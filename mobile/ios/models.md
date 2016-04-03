@@ -47,73 +47,6 @@
     }
     ```
 
- ## The JSON
-  - We are going to read in the values of the caches from a JSON file. JSON is a popular format to store information, especially when asking for information from web servers. We are going to start off with our JSON locally.
-  - Download the two starter JSON files for the [Initial Cache List]() and the [Initial Caches Found]()
-  After downloading these files, we're going to drag them into our project. Once they're in your project, we need to create a class to turn our JSON files into classes that our program can understand. We're going to call this class a `DataModelManager`.
-  Looking at the JSON a bit first, we can see that the entire structure is shaped as a dictionary. The "caches.json" file has the generic format:
-  ```
-  {
-    String: {
-      String: String,
-        String: String,
-        String: Int,
-        String: {
-          String: Double,
-          String: Double
-        }
-    }
-  }
-  ```
-
-  - We can go through and parse it like this:
-    // TODO: explain this code
-    ```swift
-    func loadCaches() { // Returns a dictionary of String ids to the cache object
-      do {
-        if let path = NSBundle.mainBundle().pathForResource("caches", ofType: "json") {
-          if let jsonData = NSData(contentsOfFile: path) {
-            guard let jsonResult = try NSJSONSerialization.JSONObjectWithData(jsonData, options: .MutableContainers) as? CacheListJSONFormat else {
-              print("We gucci")
-                throw DataModelError.InvalidFormat
-            }
-            caches = [String:Cache]() // clear out old caches
-              for (id, cacheObject) in jsonResult {
-                let cache = Cache(json: cacheObject)
-                  caches[id] = cache
-              }
-          }
-        }
-      } catch {
-        print("Something went wrong...")
-      }
-    }
-
-  func updateFoundStates() {
-    do {
-      if let path = NSBundle.mainBundle().pathForResource("found", ofType: "json") {
-        if let jsonData = NSData(contentsOfFile: path) {
-          guard let jsonResult = try NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions.MutableContainers) as? [String:[String:Double]] else {
-            print("We gucci")
-              throw DataModelError.InvalidFormat
-          }
-
-          if let cacheEntry = jsonResult["found_times"] {
-            for (id, time) in cacheEntry {
-              if let cache = self.caches[id] {
-                cache.found = time
-              }
-            }
-          }
-        }
-      }
-    } catch {
-      print("Something went wrong...")
-    }
-  }
-
-    ```
-  
 ## The annotation
   - Create another "CocoaTouchClass" file, we're going to create a class to represent an Annotation object on the map
   - For this annotation object, we want it to conform to the "MKAnnotation" protocol. So right beside `NSObject` add `, MKAnnotation` to show this
@@ -128,33 +61,34 @@
     ```swift
     var cache: Cache {
       didSet {
-        self.title = cache.name
-        self.subtitle = cache.description
-        self.coordinate = cache.location
+        self.titleProperty = cache.name
+        self.subtitleProperty = cache.description
+        self.placeProperty = cache.location
       }
     }
     ```
-  - Let's create the initializer. The initializer should take in a `Cache` object and set it to the local `cache` property. Since an `MKAnnotation` object always needs to have a location, we also need to set that up up-front. We can do this like this:
+  - Let's create the initializer. The initializer should take in a `Cache` object and set it to the local `cache` property. Note, since we're in the initializer, the `didSet` code will not be run in this special case. 
     ```swift
     init(cache: Cache) {
+      self.title = cache.name
+      self.subtitle = cache.description
       self.coordinate = cache.location
       self.cache = cache
     }
     ```
-  - The last peice of this class is to return an actual view that we can display on our map. This will be a class function, very similar to the function where we returned a cell:
-   // TODO: Explain
-    ```swift
-    static func createViewAnnotationForMapView(mapView: MKMapView, annotation: MKAnnotation) -> MKAnnotationView {
-      var returnedAnnotationView: MKAnnotationView
-      if let annotView = mapView.dequeueReusableAnnotationViewWithIdentifier(Annotation.annotationReuseIdentifier) { 
-        returnedAnnotationView = annotView
-        returnedAnnotationView.annotation = annotation
-      } else {
-        returnedAnnotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: Annotation.annotationReuseIdentifier)
-        returnedAnnotationView.canShowCallout = true
-      }
-      return returnedAnnotationView
-    }
 
-    ```
+  - The last peice of this class is to return an actual view that we can display on our map. This will be a class function, very similar to the function where we returned a cell. It'll start off like this.
+```swift
+static func createViewAnnotationForMapView(mapView: MKMapView, annotation: MKAnnotation) -> MKAnnotationView { 
+  var returnedAnnotationView: MKAnnotationView
+  
+  // populate returnedAnnotationView
+  
+  return returnedAnnotationView
+}
+```
+  - Similarly to when we made a cell in a table, we will have a "reusable identfier", defined the same was as we did in the "MenuViewController". 
+  - Then use an `if let` to see if `mapView`'s `dequeueReusableAnnotationViewWithIdentifer` method returned `nil` or an `MKAnnotationView`. If it does return a `MKAnnotationView`, then assign it to the variable we just declared (`returnedAnnotationView`), and set its annotation peropty to the `annoation` we passed into the function.
+  - If it returns `nil`, then `returnedAnnotationView` should be set to an instance of `MKAnnotationView`. When we create an instance, we need to make sure we pass in the annotation as well as the reuseIdentifier. On this view, we also want to set the `canShowCallout` to be true. For more inforamtion about this property, we can option-click on `canShowCallout` for more information.
+
 [Next](map.md)
