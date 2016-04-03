@@ -41,7 +41,7 @@
   - How we want to be able to find the distance between two caches.
   - Create a function called `getDistanceFrom(origin: CLLocationCoordinate2D)` that returns an integer, the distance between `self` and `origin`
   - It may look something like this:
-  - 
+  
     ```swift
     func getDistanceFrom(origin: CLLocationCoordinate2D) -> Int {
       let originLocaiton = CLLocation(latitude: origin.latitude, longitude: origin.longitude)
