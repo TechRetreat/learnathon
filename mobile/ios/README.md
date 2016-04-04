@@ -20,3 +20,5 @@ Learn the fundamentals of programming, the Swift programming language adn build 
   - [Git tutorial](git_tutorial.md)
   - [Scavenger](Scavenger.md)
 
+### III. Resources
+  - [Swift cheat sheet](http://swiftmonthly.com/wp-content/themes/swiftmonthly_theme/files/5b1356909f5eba2998766bbda077293c040416034729.pdf)
