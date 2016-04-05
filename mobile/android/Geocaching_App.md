@@ -155,3 +155,9 @@ Our `Activity`'s layout now contains a `<fragment` element, which we will use to
 
 ### Moving the counter
 Although this works, the logic for our `Button` click counter makes more sense to have in our `Fragment`. Move over the variables and `Button` logic from `MainActivity` to `FoundCachesFragment`, getting the `Views` will happen in between inflating `rootView` and returning it. The calls to `findViewById` have to be switched to `rootView.findViewById` as we are looking in the `Fragment`s view for these elements.
+
+### Debugging
+Show Null pointer and how to deal
+
+### Conclusion
+Wrap up, say what we've accomplished
