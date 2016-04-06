@@ -164,7 +164,7 @@ addOneToProperty(b);
 // watch out! b is now {num: 6}
 ```
 
-You can also pass a function into another function. Some class types have methods that accept functions. For example, arrays have a method `forEach` which accepts a function and runs tha function for each item in the array.
+You can also pass a function into another function. Some class types have methods that accept functions. For example, arrays have a method `forEach` which accepts a function and runs that function for each item in the array.
 ```js
 var sum = 0;
 var items = [1, 2, 3, 4];
@@ -173,6 +173,117 @@ items.forEach(function(item) {
 });
 // Sum is now 10
 ```
+
+#### Debugging practice
+To demonstrate how `forEach` works and practice debugging, let's try to fix some broken code. Here's a function that is supposed to take the average of an array of numbers. It is designed to first find the sum of the numbers and then divide by the number of items:
+```js
+function average(numbers) {
+  var result = 0;
+  var numItems = 0;
+  numbers.forEach(function(n) {
+    result = result + n;
+    numItems = numItems + 1;
+    result = result / numItems;
+  });
+  return result;
+}
+
+var avg = average([1, 2, 3, 4, 5]);
+console.log("End result: " + avg);
+```
+
+To edit this program, go to http://codepen.io/davepvm/pen/mPqQRW?editors=0010 and open the console (Ctrl-shift-J on chrome for Windows, Cmd-option-J on Chrome for Mac). You should see this result:
+
+```
+VM1284 console_runner-ba402f0….js:1 End result: 1.275
+```
+
+Obviously, 1.275 isn't the right answer. Let's add some more logging as we go through so we can see how the program gets executed:
+```js
+function average(numbers) {
+  console.log("Starting!");
+  var result = 0;
+  var numItems = 0;
+  numbers.forEach(function(n) {
+    console.log("Looking at item: " + n);
+    result = result + n;
+    console.log("Result is now " + result);
+    numItems = numItems + 1;
+    console.log("Numitems is now " + numItems);
+    result = result / numItems;
+    console.log("Result is " + result + " after dividing");
+  });
+  return result;
+}
+```
+
+After we run this, we can see more logs (at any time, you can press the circle with a line through it to clear the console):
+```
+VM1284 console_runner-ba402f0….js:1 Starting!
+VM1284 console_runner-ba402f0….js:1 Looking at item: 1
+VM1284 console_runner-ba402f0….js:1 Result is now 1
+VM1284 console_runner-ba402f0….js:1 Numitems is now 1
+VM1284 console_runner-ba402f0….js:1 Result is 1 after dividing
+VM1284 console_runner-ba402f0….js:1 Looking at item: 2
+VM1284 console_runner-ba402f0….js:1 Result is now 3
+VM1284 console_runner-ba402f0….js:1 Numitems is now 2
+VM1284 console_runner-ba402f0….js:1 Result is 1.5 after dividing
+VM1284 console_runner-ba402f0….js:1 Looking at item: 3
+VM1284 console_runner-ba402f0….js:1 Result is now 4.5
+VM1284 console_runner-ba402f0….js:1 Numitems is now 3
+VM1284 console_runner-ba402f0….js:1 Result is 1.5 after dividing
+VM1284 console_runner-ba402f0….js:1 Looking at item: 4
+VM1284 console_runner-ba402f0….js:1 Result is now 5.5
+VM1284 console_runner-ba402f0….js:1 Numitems is now 4
+VM1284 console_runner-ba402f0….js:1 Result is 1.375 after dividing
+VM1284 console_runner-ba402f0….js:1 Looking at item: 5
+VM1284 console_runner-ba402f0….js:1 Result is now 6.375
+VM1284 console_runner-ba402f0….js:1 Numitems is now 5
+VM1284 console_runner-ba402f0….js:1 Result is 1.275 after dividing
+VM1284 console_runner-ba402f0….js:1 End result: 1.275
+```
+
+Now we see the problem, we're dividing by the number of items in every iteration of the loop instead of once at the end. Try moving the division to the end:
+```js
+function average(numbers) {
+  console.log("Starting!");
+  var result = 0;
+  var numItems = 0;
+  numbers.forEach(function(n) {
+    console.log("Looking at item: " + n);
+    result = result + n;
+    console.log("Result is now " + result);
+    numItems = numItems + 1;
+    console.log("Numitems is now " + numItems);
+  });
+  result = result / numItems;
+  console.log("Result is " + result + " after dividing");
+  return result;
+}
+```
+
+Here's the new result:
+```
+VM1284 console_runner-ba402f0….js:1 Starting!
+VM1284 console_runner-ba402f0….js:1 Looking at item: 1
+VM1284 console_runner-ba402f0….js:1 Result is now 1
+VM1284 console_runner-ba402f0….js:1 Numitems is now 1
+VM1284 console_runner-ba402f0….js:1 Looking at item: 2
+VM1284 console_runner-ba402f0….js:1 Result is now 3
+VM1284 console_runner-ba402f0….js:1 Numitems is now 2
+VM1284 console_runner-ba402f0….js:1 Looking at item: 3
+VM1284 console_runner-ba402f0….js:1 Result is now 6
+VM1284 console_runner-ba402f0….js:1 Numitems is now 3
+VM1284 console_runner-ba402f0….js:1 Looking at item: 4
+VM1284 console_runner-ba402f0….js:1 Result is now 10
+VM1284 console_runner-ba402f0….js:1 Numitems is now 4
+VM1284 console_runner-ba402f0….js:1 Looking at item: 5
+VM1284 console_runner-ba402f0….js:1 Result is now 15
+VM1284 console_runner-ba402f0….js:1 Numitems is now 5
+VM1284 console_runner-ba402f0….js:1 Result is 3 after dividing
+VM1284 console_runner-ba402f0….js:1 Sum: 3
+```
+There we go, now we get the righ answer! You can take out the `console.log`s out now.
 
 Now we're ready to start making our game!
 
