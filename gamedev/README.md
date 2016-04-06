@@ -1,10 +1,8 @@
 # Game Dev
 
 ## What you'll make
-
-
-## Table of Contents
-
+<img src="screenshots/endproduct.gif" />
+Playable demo: http://codepen.io/davepvm/full/PNOyrW/
 
 ## Setup
 
@@ -12,7 +10,11 @@ We're going to use **Codepen** to make our game. Codepen is an online code edito
 
 To be able to save and share your code, go to https://codepen.io/signup, scroll down to **Free Plan**, and sign up.
 
-Then, come back to this page, and go to http://codepen.io/pen?template=ONJQya&editors=0010 to set up a new project with p5.js and p5.play.js added already. Additionally, there is a small amount of CSS included for you that will simply center the game canvas on the page.
+Then, come back to this page, and go to http://codepen.io/pen?template=ONJQya&editors=0010 to set up a new project with p5.js and p5.play.js added already. Additionally, there is a small amount of CSS included for you to change the page background colour.
+
+You likely want to add a "run" button to Codepen so you don't have to reload the page each time or wait for it to automatically rerun your changed code. Click "Settings" in the top-right, go to the Behavior tab and uncheck "auto update preview" to get a run button.
+
+<img src="screenshots/run-button.png" />
 
 ## Vocabulary
 - **sprite**: a graphic that we can move around the screen as a single entity
