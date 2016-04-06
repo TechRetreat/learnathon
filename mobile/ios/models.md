@@ -3,52 +3,7 @@
 
 [Previous](menu.md)
 
-- Since we're building a geocaching app, we need to be able to represent a cache, to do this make a new file called "Cache.swift"
-  - We want our `Cache` object to have the following properties:
-    - `name` (a `String`)
-    - `description` (a `String`)
-    - `difficulty` (an `Int`)
-    - `found` (a `Double?`, the question mark means that the property can be set to `nil`, or nothing. Which means we have not found it yet.)
-    - `location` (a `CLLocationCoordinate2D`)
-    - To get access to the `CLLocationCoordinate2D`, we need to add `import MapKit` at the top of our file
-  - Next, we need to define an initilizer. We can do so like this:
 
-  ```swift
-  init(name: String, description: String, difficulty: Int, location: CLLocationCoordinate2D) {
-    self.name = name
-    self.description = description
-    self.difficulty = difficulty
-    self.location = location
-  }
-  ```
-  - This allows us to create a `Cache` object
-  - We can also create methods which allow us to find a `Cache` object:
-  
-    ```swift
-    func foundItem(atTime time: Double) {
-      self.found = time
-    }
-
-    func foundItem(atTime time: NSDate) {
-      self.found = time.timeIntervalSince1970
-    }
-
-    func loseItem() {
-      self.found = nil
-    }
-    ```
-    
-  - How we want to be able to find the distance between two caches.
-  - Create a function called `getDistanceFrom(origin: CLLocationCoordinate2D)` that returns an integer, the distance between `self` and `origin`
-  - It may look something like this:
-  
-    ```swift
-    func getDistanceFrom(origin: CLLocationCoordinate2D) -> Int {
-      let originLocaiton = CLLocation(latitude: origin.latitude, longitude: origin.longitude)
-      let distance = originLocaiton.distanceFromLocation(CLLocation(latitude: self.location.latitude, longitude: self.location.longitude))
-      return Int(distance)
-    }
-    ```
 
 ## The Annotation
   - Create another "CocoaTouchClass" file, we're going to create a class to represent an Annotation object on the map
