@@ -133,10 +133,16 @@ if (!(conditionA || (conditionB && conditionC))) {  }
 #### Functions
 You can store repetitive code in a function to make it easier to run. When you call an expression with **arguments**, the **parameters** in the function definition will be replaced by the values and variables that were passed in. Functions can optionally **return a value** that you can assign to a variable.
 ```js
+// a and b are parameters
+//                    |
+//                    v
 function addNumbers(a, b) {
   return a + b;
 }
 
+// 1 and 2 are arguments
+//                    |
+//                    v
 var sum = addNumbers(1, 2); // sum is now equal to 3
 ```
 
