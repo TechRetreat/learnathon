@@ -2,6 +2,7 @@
 
 ## What you'll make
 <img src="screenshots/endproduct.gif" />
+
 Playable demo: http://codepen.io/davepvm/full/PNOyrW/
 
 ## Setup
