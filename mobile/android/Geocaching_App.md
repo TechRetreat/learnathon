@@ -107,11 +107,21 @@ clickMeButton.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
         // This method will get called when the Button is clicked
-        Log.i("Geocaching", "button Clicked");
+        Log.i("Geocaching", "Button Clicked");
     }
 });
 ```
-What we are doing here is creating an `OnClickListener` and defining what is does when clicked, then passing that object to our `Button`. When the `Button` is clicked this objects `onClick` is called and calls `Log.i("Geocaching", "Button Clicked");`. `Log` is a bit like Androids version of `System.out.println`, you give it a Tag (Geocaching) and some text to output (Button Clicked). The Tag lets you search for certain things that get outputted.
+What we are doing here is creating an `OnClickListener` and defining what is does when clicked, then passing that object to our `Button`. When the `Button` is clicked this objects `onClick` is called and calls `Log.i("Geocaching", "Button Clicked");`. `Log` is a bit like Androids version of `System.out.println`, you give it a Tag (Geocaching) and some text to output (Button Clicked) and it gets printed in something called `logcat`. If we click on the tab labeled "Android" at the bottom right of the screen out `logcat` should open up, it shows a list of things our app has outputted. If we tap the `Button` we created it should print "Button Clicked" here.
+
+### Debugging
+When we write code there's a lot that can go wrong, lets go through one of these and how to fix it. Let's say we forgot to get a reference to our clickMeButton before we set its click listener, comment out the line `clickMeButton = (Button) findViewById(R.id.my_button);` by adding `//` at the start. If we run our app now it will try to run on our phone and crash, showing a dialog that says "Unfortunately, Geocaching has stopped.". To tell what went wrong open up `logcat`, you should see a really long red block of text which represents what went wrong and made our app crash. If you scroll down to the last section of this crash log you should see
+```
+Caused by: java.lang.NullPointerException: Attempt to invoke virtual method 'void android.widget.Button.setOnClickListener(android.view.View$OnClickListener)' on a null object reference
+            at com.example.jzukewich.geocaching.FoundCachesFragment.onCreateView(FoundCachesFragment.java:38)
+            at android.support.v4.app.Fragment.performCreateView(Fragment.java:1974)
+            ...
+```
+What this means is that a `NullPointerException` happened in our code when we tried to call the method `setOnClickListener` on an object that was `null`. It happened at `FoundCachesFragment.onCreateView(FoundCachesFragment.java:38)` or line 38 of `FoundCachesFragment` in our `onCreateView` method. If you search for `NullPointerException` online you might find something like [this](http://stackoverflow.com/questions/218384/what-is-a-null-pointer-exception-and-how-do-i-fix-it) that explains what this exception is and how to fix it. For today mentors will be around to help you sort out issues like this, but before asking for help try googling to see if you can figure out your issue, you'll find a lot of really helpful answers on sites like [StackOverflow](http://stackoverflow.com/).
 
 ### Changing TextView
 Lets change the text in our textView when the button gets clicked, to do that well first need to get a reference to our `TextView`. We do this the same as we did our `Button` earlier. Add a variable of type `TextView` to the class and get the object by the id `my_text_view`, make sure to cast it to `TextView`. Now in the `OnClickListener` after Logging the click, add `yourTextView.setText("Button has been clicked");`.
@@ -156,8 +166,7 @@ Our `Activity`'s layout now contains a `<fragment` element, which we will use to
 ### Moving the counter
 Although this works, the logic for our `Button` click counter makes more sense to have in our `Fragment`. Move over the variables and `Button` logic from `MainActivity` to `FoundCachesFragment`, getting the `Views` will happen in between inflating `rootView` and returning it. The calls to `findViewById` have to be switched to `rootView.findViewById` as we are looking in the `Fragment`s view for these elements.
 
-### Debugging
-Show Null pointer and how to deal
-
 ### Conclusion
-Wrap up, say what we've accomplished
+So far we've made a `Fragment` that shows a few interactive elements and got them to communicate with each other. Let's start building some elements out for our Geocaching app.
+
+[Found Caches Page >](Found_Caches_Page.md)
