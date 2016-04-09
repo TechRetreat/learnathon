@@ -2,7 +2,7 @@
 
 [Home](README.md)
 
-[< Swift](1-Swift.md) - [Xcode Introduction >](2-XcodeIntro.md)
+[< Swift](1-Swift.md) - [Git Tutorial >](3-GitTutorial.md)
 
 ## Create the project
 1. Make a new project ("File" -> "New" -> "Project")
@@ -61,4 +61,4 @@
 
 
 
-[< Swift](1-Swift.md) - [Xcode Introduction >](2-XcodeIntro.md)
+[< Swift](1-Swift.md) - [Git Tutorial >](3-GitTutorial)
