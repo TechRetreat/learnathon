@@ -1,5 +1,5 @@
 # Mobile/iOS
-Learn the fundamentals of programming, the Swift programming language adn build a geocaching iOS app!
+Learn the fundamentals of programming, the Swift programming language and build a geocaching iOS app!
 
 ## What you'll make: Scavenger
 - A geocaching mobile application
@@ -27,4 +27,4 @@ Learn the fundamentals of programming, the Swift programming language adn build 
 11. [Tab Bar](11-TabBar.md)
 
 ### III. Resources
-  - [Swift cheat sheet](http://swiftmonthly.com/wp-content/themes/swiftmonthly_theme/files/5b1356909f5eba2998766bbda077293c040416034729.pdf)
+  - [Swift Cheat Sheet](http://swiftmonthly.com/wp-content/themes/swiftmonthly_theme/files/5b1356909f5eba2998766bbda077293c040416034729.pdf)
