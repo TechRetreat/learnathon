@@ -1,6 +1,6 @@
 # Swift
 
-Swift is one of the programming languages used for iOS development.
+Swift is a relatively new language introduced by Apple. One cool thing about Swift is that it's open-source. It's even hosted [right here on GitHub]()!
 
 To get started **open a new "Playground" document** in Xcode (File -> New -> File -> Playground)
 Let's start off fresh so **delete the contents of the file**
@@ -23,36 +23,36 @@ print("Hello world!")
 ## Data types
 There are many different types in Swift. We will go over the most commonly used ones: Strings, Integers, Floats, and Booleans.
 
-### Strings (`String`)
+### `String`s
 Strings are just what programmers call text. In the case of our program above, "Hello world!" is a string. We can store these strings inside a [variable](), for example:
 
 ```swift
-var favFruit = "Apple"
+var myName = "Your Name"
 ```
 
 We can also "add" strings together like this:
 ```swift
-var name = "YOUR NAME HERE"
+var myName = "Your Name"
 print("Hello! My name is " + name)
 ```
 
-Here the `var` means that `favFruit` will be a [variable](), then we assign the value of this variable to the string "Apple".
+Here the `var` means that `myName` will be a [variable](), then we assign the value of this variable to the string "Your Name".
 
-### Integers (`Int`)
+### `Int`egers
 We can store numbers too. Any whole numbers are "Integers" and decimal numbers are called "Floats".
 ```swift
-var intVariable = 3
+var numPlanetsInSolarSystem = 8
 var floatVariableName = 4.3
 ```
 
-We can also do some math! Be careful though, when you divide two integers, you will always get an integer. The end is chopped off.
+We can also do some math! Be careful though, when you divide two integers, you will always get an integer. The end is chopped off. This is called "floor division".
 ```swift
 var five = 2 + 3
 var three = 7 / 2 
 var threeAndAHalf = 7.0 / 2.0
 ```
 
-### Booleans (`Bool`)
+### `Bool`eans
 Booleans are values that can either be `true` or `false`.
 
 ```swift
@@ -63,32 +63,34 @@ We can also use [comparison operators](), such as ">", "<", "==", "<=", ">=".
 *Note: We use "==" for checking if two things are equal, since we use a single equals sign to assign one thing to another.*
 
 ```swift
-var moneyInWallet = 20
-var pizzaCost = 4.99
+var moonDistance = 370300
+var astronautDistance = 2953222
 
-var hasEnoughMoney = pizzaCost <= moneyInWallet
-// hasEnoughMoney is true, becuase pizzaCost is less than moneyInWallet
+var astronautArrivedToMoon = moonDistance <= astronautDistance
+// astronautArrivedToMoon is false, becuase the moonDistance is greater than astronautDistance
 ```
 
 ### Printing results
 We can also print out strings, numbers and booleans, like we did in our first program:
 ```swift
 print(4+3)
-var favDrink = "Tea"
+var favAstronaut = "Chris Hadfield"
 ```
 
 ### Variables (`var`)
 We've already been creating variables, but we can also go ahead and change their value!
 ```swift
-var numberOfApples = 4
-numberOfApples = numberOfApples + 1 // numberOfApples is now 5
-print("We now have \(numberOfApples) apples.")
-numberOfApples += 1 // This is the short form of the line above
-// numberOfApples is now 6
+var numberOfPlantes = 9
+numberOfPlanets = numberOfPlanets - 1 // numberOfPlanets is now 8
+print("We now have \(numberOfPlanets) planets. We'll miss you Pluto.")
+numberOfPlanets -= 1 // This is the short form of the line above
+// numberOfPlanets is now 7. :o
 
 // We can also double the number of apples:
-numberOfApples *= 2
-print("Woah! We suddenly have \(numberOfApples) apples! Think of all the pie we can make!")
+numberOfSpaceRockets = 3
+print("We start off with \(numberOfSpaceRockets) rockets.")
+numberOfSpaceRockets *= 2
+print("Woah! We suddenly have \(numberOfSpaceRockets) rockets! Thanks Elon!")
 ```
 
 ### Constants (`let`)
@@ -167,42 +169,42 @@ We can also create a group of elements. One way to group elements is into a list
 ```swift
 var list = [1,2,3,4]
 var anotherlist = 1...4 // A shortcut in Swift that does the same as above
-var class = ["Joe", "Sarah", "Dave"] // Lists can hold anything, as long as they are the same type
+var crew = ["Joe", "Sarah", "Dave"] // Lists can hold anything, as long as they are the same type
 ```
 
 Looking at the `class` list, the first student, "Joe" is stored at the "zeroth" index. We can assign this to a variable.
 
 ```swift
-var class = ["Joe", "Sarah", "Dave"] 
-var firstStudent = class[0] // joe
-var secondStudent = class[1] // sarah
+var crew = ["Joe", "Sarah", "Dave"] 
+var firstCosmonaut = crew[0] // joe
+var secondCosmonaut = crew[1] // sarah
 ```
 
 You can also change the values in a list, as long as the list is a [variable](). 
 ```swift
-var class = ["Joe", "Sarah", "Dave"]
-class[0] = "Jason"
-print class
+var crew = ["Joe", "Sarah", "Dave"]
+crew[0] = "Alice"
+print crew
 
-// Class is now ["Jason", "Sarah", "Dave"]
+// Crew is now ["Alice", "Sarah", "Dave"]
 ```
 
 We can also add new elements to the end like this:
 ```swift
-var class = ["Jason", "Sarah", "Dave"]
-class.append("Cora")
-print class
+var crew = ["Jason", "Sarah", "Dave"]
+crew.append("Cora")
+print crew
 
-// Now class is ["Jason", "Sarah", "Dave", "Cora"]
+// Now crew is ["Jason", "Sarah", "Dave", "Cora"]
 ```
 
 ## For loop
 There is also another type of loop that can iterate through elements of a list.
 
 ```swift
-var class = ["Joe", "Sarah", "Dave"]
-for studentName in class {
-  print("\(studentName) is in the class")
+var crew = ["Joe", "Sarah", "Dave"]
+for crewMember in crew {
+  print("\(crewMember) is in the crew")
 }
 ```
 
@@ -256,27 +258,69 @@ methodWithFirstArgument(42, andSecondArgument: 13)
 We can create a collection of related properties and functions into what is called an `Object`. This grouping of properties and functions act a lot like real world objects. You can set their attributed (properties), and ask them to do things (call their functions). To create an `object` we need to create a template for it, which properties and functions should be grouped together. This template is called a `class` and each object is an [instance]() of a particular `class`. This would look something like:
 
 ```swift
-class Astronaut {
-  private var name: String
-  private var yearsOfExperience = 0 // You can set initial values like this
+class Person {
+  var name: String
+  var age: Int
   
   // The initializer is the function that creates the object
   // You need at least one initializer for every class
-  init(name: String) {
+  init(givenName: String, givenAge: Int) {
     // We can access the properties of an object using dot notation as below
     // "self" is how we refer to the current instance of the class
-    self.name = name
+    self.name = givenName
+    self.age = givenAge
+  }  
+  
+  func introduce() {
+    print "Hello! My name is \(self.name) and I am \(self.age} years old. Nice to meet you."
   }
 }
 
-var astro1 = Astronaut(name: "Chris Hadfeild")
+var person = Person("Alex", 16)
+person.introduce() // Call a method like this
+var personAge = person.age // Access properties like this
+person.age += 1 // Change properties like this. Happy birthday!
 ```
 
 ## Inheritance
 We can also [inherit]() all of the properties of another class. For example, we will create a "vehicle" class, and we can make a "Mars Rover" class which will inherit from the "Vehicle" class because a Mars Rover has all of the attributes of a vehicle.
 
+```swift
+class Astronaut: Person {
+  var yearsInSpace: Int = 0
+  var authorizedVehicles: ["Space Shuttle", "Soyuz"]
+  
+  func canFly(vehicle) {
+    return authorizedVehicles.contains(vehicle)
+  }
+}
+
+```
+
 
 ## Protocols
 We can list a set of properties and functions that we want a method to implement, this is called a protocol. Then an object can declare that it implements a protocol. This is usually done in an extension. For example, we can have the flying protocol.
 
-# Fun Notes
+```swift
+protocol Flyable {
+  var distanceOffGround: Int
+  var speed: Int
+
+  func land()
+}
+```
+
+So we can create a space ship that we can declare as Flyable.
+
+```swift
+class SpaceShip: Flyable {
+  var distanceOffGround: Int = 0
+  var speed: Int = 0
+  
+  func land() {
+    self.speed = 0
+    self.distanceOffGround = 0
+  }
+}
+```
+
