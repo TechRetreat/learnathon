@@ -1,7 +1,8 @@
 # Gettings Started
 
 [Home](README.md)
-[Previous](1-Swift.md) - [Next](2-XcodeIntro.md)
+
+[< Swift](1-Swift.md) - [Xcode Introduction >](2-XcodeIntro.md)
 
 ## Create the project
 1. Make a new project ("File" -> "New" -> "Project")
@@ -60,4 +61,4 @@
 
 
 
-[Previous](1-Swift.md) - [Next](2-XcodeIntro.md)
+[< Swift](1-Swift.md) - [Xcode Introduction >](2-XcodeIntro.md)
