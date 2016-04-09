@@ -1,8 +1,8 @@
-# Swift
-
+# iOS
 [Home](README.md)
 
-[Next](2-XcodeIntro.md)
+[Xcode Introduction >](2-XcodeIntro.md)
+## Swift
 
 Swift is a relatively new language introduced by Apple. One cool thing about Swift is that it's open-source. It's even hosted [right here on GitHub]()!
 
@@ -259,7 +259,9 @@ methodWithFirstArgument(42, andSecondArgument: 13)
 ```
 
 ## Objects
-We can create a collection of related properties and functions into what is called an `Object`. This grouping of properties and functions act a lot like real world objects. You can set their attributed (properties), and ask them to do things (call their functions). To create an `object` we need to create a template for it, which properties and functions should be grouped together. This template is called a `class` and each object is an [instance]() of a particular `class`. This would look something like:
+We can create a collection of related properties and functions into what is called an `Object`. This grouping of properties and functions act a lot like real world objects. You can set their attributed (properties), and ask them to do things (call their functions). Grouping these properties and methods into an object really helps us clean up our code so that we can reuse them. This concept is called [modularity]() and is key in computer science.
+
+To create an `object` we need to create a template for it, which properties and functions should be grouped together. This template is called a `class` and each object is an [instance]() of a particular `class`. This would look something like:
 
 ```swift
 class Person {
@@ -298,7 +300,6 @@ class Astronaut: Person {
     return authorizedVehicles.contains(vehicle)
   }
 }
-
 ```
 
 
@@ -328,4 +329,6 @@ class SpaceShip: Flyable {
 }
 ```
 
-[Next](2-XcodeIntro.md)
+That's it! Now using these tools, we're going to go ahead and build our very own mobile application!
+
+[Xcode Introduction >](2-XcodeIntro.md)
