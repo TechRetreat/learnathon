@@ -1,56 +1,49 @@
 # Models
-[Home](Scavenger.md)
 
-[Previous](menu.md)
+## The Cache
 
+Since we're making a geocaching application, we're going to create a `Cache` class. Just like we did for `Astronaut` earlier.
 
+Let's take a minute to think about what properties and methods a `Cache` object might need.
 
-## The Annotation
-  - Create another "CocoaTouchClass" file, we're going to create a class to represent an Annotation object on the map
-  - For this annotation object, we want it to conform to the "MKAnnotation" protocol. So right beside `NSObject` add `, MKAnnotation` to show this
-  - Since we say we're implementing the `MKAnnotation` protocol, if you command-click on the protocol you can see that we need to have three properties we need to have:
+Okay, here's what I've come up with.
+These are the properties I think it's going to need:
+- The cache name
+- The cache description
+- The difficulty of finding the cache
+- If the cache was found
+  - When the cache was found (we can just set the found time to `nil`)
+- The location of the cache
+
+These are some of the methods that may be useful:
+- Finding a cache
+- Losing a cache
+- Finding the distance to other locations
+
+1. Let's get started by making a new file called "Cache.swift" (File -> New -> File -> Swift File)
+2. Create the `Cache` object just like we did with the astronauts. We should have 5.
+  - Note, if we `import MapKit` at the top of our file, we can use a type called `CLLocationCoordinate2D`, which is a useful way to store locations.
+3. Add the properties that we described above.
+4. Now we need to make an initializer like we did for the `Person` class so we can set all of the properties.
+5. Implement the initializer
+6. A method that takes in a time and sets it to the found time.
+  - There is a special type called `NSDate` which can be any time value and handles tricky things like timezones and special calendars for us.
+  - To convert this into a number we can use "epoch time". This is a popular time format in computer science. It is simply the number of seconds or milliseconds since January 1st 1970. Read more about it [here]().
+  - To get the "epoch time" (an integer) from an NSDate, you can use the `timeIntervalSince1970` property.
+7. Implement a method that loses the cache. This should set the found time to `nil`.
+
+Need a hint? Take a look at how I did it [here](gistLink).
+    
+8. How we want to be able to find the distance between two caches?
+  - Create a function called `getDistanceFrom(origin: CLLocationCoordinate2D)` that returns an integer, the distance between `self` and `origin`
+  - It may look something like this:
   
     ```swift
-    var coordinate: CLLocationCoordinate2D
-    var title: String?
-    var subtitle: String?
-    ```
-  - We're also going to add our own custom property, a `Cache` object that the Annotation object is presenting.
-  - When we set the cache object of this class, we also want to set the `coordinate`, `title` and `subtitle` to match the cache. Swift let's us do this with the following code:
-
-    ```swift
-    var cache: Cache {
-      didSet {
-        self.titleProperty = cache.name
-        self.subtitleProperty = cache.description
-        self.placeProperty = cache.location
-      }
+    func getDistanceFrom(origin: CLLocationCoordinate2D) -> Int {
+      let originLocaiton = CLLocation(latitude: origin.latitude, longitude: origin.longitude)
+      let distance = originLocaiton.distanceFromLocation(CLLocation(latitude: self.location.latitude, longitude: self.location.longitude))
+      return Int(distance)
     }
     ```
-  - Let's create the initializer. The initializer should take in a `Cache` object and set it to the local `cache` property. Note, since we're in the initializer, the `didSet` code will not be run in this special case. 
 
-    ```swift
-    init(cache: Cache) {
-      self.title = cache.name
-      self.subtitle = cache.description
-      self.coordinate = cache.location
-      self.cache = cache
-    }
-    ```
-
-  - The last peice of this class is to return an actual view that we can display on our map. This will be a class function, very similar to the function where we returned a cell. It'll start off like this.
-
-```swift
-static func createViewAnnotationForMapView(mapView: MKMapView, annotation: MKAnnotation) -> MKAnnotationView { 
-  var returnedAnnotationView: MKAnnotationView
-  
-  // populate returnedAnnotationView
-  
-  return returnedAnnotationView
-}
-```
-  - Similarly to when we made a cell in a table, we will have a "reusable identfier", defined the same was as we did in the "MenuViewController". 
-  - Then use an `if let` to see if `mapView`'s `dequeueReusableAnnotationViewWithIdentifer` method returned `nil` or an `MKAnnotationView`. If it does return a `MKAnnotationView`, then assign it to the variable we just declared (`returnedAnnotationView`), and set its annotation peropty to the `annoation` we passed into the function.
-  - If it returns `nil`, then `returnedAnnotationView` should be set to an instance of `MKAnnotationView`. When we create an instance, we need to make sure we pass in the annotation as well as the reuseIdentifier. On this view, we also want to set the `canShowCallout` to be true. For more inforamtion about this property, we can option-click on `canShowCallout` for more information.
-
-[Next](map.md)
+That's it! That's the cache object that we're going to use in our app.
