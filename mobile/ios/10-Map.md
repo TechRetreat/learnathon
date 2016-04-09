@@ -1,7 +1,6 @@
 # Map
-[Home](Scavenger.md)
-
-[Previous](models.md)
+[Home](README.md)
+[Previous](9-AnnotationObject.md)
 
 Now, we're going to get started on building the map portion of the application. To do this, we're going to use a [framework]() called [MapKit](). A framework is a package of useful methods and classes. In the case of MapKit, it provides some classes and methods to interface with maps. One of the view's we're going to use is `MKMapView`, which is a view that automatically provides a map for use to use. As we create a new screen, we're going to create a new [View Controller](). Let's make a new "CocoaTouchClass" file, and make it a sublcass of "UIViewController".
 The standard for naming view controllers is to have the class name end in "ViewController". So you can name this class "MapViewController" or something of the kind.
@@ -128,4 +127,4 @@ private var caches = [Cache]()
     - `annot` will have an [optional]() cache property. Try and write some code to assign the appropriate flag to `returnedAnnotationView.image` depending on whether or not the cache was found.
     - Also we will set the `rightCalloutAccessoryView` of the `returnedAnnotationView` to the detail button we created.
       
-[Next](found.md)
+[Previous](9-AnnotationObject.md)

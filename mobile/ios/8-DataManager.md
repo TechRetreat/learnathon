@@ -1,4 +1,6 @@
 # Data Model Manager
+[Home](README.md)
+[Previous](7-DetailView.md) - [Next](9-AnnotationObject.md)
 
 ## The JSON
   - We are going to read in the values of the caches from a JSON file. JSON is a popular format to store information, especially when asking for information from web servers. We are going to start off with our JSON locally.
@@ -149,3 +151,5 @@ Going back to our initalizer, we will take in JSON of type `CacheJSONFormat`.
          return nil
     }
 ```
+
+[Previous](7-DetailView.md) - [Next](9-AnnotationObject.md)

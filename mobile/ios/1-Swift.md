@@ -1,5 +1,9 @@
 # Swift
 
+[Home](README.md)
+
+[Next](2-XcodeIntro.md)
+
 Swift is a relatively new language introduced by Apple. One cool thing about Swift is that it's open-source. It's even hosted [right here on GitHub]()!
 
 To get started **open a new "Playground" document** in Xcode (File -> New -> File -> Playground)
@@ -324,3 +328,4 @@ class SpaceShip: Flyable {
 }
 ```
 
+[Next](2-XcodeIntro.md)

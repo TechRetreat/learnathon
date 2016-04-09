@@ -1,5 +1,8 @@
 # Gettings Started
 
+[Home](README.md)
+[Previous](1-Swift.md) - [Next](2-XcodeIntro.md)
+
 ## Create the project
 1. Make a new project ("File" -> "New" -> "Project")
 2. Select "iOS" -> "Single View Application". We'll start off with the most basic starting point. Starting off from scratch.
@@ -54,3 +57,7 @@
   1. In the top left, click the drop down and select your phone.
   2. Hit the run button (play button in the top left), or you can hit "Command + R"
 - If the app doesn't run, try and get a mentor to help you
+
+
+
+[Previous](1-Swift.md) - [Next](2-XcodeIntro.md)

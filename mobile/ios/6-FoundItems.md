@@ -1,4 +1,8 @@
-## Found cache list
+# Found cache list
+
+[Home](README.md)
+[Previous](5-CacheObject.md) - [Next](7-DetailView.md)
+
 ### Make the view controller
 - Create a new view controller. Let's call it "FoundCacheListViewController"
 - In this view controller, we want to make the following screen:
@@ -8,7 +12,7 @@
 - Before we start coding, let's see what's going on here. What we have is a [view]() called a [UITableVIew](), which is just a group of cells. You see this in many iOS applications.
 
 ### Creating the table view
-  - We're going to follow the same steps as we did to add a label. Not we want to create a `private`, *constant* item named "tableView", which is an [instance]() of `UITableView`. Give it a try!
+  - We're going to follow the same steps as we did to add a label. Now we want to create a `private`, *constant* item named "tableView", which is an [instance]() of `UITableView`. Give it a try!
   - In `viewDidLoad`, we need to set a few properties of the `tableView`. Start off by setting the `rowHeight` and `frame` of the `tableView`, just like you did for the `helloLabel`. I set my row height to 100. This is measured in [points]()
   - Now let's remember what a [view]() does. All it knows to do is display information and if someone is trying to interact with it. But it doesn't know **what** to do if someone intereacts with it. That's where the view controller comes it. The [view]() has a [`delegate`]() property. The [view]() then passes on its actions to let the delegate deal with it.
   - The `FoundCacheListViewController` will act as the `tableView`'s [delegate](). To specify this, set the `tableView`'s `delegate` property to `self`. `self` is referencing the `FoundCacheListViewController `.
@@ -66,15 +70,5 @@
 ### Putting cache objects in the table
 - Let's revisit our 'foundCaches' array. We can replace the placeholder strings for actual cache objects now! Let's go ahead and add placeholder cache objects.
 - In the method where we set the title of the cell, let's set the cell name to be the name of the cache!
-
-### Making the detail page
-// Make detail page
- 
-### Make the cells tapable
-  - Next, let's make the cells do something when we tap them
-  - Let's go back to `func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)`.
-      - This returns the `indexPath` the same way as in the `cellForRowAtIndexPath` method.
-      - Right now, if you select a row it gets grayed out and stays grayed out. We can change that by animating a deselection when it's selected using: `tableView.deselectRowAtIndexPath(indexPath, animated: true)`
-      - What we want is to show a new [view controller]() whenver a cell is pressed. 
-      - We can create one of our nifty `CacheDetailViewControllers` using the initializer that takes in a cache. Let's put that view controller into a constant called `vc`. Now we can push that view controller like so:
-      //TODO: FINSIH ME! :D
+- 
+[Previous](5-CacheObject.md) - [Next](7-DetailView.md)

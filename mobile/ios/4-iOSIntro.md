@@ -1,4 +1,8 @@
-## Hello, world!
+[Home](README.md)
+
+[Previous](3-GitTutorial.md) - [Next](5-CacheObject.md)
+
+# Hello, world!
 - Now that we're all set up. Let's get started.
 1. App startup
   - Remember how our application will start in "AppDelegate.swift"? Let's take a look where exactly that happens.
@@ -53,3 +57,4 @@ class MenuViewController: UIViewController {
   - If you havn't already, make sure to commit your code ("Source Control" -> "Commit")
   - Now we want to make room for our scavenger app, so let's comment out all of the code that has to do our label.
 
+[Previous](3-GitTutorial.md) - [Next](5-CacheObject.md)

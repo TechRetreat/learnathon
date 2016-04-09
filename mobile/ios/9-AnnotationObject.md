@@ -1,11 +1,6 @@
-# Models
-[Home](Scavenger.md)
-
-[Previous](menu.md)
-
-
-
-## The Annotation
+# The Annotation
+[Home](README.md)
+[Previous](8-DataManager.md) - [Next](10-Map.md)
   - Create another "CocoaTouchClass" file, we're going to create a class to represent an Annotation object on the map
   - For this annotation object, we want it to conform to the "MKAnnotation" protocol. So right beside `NSObject` add `, MKAnnotation` to show this
   - Since we say we're implementing the `MKAnnotation` protocol, if you command-click on the protocol you can see that we need to have three properties we need to have:
@@ -53,4 +48,4 @@ static func createViewAnnotationForMapView(mapView: MKMapView, annotation: MKAnn
   - Then use an `if let` to see if `mapView`'s `dequeueReusableAnnotationViewWithIdentifer` method returned `nil` or an `MKAnnotationView`. If it does return a `MKAnnotationView`, then assign it to the variable we just declared (`returnedAnnotationView`), and set its annotation peropty to the `annoation` we passed into the function.
   - If it returns `nil`, then `returnedAnnotationView` should be set to an instance of `MKAnnotationView`. When we create an instance, we need to make sure we pass in the annotation as well as the reuseIdentifier. On this view, we also want to set the `canShowCallout` to be true. For more inforamtion about this property, we can option-click on `canShowCallout` for more information.
 
-[Next](map.md)
+[Previous](8-DataManager.md) - [Next](10-Map.md)
