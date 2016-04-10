@@ -1,6 +1,21 @@
-# Make the detail page
+# iOS
+[Home](README.md)
+[< Found Items](6-FoundItems.md) - [Data Manger >](8-DataManager.md)
+## Make the detail page
 ### Make the detail view controller
 We're going to make a quick view controller that will allow us to display information about the cache, such as its name, description and location. It will also allow us to "find" a cache.
+
+Let's create anothe file called "CacheDetailViewController.swift", which as you may have guessed by the name inherits from `UIViewController`.
+
+Let's start off with defining the properties of this view controller. What we want this view controller to do is to display the details of a cache object, and also allow ability to find the cache. So we're going to need:
+- A cache object (of type `cache`)
+- 4 `UILabel`s, for the title, description, difficulty, and location.
+- A button to indicate that the item was found.
+
+### Setting up the views
+
+
+### Sizing the views
 
 ### Make the cells tapable
   - Next, let's make the cells do something when we tap them
@@ -12,3 +27,5 @@ We're going to make a quick view controller that will allow us to display inform
 ```swift
 self.navigationController?.pushViewController(vc, animated: true)
 ```
+
+[< Found Items](6-FoundItems.md) - [Data Manger >](8-DataManager.md)
