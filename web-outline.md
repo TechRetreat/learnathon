@@ -1,3 +1,15 @@
+## Hello, World (Wide Web)
+
+Long, long ago, when the great Tim-Berners Lee brought us the WWW,
+
+Clients and servers
+
+Model
+View
+Controller
+
+And that brings us to...
+
 ## Your First Website
 
 Create a folder on your computer for all your files to go inside.
@@ -105,5 +117,72 @@ Now make all the font white. (Hint: use the "color" attribute.)
 
 ## Adding interactivity with Javascript (not Java!)
 
-Javascript is a programming language that's recently taken the developer world by storm. Here, we're going to use it to make a button for adding new projects.
+Javascript is a programming language that's recently taken the developer world by storm (You may have seen Angular JS, Node JS, React JS, Meteor JS, Ember, Backbone, ... the list goes on).
+
+<TODO: insert more about Javascript>
+
+Here, we're going to use Javascript to make a clickable button for adding new projects.
 Create a third file called "scripts.js".
+
+
+### Manipulating the DOM
+
+Of course, the world isn't powered by many code monkeys modifying the HTML every time someone adds a new comment or post.
+
+<More about the Document Object Model>
+
+Computer scientists and programmers are fanciful creatures. The Document Object Model is one example of a `tree` of `nodes`. A node can be a `root`. Otherwise, it has ancestors, and specifically, `parents`. A node can also have `children`, unless it's a `leaf`.
+
+You can modify the DOM tree `dynamically` with the web's favourite language - Javascript - using methods named after the terms we just described, like `.appendChild`. [edit]
+
+`.createElement`
+`.appendChild`
+`.getElementById`
+`.getElementsByClass`
+etc.
+
+Remember this keyword, `dynamic`, especially when searching StackOverflow.
+
+## Fleshing out the website
+
+Let's start filling in the content.
+
+__Task 2:__ Turn each of the project divs into a clickable link to an HTML template titled `project_<project number>.html` (eg. "project_1.html").
+
+__Task 3:__ Your turn now: Fill in `project_1.html`!
+
+## The Comment Thread
+
+__Task 4:__ Manipulate the DOM so that Internet users can add comments to your site dynamically.
+
+### Animations and Effects with CSS and Javascript
+
+
+
+## Sorry
+
+When you reload your page, all the comments disappear. All the posts you added disappear. Not even Ctrl+S can _save_ you.
+
+Unfortunately, this is the end for My First Website 2.0.
+
+What we're missing is a `database`. This is a persistent storage that lives elsewhere. Every time someone creates a new comment or post, this information is stored in the database and loaded up again when a user loads the website.
+
+Web apps really have three layers:
+
+- the presentation layer
+- the
+
+[edit below section]
+You could use PHP, which is a `server-side` `scripting` language. But goal #2 of this learnathon is to get you started with web development in 2016, and introduce you to web frameworks.
+
+And anyway,
+
+This is why developers use `web frameworks`, like Django, Ruby on Rails, Flask,
+
+## Recap
+
+HTML
+CSS
+Javascript
+
+## Onto Flask!
