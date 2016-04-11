@@ -1,6 +1,6 @@
 # Tab Bar
 [Home](README.md)
-[Previous](10-Map.md)
+[< Map](10-Map.md)
 
 Now we're going to connect the "Found List" portion of our application with our "Map View". One way to do this is to is with a tab bar.
 
@@ -8,4 +8,4 @@ We're going to have a tab bar at the bottom of our screen where we can toggle be
 
 In this case we want the TabBar to hold the 2 `UINavigationController`s that we made. The first holds the "Found List", and the second contains the `MapViewController`. Since we want to create these on startup, we will put this code directly in our `AppDelegate` file.
 
-[Previous](10-Map.md)
+[< Map](10-Map.md)
