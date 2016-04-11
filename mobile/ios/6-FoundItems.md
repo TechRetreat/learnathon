@@ -5,6 +5,30 @@
 
 ### Make the view controller
 - Create a new view controller. Let's call it "FoundCacheListViewController"
+- Once we have this view controller let's make ti visible. Heading over to our `AppDelegate` we can create a `UINavigationViewController` instance and assign it to a constant call `navVC`.
+
+A navigation view controller, is what we call a [container view controller](). This is a special type of [view controller]() that manages other view controllers. Other examples include the tab bar commonly found in iOS applications (like the clock app). A `UINavigationViewController` will let us go to other [view controller]()s and automatically give us a back button that the user can tap. This is a common design structure in iOS. We can initialize our navigation view controller with our own custom view controller which will act as the starting point. The `UINavigationViewController` will also display the `title` property of the view controller it is currently displaing in it's navigation bar. So our `applicationDidFinishLaunchingWithOptions` method should look something like this:
+
+```swift
+func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+  // Override point for customization after application launch.
+  self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+
+  let foundList = FoundCacheListViewController()
+  foundList.title = "Found Caches"
+  
+  let navVC = UINavigationController(rootViewController: foundList)
+
+  self.window!.rootViewController = navVC 
+
+  self.window?.makeKeyAndVisible()
+
+  return true
+}
+```
+
+//TODO: Add image for explanation.
+
 - In this view controller, we want to make the following screen:
 
 ** INSERT PIC OF SCREEN HERE **
