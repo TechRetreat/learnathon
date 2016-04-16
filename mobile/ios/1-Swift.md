@@ -141,14 +141,13 @@ if (cond1) {
 
 You can also connect different expressions with `&&`, which means "and", as well as, "||", which means "or".
 ```swift
-a = true
-b = false
-
-if (a || b) {
+cond1 = false
+cond2 = true
+if (cond1 || cond2) {
   print("At least one of a or b is true")
 }
 
-if (a && b) {
+if (cond1 && cond2) {
   print("A and B are both true")
 }
 ```
