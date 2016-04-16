@@ -187,7 +187,7 @@ var crew = ["Joe", "Sarah", "Dave"] // Lists can hold anything, as long as they 
 Looking at the `class` list, the first student, "Joe" is stored at the "zeroth" index. We can assign this to a variable.
 
 ```swift
-var crew = ["Joe", "Sarah", "Dave"] 
+crew = ["Joe", "Sarah", "Dave"] 
 var firstCosmonaut = crew[0] // joe
 var secondCosmonaut = crew[1] // sarah
 ```
