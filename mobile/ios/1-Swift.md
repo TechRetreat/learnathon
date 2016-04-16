@@ -345,10 +345,23 @@ class Astronaut: Person {
 ## Protocols
 We can list a set of properties and functions that we want a method to implement, this is called a protocol. Then an object can declare that it implements a protocol. This is usually done in an extension. For example, we can have the flying protocol.
 
+Let's start with a vehicle class.
+```swift
+class Vehicle {
+    let numberOfWheels: Int
+    var speed = 0
+    
+    init(numberOfWheels: Int) {
+        self.numberOfWheels = numberOfWheels
+    }
+}
+```
+
+Nothing too suprising so far, just like our `Person` class. How let's define a protocol. A set of properties that we need for an object to be flyable.
+
 ```swift
 protocol Flyable {
-  var distanceOffGround: Int
-  var speed: Int
+  var distanceOffGround: Int { get set } // Note: we need to specify whether we can read (get) and write (set), or just read
 
   func land()
 }
@@ -357,10 +370,9 @@ protocol Flyable {
 So we can create a space ship that we can declare as Flyable.
 
 ```swift
-class SpaceShip: Flyable {
+class SpaceShip: Vehicle, Flyable {
   var distanceOffGround: Int = 0
-  var speed: Int = 0
-  
+
   func land() {
     self.speed = 0
     self.distanceOffGround = 0
