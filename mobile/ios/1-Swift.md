@@ -269,10 +269,10 @@ optional?.count
 We can group blocks of code into a function. This allows us to reuse the group of code without typing it all out again.
 Functions can take arguments, but we need to specify the types of the arguments and what type it returns.
 
-Let's make a function called `add` which takes two integers, `a` and `b` and returns their sum as an integer.
+In Swift, it's common to have very descriptive function names. This will make more sense as we start making apps:
 ```swift
-func add(a: Int, b: Int) -> Int {
-  return a + b
+func methodWithFirstArgument(a: Int, andSecondArgument b: Int) {
+      print("This is a common way to pass \(a) and \(b) into a function in Swift")
 }
 ```
 
@@ -283,18 +283,18 @@ func introduce(name: String) {
 }
 ```
 
-In Swift, it's common to have very descriptive function names. This will make more sense as we start making apps:
+Let's make a function called `add` which takes two integers, `a` and `b` and returns their sum as an integer. We can use `_` to hid the second argument name.
 ```swift
-func methodWithFirstArgument(a: Int, andSecondArgument b: Int) {
-      print("This is a common way to pass \(a) and \(b) into a function in Swift")
+func add(a: Int, _ b: Int) -> Int {
+  return a + b
 }
 ```
 
 We can call these functions like this:
 ```swift
-var seven = add(4, b: 3)
-introduce("Jonathan")
 methodWithFirstArgument(42, andSecondArgument: 13)
+introduce("Jonathan")
+var seven = add(4, 3)
 ```
 
 ## Objects
