@@ -226,6 +226,19 @@ dictionary["astronaut"] = "space wanderer"
 print dictionary
 ```
 
+### Optionals
+Swift is a language the supports optionals. In other languages it may be called "nullables" or something of the sort. All it means is that if a value is an optional, it can either have a value assigned to it or it can be `nil`. The only catch is that if it is `nil` then if you try to call a method on it, you simply won't be able to. You have to unwrap it. To "force unwrap" the opotional you can use `!`. But if you unwrap it, and it's nil and try to call a function on it. It'll crash.
+Ouch! To avoid this, we can use the `?` to safely unwrap the optional. What unwrapping means. Let's take a look at some examples:
+
+
+```swift
+var optional = nil
+optional!.count // CRASH
+
+optional = ["hi", "hello"]
+optional?.count
+```
+
 ## Function
 We can group blocks of code into a function. This allows us to reuse the group of code without typing it all out again.
 Functions can take arguments, but we need to specify the types of the arguments and what type it returns.
