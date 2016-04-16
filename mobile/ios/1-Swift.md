@@ -1,7 +1,7 @@
 # iOS
 [Home](README.md)
 
-<p style="text-align: right;">[Xcode Introduction >](2-XcodeIntro.md)</p>
+[Xcode Introduction >](2-XcodeIntro.md)
 ## Swift
 
 Swift is a relatively new language introduced by Apple. One cool thing about Swift is that it's open-source. It's even hosted [right here on GitHub]()!
