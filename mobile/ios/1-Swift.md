@@ -37,7 +37,7 @@ var myName = "Your Name"
 We can also "add" strings together like this:
 ```swift
 var myName = "Your Name"
-print("Hello! My name is " + name)
+print("Hello! My name is " + myName)
 ```
 
 Here the `var` means that `myName` will be a [variable](), then we assign the value of this variable to the string "Your Name".
@@ -78,20 +78,19 @@ var astronautArrivedToMoon = moonDistance <= astronautDistance
 We can also print out strings, numbers and booleans, like we did in our first program:
 ```swift
 print(4+3)
-var favAstronaut = "Chris Hadfield"
 ```
 
 ### Variables (`var`)
 We've already been creating variables, but we can also go ahead and change their value!
 ```swift
-var numberOfPlantes = 9
+var numberOfPlanets = 9
 numberOfPlanets = numberOfPlanets - 1 // numberOfPlanets is now 8
 print("We now have \(numberOfPlanets) planets. We'll miss you Pluto.")
 numberOfPlanets -= 1 // This is the short form of the line above
 // numberOfPlanets is now 7. :o
 
 // We can also double the number of apples:
-numberOfSpaceRockets = 3
+var numberOfSpaceRockets = 3
 print("We start off with \(numberOfSpaceRockets) rockets.")
 numberOfSpaceRockets *= 2
 print("Woah! We suddenly have \(numberOfSpaceRockets) rockets! Thanks Elon!")
@@ -117,12 +116,12 @@ if (condition) {
 You can also use the comparisons operators we saw earlier. It's also possible to execute different code if the condition is not true, using the `else` statement:
 
 ```swift
-var a = 3
-var b = 2
-if (a > b) {
-  print("a is greater than b")
+var firstNum = 3
+var secondNum = 2
+if (firstNum > secondNum) {
+  print("firstNum is greater than secondNum")
 } else {
-  print("a is less than or equal to b")
+  print("firstNum is less than or equal to secondNum")
 }
 ```
 
@@ -163,8 +162,18 @@ The while loop will repeat certain instructions until a condition is false.
 var countdown = 10
 while (countdown > 0) {
   print(countdown)
+  countdown -= 1
 }
 print("Blastoff!")
+```
+
+## Types
+
+Swift is what is known as a "strongly typed language". All that means is that every variable has a specific type, and it has to stick to it. Swift is pretty smart though, and it can usually figure out what type a variable is supposed to be, but sometimes we want to specify it. (Why we do this will become more obvious a bit further down this page.)
+
+We can specify the variable `name` to be a `String` like this.
+```swift
+var name: String = "My Name"
 ```
 
 ## Lists
@@ -186,30 +195,20 @@ var secondCosmonaut = crew[1] // sarah
 
 You can also change the values in a list, as long as the list is a [variable](). 
 ```swift
-var crew = ["Joe", "Sarah", "Dave"]
+crew = ["Joe", "Sarah", "Dave"]
 crew[0] = "Alice"
-print crew
+print(crew)
 
 // Crew is now ["Alice", "Sarah", "Dave"]
 ```
 
 We can also add new elements to the end like this:
 ```swift
-var crew = ["Jason", "Sarah", "Dave"]
+crew = ["Jason", "Sarah", "Dave"]
 crew.append("Cora")
-print crew
+print(crew)
 
 // Now crew is ["Jason", "Sarah", "Dave", "Cora"]
-```
-
-## For loop
-There is also another type of loop that can iterate through elements of a list.
-
-```swift
-var crew = ["Joe", "Sarah", "Dave"]
-for crewMember in crew {
-  print("\(crewMember) is in the crew")
-}
 ```
 
 ## Dictionaries
@@ -218,22 +217,52 @@ You can also group items in dictionaries, which act exactly like an actual dicti
 ```swift
 var dictionary = ["spaceship":"vehicle to get around space time", "astronaut":"space explorer"]
 var spaceShipDefinition = dictionary["spaceship"]
-print spaceShipDefinition // prints "vehicle to get around space time"
+print(spaceShipDefinition) // prints "vehicle to get around space time"
 
 // As long as they are variables, they can be change just like lists
 dictionary["astronaut"] = "space wanderer"
 
-print dictionary
+print(dictionary)
+```
+
+## Types Again
+
+We can also specify the type of objects that are arrays or dictionaries.
+
+We can define an array and a dictionary like this:
+```swift
+var crew: [String] = ["First Member", "Second Member"] // this is an array of strings
+var ranking: [String:Int] = ["First Member":2, "Second Member":1] // this is a dictionary from strings to ints
+```
+
+Using the same notation, we can also make empty lists like this:
+```swift
+var crew = [String]() // this is an empty array of strings
+```
+
+<pre>
+Tidbit: The `[String]` syntax is simply a shorthand for `Array<String>`. Read more [here](link_here)
+</pre>
+
+## For loop
+There is also another type of loop that can iterate through elements of a list.
+
+```swift
+crew = ["Joe", "Sarah", "Dave"]
+for crewMember in crew {
+  print("\(crewMember) is in the crew")
+}
 ```
 
 ### Optionals
 Swift is a language the supports optionals. In other languages it may be called "nullables" or something of the sort. All it means is that if a value is an optional, it can either have a value assigned to it or it can be `nil`. The only catch is that if it is `nil` then if you try to call a method on it, you simply won't be able to. You have to unwrap it. To "force unwrap" the opotional you can use `!`. But if you unwrap it, and it's nil and try to call a function on it. It'll crash.
 Ouch! To avoid this, we can use the `?` to safely unwrap the optional. What unwrapping means. Let's take a look at some examples:
 
+Note. Since we start defining this as `nil`, we need to specify a type when we create the object.
 
 ```swift
-var optional = nil
-optional!.count // CRASH
+var optional: [String]? = nil
+// optional!.count // CRASH
 
 optional = ["hi", "hello"]
 optional?.count
@@ -291,7 +320,7 @@ class Person {
   }  
   
   func introduce() {
-    print "Hello! My name is \(self.name) and I am \(self.age} years old. Nice to meet you."
+    print("Hello! My name is \(self.name) and I am \(self.age} years old. Nice to meet you.")
   }
 }
 
