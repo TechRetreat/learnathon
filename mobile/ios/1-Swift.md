@@ -380,6 +380,8 @@ class SpaceShip: Vehicle, Flyable {
 }
 ```
 
+Link to all of this code is [here](https://gist.github.com/pbardea/e86289692efbbb444df8d31db75383bd)
+
 That's it! Now using these tools, we're going to go ahead and build our very own mobile application!
 
 [Xcode Introduction >](2-XcodeIntro.md)
