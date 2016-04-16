@@ -230,13 +230,13 @@ We can also specify the type of objects that are arrays or dictionaries.
 
 We can define an array and a dictionary like this:
 ```swift
-var crew: [String] = ["First Member", "Second Member"] // this is an array of strings
-var ranking: [String:Int] = ["First Member":2, "Second Member":1] // this is a dictionary from strings to ints
+var engineeringTeam: [String] = ["First Member", "Second Member"] // this is an array of strings
+var yearsAtNasa: [String:Int] = ["First Member":2, "Second Member":1] // this is a dictionary from strings to ints
 ```
 
 Using the same notation, we can also make empty lists like this:
 ```swift
-var crew = [String]() // this is an empty array of strings
+var engineersInSpace = [String]() // this is an empty array of strings
 ```
 
 <pre>
