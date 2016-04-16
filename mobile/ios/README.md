@@ -3,7 +3,8 @@ Learn the fundamentals of programming, the Swift programming language adn build 
 
 ## What you'll make: Scavenger
 - A geocaching mobile application
-![Scavenger](assets/ScavengerDemo.gif "Scavenger" | width=100)
+ 
+<img src="assets/ScavengerDemo.gif" width="250">
 
 
 ## Setup
