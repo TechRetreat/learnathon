@@ -239,9 +239,7 @@ Using the same notation, we can also make empty lists like this:
 var engineersInSpace = [String]() // this is an empty array of strings
 ```
 
-<pre>
-Tidbit: The `[String]` syntax is simply a shorthand for `Array<String>`. Read more [here](link_here)
-</pre>
+> Tidbit: The `[String]` syntax is simply a shorthand for `Array<String>`. Read more [here](link_here)
 
 ## For loop
 There is also another type of loop that can iterate through elements of a list.
