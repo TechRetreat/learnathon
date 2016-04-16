@@ -27,13 +27,6 @@ print("Hello world!")
 ## Data types
 There are many different types in Swift. We will go over the most commonly used ones: Strings, Integers, Floats, and Booleans.
 
-### `String`s
-Strings are just what programmers call text. In the case of our program above, "Hello world!" is a string. We can store these strings inside a [variable](), for example:
-
-```swift
-var myName = "Your Name"
-```
-
 We can also "add" strings together like this:
 ```swift
 var myName = "Your Name"
@@ -54,6 +47,13 @@ We can also do some math! Be careful though, when you divide two integers, you w
 var five = 2 + 3
 var three = 7 / 2 
 var threeAndAHalf = 7.0 / 2.0
+```
+
+### `String`s
+Strings are just what programmers call text. In the case of our program above, "Hello world!" is a string. We can store these strings inside a [variable](), for example:
+
+```swift
+var myName = "Your Name"
 ```
 
 ### `Bool`eans
