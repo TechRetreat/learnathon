@@ -317,7 +317,7 @@ class Person {
   }  
   
   func introduce() {
-    print("Hello! My name is \(self.name) and I am \(self.age} years old. Nice to meet you.")
+    print("Hello! My name is \(self.name) and I am \(self.age) years old. Nice to meet you.")
   }
 }
 
