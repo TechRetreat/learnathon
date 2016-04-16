@@ -292,7 +292,7 @@ func methodWithFirstArgument(a: Int, andSecondArgument b: Int) {
 
 We can call these functions like this:
 ```swift
-var five = add(2, 3)
+var seven = add(4, b: 3)
 introduce("Jonathan")
 methodWithFirstArgument(42, andSecondArgument: 13)
 ```
