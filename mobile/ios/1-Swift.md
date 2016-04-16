@@ -68,7 +68,7 @@ We can also use [comparison operators](), such as ">", "<", "==", "<=", ">=".
 
 ```swift
 var moonDistance = 370300
-var astronautDistance = 2953222
+var astronautDistance = 295322
 
 var astronautArrivedToMoon = moonDistance <= astronautDistance
 // astronautArrivedToMoon is false, becuase the moonDistance is greater than astronautDistance
