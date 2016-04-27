@@ -6,8 +6,8 @@
 
 Swift is a relatively new language introduced by Apple. One cool thing about Swift is that it's open-source. It's even hosted [right here on GitHub]()!
 
-To get started **open a new "Playground" document** in Xcode (File -> New -> File -> Playground)
-Let's start off fresh so **delete the contents of the file**
+To get started **open a new "Playground" document** in Xcode (File -> New -> File -> Playground).
+Let's start off fresh so **delete the contents of the file**.
 
 ## Hello world!
 Traditionally the first program that you write when you're learning a new programming language is one that prints "Hello world!" to the screen. To do this in Swift just type:
@@ -17,15 +17,22 @@ print("Hello world!")
 ```
 
 ### Comments
-In Swift, if you type "//", the computer will ignore the rest of the line. This is useful to add some explantion of what your code does to other humans.
-Let's add comments to our first program
+In Swift, if you type "//", the computer will ignore the rest of the line. This is useful to add some explanation of what your code does to other humans or to yourself when you come back to the code later.
+Let's add comments to our first program...
 ```swift
 // This program prints out "Hello world!"
 print("Hello world!")
 ```
 
 ## Data types
-There are many different types in Swift. We will go over the most commonly used ones: Strings, Integers, Floats, and Booleans.
+There are many different data types in Swift. We will go over the most commonly used ones: Strings, Integers, Floats, and Booleans.
+
+### `String`s
+Strings are just what programmers call text. In the case of our program above, "Hello world!" is a string. We can store these strings inside a [variable]() using `var`, for example:
+
+```swift
+var myName = "Your Name"
+```
 
 We can also "add" strings together like this:
 ```swift
@@ -42,18 +49,11 @@ var numPlanetsInSolarSystem = 8
 var floatVariableName = 4.3
 ```
 
-We can also do some math! Be careful though, when you divide two integers, you will always get an integer. The end is chopped off. This is called "floor division".
+We can also do some math! Be careful though, when you divide two integers, you will always get an integer. The end or decimal is chopped off. This is called "floor division".
 ```swift
 var five = 2 + 3
-var three = 7 / 2 
+var three = 7 / 2
 var threeAndAHalf = 7.0 / 2.0
-```
-
-### `String`s
-Strings are just what programmers call text. In the case of our program above, "Hello world!" is a string. We can store these strings inside a [variable](), for example:
-
-```swift
-var myName = "Your Name"
 ```
 
 ### `Bool`eans
@@ -71,7 +71,7 @@ var moonDistance = 370300
 var astronautDistance = 295322
 
 var astronautArrivedToMoon = moonDistance <= astronautDistance
-// astronautArrivedToMoon is false, becuase the moonDistance is greater than astronautDistance
+// astronautArrivedToMoon is false, because the moonDistance is greater than astronautDistance
 ```
 
 ### Printing results
@@ -187,12 +187,12 @@ var crew = ["Joe", "Sarah", "Dave"] // Lists can hold anything, as long as they 
 Looking at the `class` list, the first student, "Joe" is stored at the "zeroth" index. We can assign this to a variable.
 
 ```swift
-crew = ["Joe", "Sarah", "Dave"] 
+crew = ["Joe", "Sarah", "Dave"]
 var firstCosmonaut = crew[0] // joe
 var secondCosmonaut = crew[1] // sarah
 ```
 
-You can also change the values in a list, as long as the list is a [variable](). 
+You can also change the values in a list, as long as the list is a [variable]().
 ```swift
 crew = ["Joe", "Sarah", "Dave"]
 crew[0] = "Alice"
@@ -252,8 +252,8 @@ for crewMember in crew {
 ```
 
 ### Optionals
-Swift is a language the supports optionals. In other languages it may be called "nullables" or something of the sort. All it means is that if a value is an optional, it can either have a value assigned to it or it can be `nil`. The only catch is that if it is `nil` then if you try to call a method on it, you simply won't be able to. You have to unwrap it. To "force unwrap" the opotional you can use `!`. But if you unwrap it, and it's nil and try to call a function on it. It'll crash.
-Ouch! To avoid this, we can use the `?` to safely unwrap the optional. What unwrapping means. Let's take a look at some examples:
+Swift is a language the supports optionals. In other languages it may be called "nullables" or something of the sort. All it means is that if a value is an optional, it can either have a value assigned to it or it can be `nil`. The only catch is that if it is `nil` then if you try to call a method on it, you simply won't be able to. You have to unwrap it. To "force unwrap" the optional you can use `!`. But if you unwrap it, and it's nil and try to call a function on it. It'll crash.
+Ouch! To avoid this, we can use the `?` to safely unwrap the optional. What does unwrapping mean? Let's take a look at some examples:
 
 Note. Since we start defining this as `nil`, we need to specify a type when we create the object.
 
@@ -306,7 +306,7 @@ To create an `object` we need to create a template for it, which properties and 
 class Person {
   var name: String
   var age: Int
-  
+
   // The initializer is the function that creates the object
   // You need at least one initializer for every class
   init(givenName: String, givenAge: Int) {
@@ -315,7 +315,7 @@ class Person {
     self.name = givenName
     self.age = givenAge
   }  
-  
+
   func introduce() {
     print("Hello! My name is \(self.name) and I am \(self.age) years old. Nice to meet you.")
   }
@@ -334,13 +334,12 @@ We can also [inherit]() all of the properties of another class. For example, we 
 class Astronaut: Person {
   var yearsInSpace: Int = 0
   var authorizedVehicles: ["Space Shuttle", "Soyuz"]
-  
+
   func canFly(vehicle) {
     return authorizedVehicles.contains(vehicle)
   }
 }
 ```
-
 
 ## Protocols
 We can list a set of properties and functions that we want a method to implement, this is called a protocol. Then an object can declare that it implements a protocol. This is usually done in an extension. For example, we can have the flying protocol.
@@ -350,14 +349,14 @@ Let's start with a vehicle class.
 class Vehicle {
     let numberOfWheels: Int
     var speed = 0
-    
+
     init(numberOfWheels: Int) {
         self.numberOfWheels = numberOfWheels
     }
 }
 ```
 
-Nothing too suprising so far, just like our `Person` class. How let's define a protocol. A set of properties that we need for an object to be flyable.
+Nothing too surprising so far, just like our `Person` class. How let's define a protocol. A set of properties that we need for an object to be flyable.
 
 ```swift
 protocol Flyable {
