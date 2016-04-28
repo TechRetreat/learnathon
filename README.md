@@ -1,15 +1,15 @@
 # Learnathon
 Learnathon lesson plans
-- <a href="gamedev/README.md">Game Dev</a>
+- <a href="https://github.com/TechRetreat/learnathon/tree/gamedev2/gamedev">Game Dev</a>
  - Contact: Dave
- - Demo: http://codepen.io/davepvm/pen/BKLYqz?editors=0010
-- <a href="hardware/README.md">Hardware</a>
+ - Demo: http://codepen.io/davepvm/full/PNOyrW/
+- <a href="https://github.com/TechRetreat/learnathon/blob/master/hardware/DDR.md">Hardware</a>
  - Contact: Adam or Steven
-- <a href="web/README.md">Web</a>
+- <a href="https://github.com/TechRetreat/learnathon/tree/web-outline/web">Web</a>
  - Contact: Frieda
- - Demo: https://ancient-waters-21654.herokuapp.com/
+ - Demo: https://ancient-waters-21654.herokuapp.com/ (Repo: https://github.com/friedeggs/web-demo)
 - Mobile
- - <a href="mobile/android/README.md">Android</a>
+ - <a href="https://github.com/TechRetreat/learnathon/tree/android/mobile/android">Android</a>
   - Contact: Jason
- - <a href="mobile/ios/README.md">iOS</a>
+ - <a href="https://github.com/TechRetreat/learnathon/tree/ios/mobile/ios">iOS</a>
   - Contact: Paul
