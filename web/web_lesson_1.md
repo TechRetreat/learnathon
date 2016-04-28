@@ -16,6 +16,9 @@ Once you've downloaded `virtualenv`, run the following command to create a new v
 
 Now to install Flask. You can install it [here](). <TODO: additional instructions>
 
+This is also a good time to install PostgreSQL.
+Install Flask-Migrate with pip install Flask-Migrate
+
 ### Initial commit
 <when to introduce Github?>
 
@@ -76,6 +79,8 @@ To see this website in your browser, run
 
 This tells python to run the file `app.py`.
 Now the last two lines in `app.py` come into play, because `app.py` is the main file running right now, so `app.run()` is called and the app is run.
+
+<Mention localhost>
 
 ##### Checkpoint!
 
@@ -226,3 +231,169 @@ To fix this, specify the methods in a route like so:
 ```python
 @app.route('/my_url', methods=['GET', 'POST'])
 ```
+
+## Heroku
+
+So far, your website can only be viewed on your computer. So much for "web"site. :( Now that it's a Flask app, we can put our app on __Heroku__.
+
+Heroku is a Platform as a Service (PaaS) - aka it provides hosting for web apps.
+
+Normally, you need to purchase a `domain` and [elaborate].
+
+We also had another option before, which is Github Pages. This is free but it's only for `static` sites and not web applications. It's a good option to keep in mind though, eg. for a personal website!
+
+Anyways (and most importantly), Heroku provides free hosting (for up to five web apps, and the websites can't be running all the time, but hey, free hosting).
+
+Here's the link to create a Heroku account ().
+
+<TODO: find a Heroku guide>
+
+Once you've created a new app in the Heroku dashboard, you should select the app, navigate over to the __Deploy__ tab, and choose __Github__ as the __Deployment method__.
+
+From there, you can type in your Github repository name into the input field and connect your new Heroku app to the repository.
+
+If you now go to Settings, you can find the url for your app.
+
+## Databases
+
+A database stores information, although how it stores data varies.
+
+Just like there are many programming languages, there are a couple `database management systems`. Some examples are MySQL, SQLite, PostgreSQL, MongoDB, Oracle.
+
+There are three (two?) main camps: `relational` databases, `object-oriented` databases, and `NoSQL`. [TODO: fact check!]
+
+Relational databases are really the main type of database. Virtually all relational database management systems (`RDBMSs`) use `SQL` as their language, which is why so many of the examples given had 'SQL' in their name. <https://en.wikipedia.org/wiki/Relational_database whoops, even copied the exact phrasing>
+(As you can guess from the lack of 'SQL' in the name, MongoDB isn't an RDBMS.)
+
+We'll be using PostgreSQL, which is actually in between a `object-oriented` DBMS and a `relational` DBMS. (It's an `object-relational` DBMS, or, `ORDBMS`.)
+
+A relational database stores the data in `tables` of `rows` and `columns`:
+- every column is a field
+- every row is another data entry
+
+An object-oriented database stores data as `objects`.
+
+<TODO: Object-relational database>
+
+`SQL` stands for `Structured Query Language`, because you do two things with a database: store information in a database, and `query` the database to get its information.
+
+A SQL query looks something like the following:
+
+```sql
+SELECT * AS older_customers FROM customer_table WHERE age > 20
+```
+> this means select all "customers" (technically these are data entries in the database and not actual people) over the age of 20, and call this selection of customers "older_customers".
+
+Note: the web app won't use SQL because there's a Python package called SQLAlchemy that can interface with the database and lets us execute SQL queries in Python. But the basic idea of selecting data from database tables with conditions is relevant.
+
+### Databases with Heroku
+
+Heroku lets you "provision" your web app with a database, but it only supports PostgreSQL for Flask. <IIRC>
+
+To provision your app, follow the instructions at (Heroku guide)
+
+###### If you haven't got PostgreSQL installed properly yet
+No worries: the Heroku database is on the Heroku servers, and the only reason for installing PostgreSQL locally (on your computer) is so that you can play with a local database.
+
+All Python installations come with SQLite, another database management system. You could play with that instead, but in the web application it's better to use the same database management system that Heroku's using or you'd run into messes when pushing to the Heroku servers.
+
+[commands to create a local SQLite database for demonstration purposes]
+
+###### If you do have PostgreSQL installed and working
+
+[commands to create a local PostgreSQL database for demonstration purposes]
+```sql
+psql
+\d
+\c
+\l
+\?
+\q
+select * from table_name; <-- need the semicolon!
+```
+
+## Connect to the database from a Flask web application
+
+Underneath `app = Flask(__name__)` in `app.py`, <TODO: keep everything in app.py?> add the following:
+
+```python
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL',
+ 'postgresql://localhost/techretreattemp')
+db = SQLAlchemy(app)
+```
+
+This `configures` the `SQLALCHEMY_DATABASE_URI` variable by setting it to the `path` of your database. Aka it tells Flask where the database it should use is.
+If `DATABASE_URL` isn't set, it'll fall back to the default. In the code above, this default is 'postgresql://localhost/techretreattemp' - the database stored locally on your computer.
+
+When you run the web app locally with `python app.py`, Flask uses the default local database.
+When Heroku runs the web app, `DATABASE_URL` is set to the database that Heroku provides so Flask uses that one.
+
+## Storing comments
+
+Since we're using an `object-relational DBMS`, we work with objects.
+First, define what a Comments object is by creating a `class`.
+
+We'll say a Comment has:
+-
+
+<In object-oriented programming, TODO>
+
+In `app.py`:
+import SQLAlchemy with
+
+```python
+from flask.ext.sqlalchemy import SQLAlchemy
+```
+
+```python
+class Comment(db.Model):
+    __tablename__ = 'comments'
+
+    id = db.Column(db.Integer, primary_key=True)
+    poster = db.Column(db.String())
+    comment = db.Column(db.String())
+
+    def __init__(self, poster, comment):
+        self.poster = poster
+        self.comment = comment
+
+    def __repr__(self):
+        return '<id {}>' .format(self.id)
+```
+
+### Database Migrations
+Database migrations are changes to your database that are packaged and recorded down so that you can undo and redo database changes. [check this description...]
+
+We'll add a Python script that allows us to manage the migrations. [do they even know what a Python script is?]
+```python
+import os
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from flask_script import Manager
+from flask_migrate import Migrate, MigrateCommand
+from app import app, db
+
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL',
+ 'postgresql://localhost/techretreattemp')
+
+migrate = Migrate(app, db)
+
+manager = Manager(app)
+manager.add_command('db', MigrateCommand)
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(128))
+
+if __name__ == '__main__':
+    manager.run()
+```
+
+
+What does all this code mean?
+[description]
+But in short, I got it from the official documentation example: https://flask-migrate.readthedocs.org/en/latest/
+Moral of the story: documentation is your best friend. Stack-Overflow is your second.
+
+##### .gitignore
