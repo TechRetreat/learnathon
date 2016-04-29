@@ -35,8 +35,8 @@ If we look at the types of this, we would get this:
   }
   ```
 
-  - We can go through and [parse]() it. That means we are going to convert the JSON into an object. Since this is a fairly uninteresting part of the application, the code will be provided and explaind.
-  - In this code, we load a file called "caches.json". `NSBundle.mainBundle().pathForResource("caches", ofType: "json")` will load that. If the file does not exist, it will return nil and the `if let` statement will fail. Next we convert the contents of this file to `NSData`, which is just a series of "1"s and "0"s: the raw data of the file. From this format, we can use a calss called `NSJSONSerialization` provided with Swift that tries to convert this NSData to the dictionary we specified above. The `try`, `guard` and `throw` keywords work together to `throw` an `InvalidFormat` exception, which just means that it will error with a custom error (InvalidFormat). If anything went wrong, it will print out "Something went wrong...", which is done by `do`, `catch` pair.
+  - We can go through and [parse]() it. That means we are going to convert the JSON into an object. Since this is a fairly uninteresting part of the application, the code will be provided and explained.
+  - In this code, we load a file called "caches.json". `NSBundle.mainBundle().pathForResource("caches", ofType: "json")` will load that. If the file does not exist, it will return nil and the `if let` statement will fail. Next we convert the contents of this file to `NSData`, which is just a series of "1"s and "0"s: the raw data of the file. From this format, we can use a class called `NSJSONSerialization` provided with Swift that tries to convert this NSData to the dictionary we specified above. The `try`, `guard` and `throw` keywords work together to `throw` an `InvalidFormat` exception, which just means that it will error with a custom error (InvalidFormat). If anything went wrong, it will print out "Something went wrong...", which is done by `do`, `catch` pair.
     ```swift
     func loadCaches() { // Returns a dictionary of String ids to the cache object
       do {
@@ -82,8 +82,8 @@ If we look at the types of this, we would get this:
       }
     }
   ```
-  
-Now we're going to make an initalizer that takes in a dictionary of this format to create an actual `Cache` object. We're going to go to our "Cache.swift" file and add an additional initalizer. This initializer is a bit different. Start off with a normal initializer, similar to the other one. This one, however, can fail. Because it can fail, we add a `?` after the `init`. If it does fail we will return [nil]().
+
+Now we're going to make an initializer that takes in a dictionary of this format to create an actual `Cache` object. We're going to go to our "Cache.swift" file and add an additional initializer. This initializer is a bit different. Start off with a normal initializer, similar to the other one. This one, however, can fail. Because it can fail, we add a `?` after the `init`. If it does fail we will return [nil]().
 Looking at the structure of the file we can define some types at the top of the `Cache` file. Looking at a cache item, specifically:
 ```
 {
@@ -111,7 +111,7 @@ Going back to the JSON, we can look back an see that the value can be a `String`
     }
   }
 ```
-Wich is just a dictionary with a string as the key and the `CacheJSONFormat` we just defined as the value. We can use a type alias and call this `CacheListJSONFormat`.
+Which is just a dictionary with a string as the key and the `CacheJSONFormat` we just defined as the value. We can use a type alias and call this `CacheListJSONFormat`.
 In the end, we will have something that looks like this:
 
 ```swift
@@ -123,7 +123,7 @@ typealias LocationJSON = [String:Double]
 
 This will allow us to manage types more neatly.
 
-Going back to our initalizer, we will take in JSON of type `CacheJSONFormat`.
+Going back to our initializer, we will take in JSON of type `CacheJSONFormat`.
 
  ```swift
  // We add the question mark to this initializer, because it could fail if the input format is incorrect
@@ -131,17 +131,17 @@ Going back to our initalizer, we will take in JSON of type `CacheJSONFormat`.
   // code to parse the json goes here
  }
  ```
- 
- Using the `if let` command in swift, we can make sure that the format is correct. If any condition fails, we'll set some default initial values and return nil. This is some sample code that can be used as the body of the initalzier.
-```swift 
-   // This large if statment makes sure everything is of proper format
+
+ Using the `if let` command in swift, we can make sure that the format is correct. If any condition fails, we'll set some default initial values and return nil. This is some sample code that can be used as the body of the initializer.
+```swift
+   // This large if statement makes sure everything is of proper format
    if let name = jsonObject["name"] as? TypeOfNameValue,
       let desc = jsonObject["description"] as? String,
       let diff = jsonObject["difficulty"] as? Int,
       let location = jsonObject["location"] as? TypeOfLocationValue,
       let long = location["longitude"],
       let lat = location["latitude"] {
-      
+
          self.name = name
          self.description = desc
          self.difficulty = diff
