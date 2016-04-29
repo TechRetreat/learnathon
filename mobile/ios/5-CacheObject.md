@@ -20,6 +20,7 @@ These are some of the methods that may be useful:
 - Losing a cache
 - Finding the distance to other locations
 
+
 1. Let's get started by making a new file called "Cache.swift" (File -> New -> File -> Swift File)
 2. Create the `Cache` object just like we did with the astronauts. We should have 5.
   - Note, if we `import MapKit` at the top of our file, we can use a type called `CLLocationCoordinate2D`, which is a useful way to store locations.
@@ -27,17 +28,15 @@ These are some of the methods that may be useful:
 4. Now we need to make an initializer like we did for the `Person` class so we can set all of the properties.
 5. Implement the initializer
 6. A method that takes in a time and sets it to the found time.
-  - There is a special type called `NSDate` which can be any time value and handles tricky things like timezones and special calendars for us.
+ - There is a special type called `NSDate` which can be any time value and handles tricky things like timezones and special calendars for us.
   - To convert this into a number we can use "epoch time". This is a popular time format in computer science. It is simply the number of seconds or milliseconds since January 1st 1970. Read more about it [here]().
   - To get the "epoch time" (an integer) from an NSDate, you can use the `timeIntervalSince1970` property.
 7. Implement a method that loses the cache. This should set the found time to `nil`.
-
 Need a hint? Take a look at how I did it [here](gistLink).
-    
 8. How we want to be able to find the distance between two caches?
   - Create a function called `getDistanceFrom(origin: CLLocationCoordinate2D)` that returns an integer, the distance between `self` and `origin`
   - It may look something like this:
-  
+
     ```swift
     func getDistanceFrom(origin: CLLocationCoordinate2D) -> Int {
       let originLocaiton = CLLocation(latitude: origin.latitude, longitude: origin.longitude)
