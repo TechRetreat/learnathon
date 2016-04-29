@@ -5,7 +5,7 @@
 ### Make the detail view controller
 We're going to make a quick view controller that will allow us to display information about the cache, such as its name, description and location. It will also allow us to "find" a cache.
 
-Let's create anothe file called "CacheDetailViewController.swift", which as you may have guessed by the name inherits from `UIViewController`.
+Let's create another file called "CacheDetailViewController.swift", which as you may have guessed by the name inherits from `UIViewController`.
 
 Let's start off with defining the properties of this view controller. What we want this view controller to do is to display the details of a cache object, and also allow ability to find the cache. So we're going to need:
 - A cache object (of type `cache`)
@@ -26,7 +26,7 @@ required init?(coder aDecoder: NSCoder) {
 }
 ```
 
-//TODO: explain initializers in swift
+Initialization is the process of preparing an instance of a class, structure or enumeration for use which involves providing an initial value in the instance's properties. To undergo this process, special methods called initializers are implemented to create new instances of a specific type.
 
 ### Setting up the views
 Since we'll have quite a lot of views to set up on this page, it would be best if we break down the setting up of each view into its own function.
@@ -62,7 +62,7 @@ Make sure to call all of them from `viewDidLoad`.
   - Let's go back to `func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath)`.
       - This returns the `indexPath` the same way as in the `cellForRowAtIndexPath` method.
       - Right now, if you select a row it gets grayed out and stays grayed out. We can change that by animating a deselection when it's selected using: `tableView.deselectRowAtIndexPath(indexPath, animated: true)`
-      - What we want is to show a new [view controller]() whenver a cell is pressed. 
+      - What we want is to show a new [view controller]() whenever a cell is pressed.
       - We can create one of our nifty `CacheDetailViewControllers` using the initializer that takes in a cache. Let's put that view controller into a constant called `vc`. Now we can push that view controller like so:
 ```swift
 self.navigationController?.pushViewController(vc, animated: true)
