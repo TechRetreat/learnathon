@@ -390,10 +390,125 @@ if __name__ == '__main__':
     manager.run()
 ```
 
-
+We'll also add the file `migrations/env.py` [insert file]
 What does all this code mean?
 [description]
 But in short, I got it from the official documentation example: https://flask-migrate.readthedocs.org/en/latest/
 Moral of the story: documentation is your best friend. Stack-Overflow is your second.
 
-##### .gitignore
+##### .gitignore & More Command Line!
+
+Git tracks files, including a lot of automatically generated files that aren't supposed to be kept track of. To exclude those, your repository has an invisible `.gitignore` file.
+You can edit it in the terminal/command line:
+
+> vim .gitignore
+
+- this will open up a primordial text editor inside your terminal/command line window
+Here are the commands: (good luck)
+
+
+
+or you can just
+> atom .gitignore
+
+to open it in Atom. (atom <3)
+Make sure you navigated to the right directory in the terminal/command line [ / shell?? ] before you type these. To check where you are, you can use the command
+> pwd
+
+We won't need all the files in the `venv` folder, since those are all the python requirements [libraries?] downloaded by running ` ` <insert command> and Heroku will run that command itself to create its own `venv` folder.
+
+# Comments!
+
+This is the lifecycle of a comment:
+
+Alice types a comment
+
+This is the `form`:
+________________
+<sub>name: <sub>
+
+<sub>comment:<sub>
+
+              <sub>Submit<sub>
+________________
+
+She submits it.
+
+--> The request goes to our server
+with all the information we specified:
+- name
+- comment
+
+<New!> Now we're going to save it permanently in our database.
+
+# Objects
+
+We're saving a comment.
+In our words, a comment is:
+a _string_ (the name)
+and another _string_ (the comment)
+
+
+
+# __Model__, View, Controller
+
+Fields:
+- id
+- poster
+- comment
+
+Mandatory methods:
+__init__
+
+__repr__
+
+## HTTP Requests
+We create a new `route` called `store_comment`.
+The HTTP method for this is `POST`, because we're passing information.
+To get this information, we can find it in
+```py
+request.form['poster'] # the poster
+request.form['comment'] # the comment
+```
+Now we create a `Comment`, passing the poster and comment which will call the special `__init__` method into action.
+To add it to the database, we call
+```py
+db.session.add(<name of new Comment>)
+db.session.commit() # submits the comment to the database
+```
+lmao I did this already
+
+### Security
+
+### Updating requirements.txt
+
+[Add gunicorn as well]
+
+### Remote migration
+
+## Showing comments
+
+To show the comments, we need to update the HTML in `templates/project/1` to show all the comments we have so far.
+However, the HTML file doesn't have the comments. We can get all the comments using python in our route method in `app.py`, and then pass them to the HTML with the `render_template` method.
+
+```py
+comments = Comment.query.all()
+return render_template("/project/"+id+".html", comments=comments)
+```
+
+In the HTML file, we want to add all the comments. This needs a `for loop`.
+HTML isn't a programming language - it just defines the structure and content of a website - but we can `embed` [programming ] in it using Flask's `templating engine`.
+
+```html
+{% for comment in comments %}
+<div class="comment"><img src="{{ url_for('static',filename='heart-green.svg') }}" class="like"><div class="poster">{{comment.poster}}</div><div class="comment-text">{{comment.comment}}</div></div>
+{% endfor %}
+```
+
+## Make the like button work!
+When a user __clicks__ the button # jQuery & javascript
+make the number inside it go up by one # jQuery & javascript - DOM manipulation
+When a user __hovers__ over the button # CSS
+change the button image to the filled in button image # CSS
+
+## Add an about page to spruce up the website
