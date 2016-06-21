@@ -1,27 +1,17 @@
 # Web
 
 ## What you'll make
-A dynamic \_\_\_\_\_\_\_\_ website that
-shows a list of \_\_\_\_\_\_\_s ("posts") which users can interact with through \_\_\_\_\_\_\_s
+A very simple project showcase complete with its own comment section!
 
-Examples: (to edit, try to use social justice theme, should be sufficiently extendable)
-
-- simplified Kickstarter, display great projects and allow users to add their own
-
-- a simple blog
-
-- [Rate with Science](http://ratewith.science/)/an idea generator listing cool combinations and letting users try their own combination
-
-- a personal website to showcase your projects and provide a contact form
+## What you'll learn
+An introduction to:
+ HTML, CSS, Javascript, JQuery, your first web framework (Flask), Python (again Flask), a templating engine, working with databases, and deploying to Heroku!
 
 
 ## What you'll need
 
 - A text editor
-- An [idea](link to ideas)
-- Github, Git
-
-- (provided [HTML](), [CSS](), and [JS]() cheatsheets)
+- Github, Git (Optional)
 
 ## Table of Contents
 
@@ -87,3 +77,7 @@ Download the Atom text editor from https://atom.io/
 - Make posts searchable
 - Create user accounts
 - Use a web framework
+
+## Additional Resources
+- For a fun CSS primer, check out http://flukeout.github.io/
+- [Google Fonts](https://www.google.com/fonts)
