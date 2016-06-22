@@ -1,0 +1,10 @@
+body {
+  font-family: "Montserrat";
+  color: white;
+  background-image: url("http://kriswhitewrites.com/wp-content/uploads/2013/06/landscape-mountains-snow-sky.jpg");
+}
+
+.post p {
+  font-family: "Open Sans";
+  /*font-weight: 300;*/
+}
